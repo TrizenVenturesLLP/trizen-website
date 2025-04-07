@@ -15,7 +15,7 @@ const Navbar = () => {
         <div className="flex items-center gap-10">
           {/* Logo */}
           <a href="/" className="flex items-center">
-            <img src="/lovable-uploads/f5d701af-d83d-4650-8a1b-f9818437fcf9.png" alt="Trizen Logo" className="h-14" />
+            <img src="/lovable-uploads/trizen-logo.png" alt="Trizen Logo" className="h-14" />
           </a>
 
           {/* Navigation Links */}
