@@ -35,27 +35,27 @@ const FloatingCard = () => {
   if (!isVisible || isDismissed) return null;
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 w-80 aspect-square bg-trizen-dark text-white shadow-xl rounded-xl p-6 border border-gray-700 animate-tab-fade-in">
+    <div className="fixed bottom-6 right-6 z-50 max-w-[320px] bg-trizen-purple shadow-xl rounded-xl p-6 border border-purple-700 animate-tab-fade-in">
       <div className="flex justify-between items-start">
         <div>
           <h3 className="text-xl font-semibold text-white">
             300+ Final Year Project Ideas
           </h3>
-          <p className="text-gray-300 mt-3 text-base">
+          <p className="text-purple-100 mt-3 text-base">
             Explore trending AI, Web, and IoT project topics tailored for students!
           </p>
         </div>
         <button 
           onClick={handleDismiss}
-          className="text-gray-400 hover:text-white transition-colors p-1"
+          className="text-purple-300 hover:text-white transition-colors p-1"
           aria-label="Close"
         >
           <X className="h-5 w-5" />
         </button>
       </div>
-      <div className="absolute bottom-6 left-6 right-6">
+      <div className="mt-5">
         <Button 
-          className="w-full bg-trizen-blue hover:bg-trizen-blue/90 py-6 text-base"
+          className="w-full bg-trizen-blue hover:bg-trizen-blue/90 py-5 text-base"
         >
           Discover Projects
         </Button>
