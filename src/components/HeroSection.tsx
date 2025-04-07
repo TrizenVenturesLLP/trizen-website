@@ -16,18 +16,18 @@ const HeroSection = () => {
     },
     {
       id: "uiux",
-      label: "UI/UX Design / Web Development",
+      label: "UI/UX & WebDevelopment",
       heading: "We craft intuitive digital experiences and scalable web solutions that make an impact.",
     },
     {
       id: "research",
-      label: "Research Development & Paper Publishing",
-      heading: "Supporting PhD and final year projects with end-to-end research, development, and publishing guidance.",
+      label: "Research Development",
+      heading: "Supporting PhD and Final year Projects with end-to-end research, development, and publishing guidance.",
     },
     {
       id: "aiml",
-      label: "AIML and Multi-Agent Services",
-      heading: "From intelligent chatbots to custom AI agents—we build solutions that think, learn, and act.",
+      label: "Multi-Agent Services",
+      heading: "From intelligent chatbots to custom AI agents, we build solutions that think, learn, and act.",
     },
     {
       id: "cloud",
@@ -67,15 +67,15 @@ const HeroSection = () => {
                   </TabsContent>
                 ))}
                 
-                <p className="text-lg md:text-xl text-gray-700 mb-8">
+                {/* <p className="text-lg md:text-xl text-gray-700 mb-8">
                   We're Providing {tabContent.find(tab => tab.id === activeTab)?.label}
-                </p>
+                </p> */}
               </div>
               
               <Button 
                 className="rounded-full px-6 py-6 bg-trizen-blue hover:bg-trizen-blue/90 transition-all hover:scale-105 text-white"
               >
-                Read the report
+                Know More
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
               
