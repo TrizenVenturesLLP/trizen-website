@@ -22,7 +22,7 @@ const OurWingsSection = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
-          {/* Trizen Learn */}
+          {/* Trizen Training */}
           <Card className="border-none rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 bg-white relative overflow-hidden group">
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-trizen-purple to-trizen-blue"></div>
             <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-trizen-purple/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -32,12 +32,20 @@ const OurWingsSection = () => {
                   <GraduationCap className="h-10 w-10 text-trizen-purple" />
                 </div>
               </div>
-              <CardTitle className="text-2xl font-bold text-center text-trizen-dark">Trizen Learn</CardTitle>
+              <CardTitle className="text-2xl font-bold text-center text-trizen-dark">Trizen Training</CardTitle>
             </CardHeader>
             <CardContent className="text-center">
-              <p className="text-gray-600 text-lg">
-                AI & Machine Learning Training Programs designed to build expertise in cutting-edge technologies.
+              <p className="text-gray-600 mb-4 text-lg">
+                Empowering Future-Ready Talent with Industry-Aligned Skills
               </p>
+              <div className="text-sm text-gray-600 bg-trizen-light/50 p-4 rounded-lg">
+                <p className="mb-2">
+                  Trizen Training provides a comprehensive portfolio of technical courses, hands-on workshops, and globally recognized certifications to help individuals, students, and organizations acquire, upgrade, and optimize in-demand IT and emerging tech skills.
+                </p>
+                <p>
+                  Our curriculum is designed in collaboration with industry experts to ensure relevance, innovation, and job readiness. We offer flexible learning paths in AI & Machine Learning, Cloud Computing, Data Science, Cybersecurity, Web Development, IoT, Blockchain, and more.
+                </p>
+              </div>
             </CardContent>
           </Card>
 
