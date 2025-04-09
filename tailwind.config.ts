@@ -19,6 +19,11 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				heading: ['Poppins', 'sans-serif'],
+				subheading: ['DM Sans', 'sans-serif'],
+				body: ['Roboto', 'sans-serif']
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -109,8 +114,12 @@ export default {
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				'tab-fade-in': 'tab-fade-in 0.4s ease-out forwards'
 			},
-			fontFamily: {
-				sans: ['Segoe UI', 'sans-serif']
+			lineHeight: {
+				'relaxed': '1.65'
+			},
+			letterSpacing: {
+				'tight': '-0.5px',
+				'wide': '0.5px'
 			}
 		}
 	},

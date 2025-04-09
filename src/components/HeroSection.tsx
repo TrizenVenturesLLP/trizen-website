@@ -61,19 +61,15 @@ const HeroSection = () => {
                     value={tab.id}
                     className="data-[state=active]:animate-tab-fade-in"
                   >
-                    <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-trizen-dark mb-6 transition-all duration-300">
+                    <h1 className="font-heading font-bold tracking-tight text-trizen-dark mb-6 transition-all duration-300">
                       {tab.heading}
                     </h1>
                   </TabsContent>
                 ))}
-                
-                {/* <p className="text-lg md:text-xl text-gray-700 mb-8">
-                  We're Providing {tabContent.find(tab => tab.id === activeTab)?.label}
-                </p> */}
               </div>
               
               <Button 
-                className="rounded-full px-6 py-6 bg-trizen-blue hover:bg-trizen-blue/90 transition-all hover:scale-105 text-white"
+                className="rounded-full px-6 py-6 bg-trizen-blue hover:bg-trizen-blue/90 transition-all hover:scale-105 text-white button-text uppercase tracking-wide"
               >
                 Know More
                 <ArrowRight className="ml-2 h-4 w-4" />
@@ -85,7 +81,7 @@ const HeroSection = () => {
                   <TabsTrigger
                     key={tab.id}
                     value={tab.id}
-                    className={`navbar-link ${activeTab === tab.id ? 'text-trizen-purple' : ''}`}
+                    className={`navbar-link font-subheading font-medium ${activeTab === tab.id ? 'text-trizen-purple' : ''}`}
                   >
                     <span className="flex items-center gap-1">
                       {tab.label}

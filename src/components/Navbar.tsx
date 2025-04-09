@@ -20,48 +20,48 @@ const Navbar = () => {
 
           {/* Navigation Links */}
           <nav className="hidden lg:flex items-center space-x-8">
-            <div className="navbar-link">Consulting</div>
+            <div className="navbar-link font-subheading font-medium">Consulting</div>
             
-            <div className="navbar-link navbar-dropdown-trigger">
+            <div className="navbar-link navbar-dropdown-trigger font-subheading font-medium">
               <div className="flex items-center">
                 Capabilities
                 <ChevronDown className="ml-1 h-4 w-4" />
               </div>
               <div className="navbar-dropdown">
-                <div className="py-2 px-4 bg-trizen-light font-medium text-sm">Services</div>
-                <a href="#" className="block px-4 py-2 text-sm hover:bg-gray-50">Application Services</a>
-                <a href="#" className="block px-4 py-2 text-sm hover:bg-gray-50">Artificial Intelligence</a>
-                <a href="#" className="block px-4 py-2 text-sm hover:bg-gray-50">Automation</a>
-                <a href="#" className="block px-4 py-2 text-sm hover:bg-gray-50">Business Strategy</a>
-                <a href="#" className="block px-4 py-2 text-sm hover:bg-gray-50">Cloud</a>
-                <a href="#" className="block px-4 py-2 text-sm hover:bg-gray-50">Customer Experience</a>
-                <a href="#" className="block px-4 py-2 text-sm hover:bg-gray-50">Cybersecurity</a>
-                <a href="#" className="px-4 py-3 text-trizen-blue flex items-center text-sm font-medium">
+                <div className="py-2 px-4 bg-trizen-light font-subheading font-medium text-sm">Services</div>
+                <a href="#" className="block px-4 py-2 text-sm font-body hover:bg-gray-50">Application Services</a>
+                <a href="#" className="block px-4 py-2 text-sm font-body hover:bg-gray-50">Artificial Intelligence</a>
+                <a href="#" className="block px-4 py-2 text-sm font-body hover:bg-gray-50">Automation</a>
+                <a href="#" className="block px-4 py-2 text-sm font-body hover:bg-gray-50">Business Strategy</a>
+                <a href="#" className="block px-4 py-2 text-sm font-body hover:bg-gray-50">Cloud</a>
+                <a href="#" className="block px-4 py-2 text-sm font-body hover:bg-gray-50">Customer Experience</a>
+                <a href="#" className="block px-4 py-2 text-sm font-body hover:bg-gray-50">Cybersecurity</a>
+                <a href="#" className="px-4 py-3 text-trizen-blue flex items-center text-sm font-subheading font-medium">
                   See All Services
                   <span className="ml-1">→</span>
                 </a>
               </div>
             </div>
 
-            <div className="navbar-link navbar-dropdown-trigger">
+            <div className="navbar-link navbar-dropdown-trigger font-subheading font-medium">
               <div className="flex items-center">
                 Industries
                 <ChevronDown className="ml-1 h-4 w-4" />
               </div>
               <div className="navbar-dropdown">
-                <a href="#" className="block px-4 py-2 text-sm hover:bg-gray-50">Energy</a>
-                <a href="#" className="block px-4 py-2 text-sm hover:bg-gray-50">Financial Services</a>
-                <a href="#" className="block px-4 py-2 text-sm hover:bg-gray-50">Government</a>
-                <a href="#" className="block px-4 py-2 text-sm hover:bg-gray-50">Healthcare Services</a>
-                <a href="#" className="block px-4 py-2 text-sm hover:bg-gray-50">Retail</a>
-                <a href="#" className="block px-4 py-2 text-sm hover:bg-gray-50">Telecommunications</a>
-                <a href="#" className="block px-4 py-2 text-sm hover:bg-gray-50">US Federal</a>
+                <a href="#" className="block px-4 py-2 text-sm font-body hover:bg-gray-50">Energy</a>
+                <a href="#" className="block px-4 py-2 text-sm font-body hover:bg-gray-50">Financial Services</a>
+                <a href="#" className="block px-4 py-2 text-sm font-body hover:bg-gray-50">Government</a>
+                <a href="#" className="block px-4 py-2 text-sm font-body hover:bg-gray-50">Healthcare Services</a>
+                <a href="#" className="block px-4 py-2 text-sm font-body hover:bg-gray-50">Retail</a>
+                <a href="#" className="block px-4 py-2 text-sm font-body hover:bg-gray-50">Telecommunications</a>
+                <a href="#" className="block px-4 py-2 text-sm font-body hover:bg-gray-50">US Federal</a>
               </div>
             </div>
 
-            <div className="navbar-link">Strategic Partners</div>
-            <div className="navbar-link">Insights</div>
-            <div className="navbar-link">Careers</div>
+            <div className="navbar-link font-subheading font-medium">Strategic Partners</div>
+            <div className="navbar-link font-subheading font-medium">Insights</div>
+            <div className="navbar-link font-subheading font-medium">Careers</div>
           </nav>
         </div>
 
@@ -78,9 +78,9 @@ const Navbar = () => {
               <User className="h-5 w-5" />
             </button>
             <div className="navbar-dropdown right-0 left-auto w-40">
-              <div className="py-2 px-4 bg-trizen-light font-medium text-sm">My Trizen</div>
-              <a href="#" className="block px-4 py-2 text-sm hover:bg-gray-50">Log in</a>
-              <a href="#" className="block px-4 py-2 text-sm hover:bg-gray-50">Register</a>
+              <div className="py-2 px-4 bg-trizen-light font-subheading font-medium text-sm">My Trizen</div>
+              <a href="#" className="block px-4 py-2 text-sm font-body hover:bg-gray-50">Log in</a>
+              <a href="#" className="block px-4 py-2 text-sm font-body hover:bg-gray-50">Register</a>
             </div>
           </div>
           <button className="lg:hidden text-gray-600">

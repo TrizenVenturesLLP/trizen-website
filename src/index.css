@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=DM+Sans:wght@400;500;700&family=Roboto:wght@400;500&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -50,7 +51,41 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans;
+    @apply bg-background text-foreground font-body;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading font-bold tracking-tight;
+  }
+
+  h1 {
+    @apply text-4xl md:text-5xl lg:text-6xl;
+  }
+
+  h2 {
+    @apply text-3xl md:text-4xl;
+  }
+
+  h3 {
+    @apply text-2xl md:text-3xl;
+  }
+
+  .subheading {
+    @apply font-subheading font-medium text-base md:text-lg;
+  }
+
+  .body-text {
+    @apply font-body text-base leading-relaxed;
+  }
+
+  .body-text-sm {
+    @apply font-body text-sm leading-relaxed;
+  }
+
+  .button-text {
+    @apply font-heading font-semibold text-sm md:text-base tracking-wide;
   }
 
   @keyframes fadeIn {
