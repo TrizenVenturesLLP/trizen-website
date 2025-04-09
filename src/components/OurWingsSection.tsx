@@ -2,7 +2,7 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { GraduationCap, FlaskRound, Briefcase } from "lucide-react";
+import { GraduationCap, FlaskRound, Briefcase, Rocket } from "lucide-react";
 
 const OurWingsSection = () => {
   return (
@@ -21,7 +21,7 @@ const OurWingsSection = () => {
           <Separator className="w-32 h-1 bg-trizen-purple mx-auto mt-8" />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
           {/* Trizen Training */}
           <Card className="border-none rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 bg-white relative overflow-hidden group">
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-trizen-purple to-trizen-blue"></div>
@@ -98,6 +98,33 @@ const OurWingsSection = () => {
                 </p>
                 <p>
                   Our team collaborates closely with clients to modernize infrastructure, optimize operations, and create impactful customer experiences. From intelligent automation to cloud migration and sustainable innovation, we bring technology and strategy together.
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Trizen Ventures */}
+          <Card className="border-none rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 bg-white relative overflow-hidden group">
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-trizen-purple to-trizen-blue"></div>
+            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-trizen-purple/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <CardHeader className="pb-2">
+              <div className="flex justify-center mb-6">
+                <div className="bg-trizen-light p-4 rounded-full group-hover:bg-trizen-purple/10 transition-colors duration-300">
+                  <Rocket className="h-10 w-10 text-trizen-purple" />
+                </div>
+              </div>
+              <CardTitle className="text-2xl font-bold text-center text-trizen-dark">Trizen Ventures</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-gray-600 mb-4 text-center text-lg">
+                From Vision to Venture — Powered by Trizen
+              </p>
+              <div className="text-sm text-gray-600 bg-trizen-light/50 p-4 rounded-lg">
+                <p className="mb-2">
+                  Trizen Ventures is the strategic innovation and investment arm of Trizen, dedicated to supporting visionary startups and mission-driven innovators in AI, EdTech, AgriTech, HealthTech, and Sustainability.
+                </p>
+                <p>
+                  We empower early-stage entrepreneurs not just with capital, but with deep mentorship, technical infrastructure, research collaboration, and go-to-market support. Backed by Trizen's core strengths—Research, Consulting, and Training—our venture ecosystem bridges academia, industry, and innovation to help founders scale responsibly and build for long-term impact.
                 </p>
               </div>
             </CardContent>
