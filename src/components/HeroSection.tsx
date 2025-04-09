@@ -82,14 +82,14 @@ const HeroSection = () => {
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
               
-              {/* Tabs Navigation - Using scrollable container on mobile */}
-              <div className="mt-8 md:mt-12 overflow-x-auto">
-                <TabsList className="flex flex-nowrap md:flex-wrap gap-3 md:gap-8 bg-transparent p-0 min-w-max">
+              {/* Tabs Navigation - Using scrollable container on mobile, wrapping on desktop */}
+              <div className="mt-8 md:mt-12 overflow-x-auto md:overflow-x-visible">
+                <TabsList className={`flex ${isMobile ? 'flex-nowrap' : 'flex-wrap'} gap-3 md:gap-4 bg-transparent p-0 ${isMobile ? 'min-w-max' : 'w-full'}`}>
                   {tabContent.map((tab) => (
                     <TabsTrigger
                       key={tab.id}
                       value={tab.id}
-                      className={`navbar-link flex items-center whitespace-nowrap ${activeTab === tab.id ? 'text-trizen-purple' : ''}`}
+                      className={`navbar-link flex items-center whitespace-nowrap mb-2 ${activeTab === tab.id ? 'text-trizen-purple' : ''}`}
                     >
                       {isMobile ? (
                         <span className="mr-1">{tab.icon}</span>
