@@ -1,5 +1,5 @@
 
-import { User, Search, HelpCircle, ChevronDown, Menu, X } from "lucide-react";
+import { User, Search, HelpCircle, ChevronDown, Menu } from "lucide-react";
 import { useState } from "react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
@@ -57,6 +57,20 @@ const Navbar = () => {
                 <a href="#" className="block px-4 py-2 text-sm hover:bg-gray-50">Retail</a>
                 <a href="#" className="block px-4 py-2 text-sm hover:bg-gray-50">Telecommunications</a>
                 <a href="#" className="block px-4 py-2 text-sm hover:bg-gray-50">US Federal</a>
+              </div>
+            </div>
+
+            {/* New OurWings dropdown */}
+            <div className="navbar-link navbar-dropdown-trigger">
+              <div className="flex items-center">
+                Our Wings
+                <ChevronDown className="ml-1 h-4 w-4" />
+              </div>
+              <div className="navbar-dropdown">
+                <a href="/research" className="block px-4 py-2 text-sm hover:bg-gray-50">Trizen Research</a>
+                <a href="/consulting" className="block px-4 py-2 text-sm hover:bg-gray-50">Trizen Consulting</a>
+                <a href="/training" className="block px-4 py-2 text-sm hover:bg-gray-50">Trizen Training</a>
+                <a href="/ventures" className="block px-4 py-2 text-sm hover:bg-gray-50">Trizen Ventures</a>
               </div>
             </div>
 
@@ -148,6 +162,25 @@ const Navbar = () => {
                     </a>
                     <a href="#" className="block px-4 py-2 text-sm text-gray-600 hover:text-trizen-purple">
                       US Federal
+                    </a>
+                  </div>
+                </div>
+                
+                {/* Add Our Wings to mobile menu */}
+                <div className="border-t border-gray-200 pt-4">
+                  <div className="px-4 text-base font-medium text-trizen-dark mb-2">Our Wings</div>
+                  <div className="ml-4 space-y-1">
+                    <a href="/research" className="block px-4 py-2 text-sm text-gray-600 hover:text-trizen-purple">
+                      Trizen Research
+                    </a>
+                    <a href="/consulting" className="block px-4 py-2 text-sm text-gray-600 hover:text-trizen-purple">
+                      Trizen Consulting
+                    </a>
+                    <a href="/training" className="block px-4 py-2 text-sm text-gray-600 hover:text-trizen-purple">
+                      Trizen Training
+                    </a>
+                    <a href="/ventures" className="block px-4 py-2 text-sm text-gray-600 hover:text-trizen-purple">
+                      Trizen Ventures
                     </a>
                   </div>
                 </div>
