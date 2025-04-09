@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -8,9 +7,7 @@ const FloatingCard = () => {
   const [isDismissed, setIsDismissed] = useState(false);
 
   useEffect(() => {
-    // Show the card after 3 seconds
     const timer = setTimeout(() => {
-      // Check if the user hasn't dismissed it already
       const dismissed = localStorage.getItem('ctaDismissed');
       if (!dismissed) {
         setIsVisible(true);
@@ -23,10 +20,8 @@ const FloatingCard = () => {
   const handleDismiss = () => {
     setIsVisible(false);
     setIsDismissed(true);
-    // Remember that the user dismissed it
     localStorage.setItem('ctaDismissed', 'true');
-    
-    // Remove the dismissed status after 24 hours
+
     setTimeout(() => {
       localStorage.removeItem('ctaDismissed');
     }, 24 * 60 * 60 * 1000);
@@ -35,19 +30,19 @@ const FloatingCard = () => {
   if (!isVisible || isDismissed) return null;
 
   return (
-    <div className="fixed bottom-4 md:bottom-6 right-4 md:right-6 z-50 max-w-[300px] md:max-w-[320px] bg-trizen-purple shadow-xl rounded-xl p-4 md:p-6 border border-purple-700 animate-tab-fade-in">
+    <div className="fixed bottom-4 md:bottom-6 right-4 md:right-6 z-50 max-w-[300px] md:max-w-[320px] bg-gray-800 shadow-xl rounded-xl p-4 md:p-6 border border-gray-700 animate-tab-fade-in">
       <div className="flex justify-between items-start">
         <div>
           <h3 className="text-lg md:text-xl font-semibold text-white">
-            300+ Final Year Project Ideas
+            Dummy Card Title
           </h3>
-          <p className="text-purple-100 mt-2 md:mt-3 text-sm md:text-base">
-            Explore trending AI, Web, and IoT project topics tailored for students!
+          <p className="text-gray-300 mt-2 md:mt-3 text-sm md:text-base">
+            This is a placeholder text for testing the floating card component.
           </p>
         </div>
         <button 
           onClick={handleDismiss}
-          className="text-purple-300 hover:text-white transition-colors p-1"
+          className="text-gray-400 hover:text-white transition-colors p-1"
           aria-label="Close"
         >
           <X className="h-5 w-5" />
@@ -55,9 +50,9 @@ const FloatingCard = () => {
       </div>
       <div className="mt-4 md:mt-5">
         <Button 
-          className="w-full bg-trizen-blue hover:bg-trizen-blue/90 py-4 md:py-5 text-sm md:text-base"
+          className="w-full bg-blue-600 hover:bg-blue-500 py-4 md:py-5 text-sm md:text-base"
         >
-          Discover Projects
+          Dummy Button
         </Button>
       </div>
     </div>
