@@ -37,9 +37,9 @@ const OurWingsSection = () => {
               <CardTitle className="text-2xl font-bold text-center text-trizen-dark">Trizen Research</CardTitle>
             </CardHeader>
             <CardContent className="text-center px-6">
-              <p className="text-gray-600 text-lg">
-                Innovating tomorrow through cutting-edge research in AI, Quantum, and Sustainable Technologies
-              </p>
+               <p className="text-gray-600 text-lg">
+                Your Partner in Transformative Research and Smart Solutions
+              </p> 
             </CardContent>
             <CardFooter className="flex justify-center pb-6">
               <Link to="/research">

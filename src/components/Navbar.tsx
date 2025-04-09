@@ -21,6 +21,21 @@ const Navbar = () => {
 
           {/* Navigation Links - Desktop Only */}
           <nav className="hidden lg:flex items-center space-x-8">
+
+            {/* New OurWings dropdown */}
+            <div className="navbar-link navbar-dropdown-trigger">
+              <div className="flex items-center">
+                Our Wings
+                <ChevronDown className="ml-1 h-4 w-4" />
+              </div>
+              <div className="navbar-dropdown">
+                <a href="/research" className="block px-4 py-2 text-sm hover:bg-gray-50">Trizen Research</a>
+                <a href="/consulting" className="block px-4 py-2 text-sm hover:bg-gray-50">Trizen Consulting</a>
+                <a href="/training" className="block px-4 py-2 text-sm hover:bg-gray-50">Trizen Training</a>
+                <a href="/ventures" className="block px-4 py-2 text-sm hover:bg-gray-50">Trizen Ventures</a>
+              </div>
+            </div>
+            
             <div className="navbar-link">Consulting</div>
             
             <div className="navbar-link navbar-dropdown-trigger">
@@ -57,20 +72,6 @@ const Navbar = () => {
                 <a href="#" className="block px-4 py-2 text-sm hover:bg-gray-50">Retail</a>
                 <a href="#" className="block px-4 py-2 text-sm hover:bg-gray-50">Telecommunications</a>
                 <a href="#" className="block px-4 py-2 text-sm hover:bg-gray-50">US Federal</a>
-              </div>
-            </div>
-
-            {/* New OurWings dropdown */}
-            <div className="navbar-link navbar-dropdown-trigger">
-              <div className="flex items-center">
-                Our Wings
-                <ChevronDown className="ml-1 h-4 w-4" />
-              </div>
-              <div className="navbar-dropdown">
-                <a href="/research" className="block px-4 py-2 text-sm hover:bg-gray-50">Trizen Research</a>
-                <a href="/consulting" className="block px-4 py-2 text-sm hover:bg-gray-50">Trizen Consulting</a>
-                <a href="/training" className="block px-4 py-2 text-sm hover:bg-gray-50">Trizen Training</a>
-                <a href="/ventures" className="block px-4 py-2 text-sm hover:bg-gray-50">Trizen Ventures</a>
               </div>
             </div>
 
