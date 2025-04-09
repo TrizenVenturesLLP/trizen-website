@@ -35,13 +35,13 @@ const FloatingCard = () => {
   if (!isVisible || isDismissed) return null;
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 max-w-[320px] bg-trizen-purple shadow-xl rounded-xl p-6 border border-purple-700 animate-tab-fade-in">
+    <div className="fixed bottom-4 md:bottom-6 right-4 md:right-6 z-50 max-w-[300px] md:max-w-[320px] bg-trizen-purple shadow-xl rounded-xl p-4 md:p-6 border border-purple-700 animate-tab-fade-in">
       <div className="flex justify-between items-start">
         <div>
-          <h3 className="text-xl font-semibold text-white">
+          <h3 className="text-lg md:text-xl font-semibold text-white">
             300+ Final Year Project Ideas
           </h3>
-          <p className="text-purple-100 mt-3 text-base">
+          <p className="text-purple-100 mt-2 md:mt-3 text-sm md:text-base">
             Explore trending AI, Web, and IoT project topics tailored for students!
           </p>
         </div>
@@ -53,9 +53,9 @@ const FloatingCard = () => {
           <X className="h-5 w-5" />
         </button>
       </div>
-      <div className="mt-5">
+      <div className="mt-4 md:mt-5">
         <Button 
-          className="w-full bg-trizen-blue hover:bg-trizen-blue/90 py-5 text-base"
+          className="w-full bg-trizen-blue hover:bg-trizen-blue/90 py-4 md:py-5 text-sm md:text-base"
         >
           Discover Projects
         </Button>

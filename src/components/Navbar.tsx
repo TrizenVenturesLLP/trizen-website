@@ -1,6 +1,7 @@
 
-import { User, Search, HelpCircle, ChevronDown } from "lucide-react";
+import { User, Search, HelpCircle, ChevronDown, Menu, X } from "lucide-react";
 import { useState } from "react";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 const Navbar = () => {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
@@ -18,7 +19,7 @@ const Navbar = () => {
             <img src="/lovable-uploads/trizen-logo.png" alt="Trizen Logo" className="h-14" />
           </a>
 
-          {/* Navigation Links */}
+          {/* Navigation Links - Desktop Only */}
           <nav className="hidden lg:flex items-center space-x-8">
             <div className="navbar-link">Consulting</div>
             
@@ -83,11 +84,97 @@ const Navbar = () => {
               <a href="#" className="block px-4 py-2 text-sm hover:bg-gray-50">Register</a>
             </div>
           </div>
-          <button className="lg:hidden text-gray-600">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          </button>
+          
+          {/* Mobile Menu Button */}
+          <Sheet>
+            <SheetTrigger asChild>
+              <button className="lg:hidden text-gray-600 focus:outline-none">
+                <Menu className="w-6 h-6" />
+              </button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-[85%] sm:w-[350px] overflow-y-auto">
+              <div className="py-6 space-y-6">
+                <a href="#" className="block px-4 py-2 text-base font-medium text-trizen-dark hover:text-trizen-purple">
+                  Consulting
+                </a>
+                
+                <div className="border-t border-gray-200 pt-4">
+                  <div className="px-4 text-base font-medium text-trizen-dark mb-2">Capabilities</div>
+                  <div className="ml-4 space-y-1">
+                    <a href="#" className="block px-4 py-2 text-sm text-gray-600 hover:text-trizen-purple">
+                      Application Services
+                    </a>
+                    <a href="#" className="block px-4 py-2 text-sm text-gray-600 hover:text-trizen-purple">
+                      Artificial Intelligence
+                    </a>
+                    <a href="#" className="block px-4 py-2 text-sm text-gray-600 hover:text-trizen-purple">
+                      Automation
+                    </a>
+                    <a href="#" className="block px-4 py-2 text-sm text-gray-600 hover:text-trizen-purple">
+                      Business Strategy
+                    </a>
+                    <a href="#" className="block px-4 py-2 text-sm text-gray-600 hover:text-trizen-purple">
+                      Cloud
+                    </a>
+                    <a href="#" className="block px-4 py-2 text-sm text-gray-600 hover:text-trizen-purple">
+                      Customer Experience
+                    </a>
+                    <a href="#" className="block px-4 py-2 text-sm text-gray-600 hover:text-trizen-purple">
+                      Cybersecurity
+                    </a>
+                  </div>
+                </div>
+                
+                <div className="border-t border-gray-200 pt-4">
+                  <div className="px-4 text-base font-medium text-trizen-dark mb-2">Industries</div>
+                  <div className="ml-4 space-y-1">
+                    <a href="#" className="block px-4 py-2 text-sm text-gray-600 hover:text-trizen-purple">
+                      Energy
+                    </a>
+                    <a href="#" className="block px-4 py-2 text-sm text-gray-600 hover:text-trizen-purple">
+                      Financial Services
+                    </a>
+                    <a href="#" className="block px-4 py-2 text-sm text-gray-600 hover:text-trizen-purple">
+                      Government
+                    </a>
+                    <a href="#" className="block px-4 py-2 text-sm text-gray-600 hover:text-trizen-purple">
+                      Healthcare Services
+                    </a>
+                    <a href="#" className="block px-4 py-2 text-sm text-gray-600 hover:text-trizen-purple">
+                      Retail
+                    </a>
+                    <a href="#" className="block px-4 py-2 text-sm text-gray-600 hover:text-trizen-purple">
+                      Telecommunications
+                    </a>
+                    <a href="#" className="block px-4 py-2 text-sm text-gray-600 hover:text-trizen-purple">
+                      US Federal
+                    </a>
+                  </div>
+                </div>
+                
+                <div className="border-t border-gray-200 pt-4 space-y-4">
+                  <a href="#" className="block px-4 py-2 text-base font-medium text-trizen-dark hover:text-trizen-purple">
+                    Strategic Partners
+                  </a>
+                  <a href="#" className="block px-4 py-2 text-base font-medium text-trizen-dark hover:text-trizen-purple">
+                    Insights
+                  </a>
+                  <a href="#" className="block px-4 py-2 text-base font-medium text-trizen-dark hover:text-trizen-purple">
+                    Careers
+                  </a>
+                </div>
+                
+                <div className="border-t border-gray-200 pt-4 space-y-4">
+                  <a href="#" className="block px-4 py-2 text-base font-medium text-trizen-dark hover:text-trizen-purple">
+                    Login
+                  </a>
+                  <a href="#" className="block px-4 py-2 text-base font-medium text-trizen-dark hover:text-trizen-purple">
+                    Register
+                  </a>
+                </div>
+              </div>
+            </SheetContent>
+          </Sheet>
         </div>
       </div>
     </header>
