@@ -2,6 +2,7 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import AboutUsSection from "@/components/AboutUsSection";
+import OurWingsSection from "@/components/OurWingsSection";
 
 const AboutUs = () => {
   return (
@@ -17,6 +18,7 @@ const AboutUs = () => {
           </div>
         </div>
         <AboutUsSection />
+        <OurWingsSection />
       </main>
       <Footer />
     </div>
