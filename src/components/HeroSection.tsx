@@ -1,46 +1,35 @@
-
 import { useState, useEffect } from "react";
-import { ArrowRight, ChevronRight, Rocket, Palette, BookOpen, Bot, Cloud } from "lucide-react";
+import { ArrowRight, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 const HeroSection = () => {
-  const [activeTab, setActiveTab] = useState("teaching");
+  const [activeTab, setActiveTab] = useState("research");
   const isMobile = useIsMobile();
 
-  // Tab content with icons
+  // Updated tab content
   const tabContent = [
     {
-      id: "teaching",
-      label: "AI & Machine Learning Training Programs",
-      heading: "Accelerate Your Career with AI and Full-Stack Development Training",
-      icon: <Rocket className="h-5 w-5" />
-    },
-    {
-      id: "uiux",
-      label: "UI/UX & Web Solutions",
-      heading: "Design Intuitive UI/UX and Scalable Web Solutions to Drive Growth",
-      icon: <Palette className="h-5 w-5" />
-    },
-    {
       id: "research",
-      label: "Research & Project Support",
-      heading: "Full Research & Project Support for PhD and Final Year Students",
-      icon: <BookOpen className="h-5 w-5" />
+      label: "Trizen Research",
+      heading: "Your Partner in Transformative Research and Smart Solutions",
     },
     {
-      id: "aiml",
-      label: "AI Chatbot & Intelligent Agent Development",
-      heading: "Conversational AI & Intelligent Agent Solutions",
-      icon: <Bot className="h-5 w-5" />
+      id: "consulting",
+      label: "Trizen Consulting",
+      heading: "Your Partner in Digital Transformation",
     },
     {
-      id: "cloud",
-      label: "Cloud Hosting Solutions",
-      heading: "Secure and Scalable Cloud Hosting Tailored to Your Business Needs",
-      icon: <Cloud className="h-5 w-5" />
-    }
+      id: "training",
+      label: "Trizen Training",
+      heading: "Empowering Future-Ready Talent with Industry-Aligned Skills",
+    },
+    {
+      id: "ventures",
+      label: "Trizen Ventures",
+      heading: "From Vision to Venture — Powered by Trizen",
+    },
   ];
 
   // Auto-rotate tabs
@@ -60,7 +49,7 @@ const HeroSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-4 items-center">
           {/* Left Column - Text Content */}
           <div className="text-left md:col-span-7 order-2 md:order-1">
-            <Tabs defaultValue="teaching" value={activeTab} onValueChange={setActiveTab} className="w-full">
+            <Tabs defaultValue="research" value={activeTab} onValueChange={setActiveTab} className="w-full">
               <div className="space-y-6 mb-8">
                 {tabContent.map((tab) => (
                   <TabsContent 
@@ -74,15 +63,14 @@ const HeroSection = () => {
                   </TabsContent>
                 ))}
               </div>
-              
+
               <Button 
                 className="rounded-full px-5 py-5 md:px-6 md:py-6 bg-trizen-purple hover:bg-trizen-purple/90 transition-all hover:scale-105 text-white"
               >
                 Know More
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
-              
-              {/* Tabs Navigation - Using scrollable container on mobile, wrapping on desktop */}
+
               <div className="mt-8 md:mt-12 overflow-x-auto md:overflow-x-visible">
                 <TabsList className={`flex ${isMobile ? 'flex-nowrap' : 'flex-wrap'} gap-3 md:gap-4 bg-transparent p-0 ${isMobile ? 'min-w-max' : 'w-full'}`}>
                   {tabContent.map((tab) => (
@@ -91,21 +79,17 @@ const HeroSection = () => {
                       value={tab.id}
                       className={`navbar-link flex items-center whitespace-nowrap mb-2 ${activeTab === tab.id ? 'text-trizen-purple' : ''}`}
                     >
-                      {isMobile ? (
-                        <span className="mr-1">{tab.icon}</span>
-                      ) : (
-                        <span className="flex items-center gap-1">
-                          {tab.label}
-                          {activeTab === tab.id && <ChevronRight className="h-3.5 w-3.5 ml-0.5" />}
-                        </span>
-                      )}
+                      <span className="flex items-center gap-1">
+                        {tab.label}
+                        {activeTab === tab.id && !isMobile && <ChevronRight className="h-3.5 w-3.5 ml-0.5" />}
+                      </span>
                     </TabsTrigger>
                   ))}
                 </TabsList>
               </div>
             </Tabs>
           </div>
-          
+
           {/* Right Column - Hero Image */}
           <div className="flex justify-center md:justify-end md:col-span-5 order-1 md:order-2 mb-8 md:mb-0">
             <div className="relative">
