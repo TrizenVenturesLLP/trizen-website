@@ -76,7 +76,7 @@ const HeroSection = () => {
               </div>
               
               <Button 
-                className="rounded-full px-5 py-5 md:px-6 md:py-6 bg-trizen-blue hover:bg-trizen-blue/90 transition-all hover:scale-105 text-white"
+                className="rounded-full px-5 py-5 md:px-6 md:py-6 bg-trizen-purple hover:bg-trizen-purple/90 transition-all hover:scale-105 text-white"
               >
                 Know More
                 <ArrowRight className="ml-2 h-4 w-4" />
