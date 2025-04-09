@@ -2,10 +2,12 @@
 import { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const FloatingCard = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isDismissed, setIsDismissed] = useState(false);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     // Show the card after 3 seconds
@@ -35,13 +37,14 @@ const FloatingCard = () => {
   if (!isVisible || isDismissed) return null;
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 max-w-[320px] bg-trizen-purple shadow-xl rounded-xl p-6 border border-purple-700 animate-tab-fade-in">
+    <div className={`fixed z-50 bg-trizen-purple shadow-xl rounded-xl p-4 md:p-6 border border-purple-700 animate-tab-fade-in 
+      ${isMobile ? 'bottom-0 left-0 right-0 max-w-full mx-4 mb-4' : 'bottom-6 right-6 max-w-[320px]'}`}>
       <div className="flex justify-between items-start">
         <div>
-          <h3 className="text-xl font-heading font-semibold text-white tracking-tight">
+          <h3 className="text-lg md:text-xl font-heading font-semibold text-white tracking-tight">
             300+ Final Year Project Ideas
           </h3>
-          <p className="text-purple-100 mt-3 font-body text-base leading-relaxed">
+          <p className="text-purple-100 mt-2 md:mt-3 font-body text-sm md:text-base leading-relaxed">
             Explore trending AI, Web, and IoT project topics tailored for students!
           </p>
         </div>
@@ -53,9 +56,9 @@ const FloatingCard = () => {
           <X className="h-5 w-5" />
         </button>
       </div>
-      <div className="mt-5">
+      <div className="mt-4 md:mt-5">
         <Button 
-          className="w-full bg-trizen-blue hover:bg-trizen-blue/90 py-5 button-text uppercase tracking-wide"
+          className="w-full bg-trizen-blue hover:bg-trizen-blue/90 py-4 md:py-5 button-text uppercase tracking-wide"
         >
           Discover Projects
         </Button>

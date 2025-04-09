@@ -1,6 +1,7 @@
 
 import { User, Search, HelpCircle, ChevronDown } from "lucide-react";
 import { useState } from "react";
+import MobileMenu from "./MobileMenu";
 
 const Navbar = () => {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
@@ -15,10 +16,10 @@ const Navbar = () => {
         <div className="flex items-center gap-10">
           {/* Logo */}
           <a href="/" className="flex items-center">
-            <img src="/lovable-uploads/trizen-logo.png" alt="Trizen Logo" className="h-14" />
+            <img src="/lovable-uploads/trizen-logo.png" alt="Trizen Logo" className="h-12 md:h-14" />
           </a>
 
-          {/* Navigation Links */}
+          {/* Navigation Links - Only visible on large screens */}
           <nav className="hidden lg:flex items-center space-x-8">
             <div className="navbar-link font-subheading font-medium">Consulting</div>
             
@@ -66,14 +67,14 @@ const Navbar = () => {
         </div>
 
         {/* Right side icons */}
-        <div className="flex items-center space-x-6">
-          <button className="text-gray-600 hover:text-trizen-purple">
+        <div className="flex items-center space-x-4 md:space-x-6">
+          <button className="hidden sm:block text-gray-600 hover:text-trizen-purple">
             <Search className="h-5 w-5" />
           </button>
-          <button className="text-gray-600 hover:text-trizen-purple">
+          <button className="hidden sm:block text-gray-600 hover:text-trizen-purple">
             <HelpCircle className="h-5 w-5" />
           </button>
-          <div className="relative navbar-dropdown-trigger">
+          <div className="relative navbar-dropdown-trigger hidden sm:block">
             <button className="text-gray-600 hover:text-trizen-purple p-1 border border-transparent hover:border-gray-200 rounded">
               <User className="h-5 w-5" />
             </button>
@@ -83,11 +84,9 @@ const Navbar = () => {
               <a href="#" className="block px-4 py-2 text-sm font-body hover:bg-gray-50">Register</a>
             </div>
           </div>
-          <button className="lg:hidden text-gray-600">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          </button>
+          
+          {/* Mobile Menu */}
+          <MobileMenu />
         </div>
       </div>
     </header>
