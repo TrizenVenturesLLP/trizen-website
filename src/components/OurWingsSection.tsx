@@ -44,12 +44,14 @@ const OurWingsSection = () => {
               </p>
             </CardContent>
             <CardFooter className="flex justify-center pb-6">
-              <Link to="/training">
-                <Button variant="outline" className="group border-trizen-purple text-trizen-purple hover:bg-trizen-purple hover:text-white transition-all duration-300">
-                  Learn More
-                  <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-                </Button>
-              </Link>
+              <Button 
+                variant="outline" 
+                className="group border-trizen-purple text-trizen-purple hover:bg-trizen-purple hover:text-white transition-all duration-300"
+                onClick={() => window.location.href = '/training'}
+              >
+                Learn More
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+              </Button>
             </CardFooter>
           </Card>
 
@@ -73,12 +75,14 @@ const OurWingsSection = () => {
               </p>
             </CardContent>
             <CardFooter className="flex justify-center pb-6">
-              <Link to="/research">
-                <Button variant="outline" className="group border-trizen-purple text-trizen-purple hover:bg-trizen-purple hover:text-white transition-all duration-300">
-                  Learn More
-                  <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-                </Button>
-              </Link>
+              <Button 
+                variant="outline" 
+                className="group border-trizen-purple text-trizen-purple hover:bg-trizen-purple hover:text-white transition-all duration-300"
+                onClick={() => window.location.href = '/research'}
+              >
+                Learn More
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+              </Button>
             </CardFooter>
           </Card>
 
@@ -102,12 +106,14 @@ const OurWingsSection = () => {
               </p>
             </CardContent>
             <CardFooter className="flex justify-center pb-6">
-              <Link to="/consulting">
-                <Button variant="outline" className="group border-trizen-purple text-trizen-purple hover:bg-trizen-purple hover:text-white transition-all duration-300">
-                  Learn More
-                  <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-                </Button>
-              </Link>
+              <Button 
+                variant="outline" 
+                className="group border-trizen-purple text-trizen-purple hover:bg-trizen-purple hover:text-white transition-all duration-300"
+                onClick={() => window.location.href = '/consulting'}
+              >
+                Learn More
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+              </Button>
             </CardFooter>
           </Card>
 
@@ -131,12 +137,14 @@ const OurWingsSection = () => {
               </p>
             </CardContent>
             <CardFooter className="flex justify-center pb-6">
-              <Link to="/ventures">
-                <Button variant="outline" className="group border-trizen-purple text-trizen-purple hover:bg-trizen-purple hover:text-white transition-all duration-300">
-                  Learn More
-                  <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-                </Button>
-              </Link>
+              <Button 
+                variant="outline" 
+                className="group border-trizen-purple text-trizen-purple hover:bg-trizen-purple hover:text-white transition-all duration-300"
+                onClick={() => window.location.href = '/ventures'}
+              >
+                Learn More
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+              </Button>
             </CardFooter>
           </Card>
         </div>
