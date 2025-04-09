@@ -1,34 +1,40 @@
+
 import { useState, useEffect } from "react";
 import { ArrowRight, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   const [activeTab, setActiveTab] = useState("research");
   const isMobile = useIsMobile();
 
-  // Updated tab content
+  // Updated tab content with routes
   const tabContent = [
     {
       id: "research",
       label: "Trizen Research",
       heading: "Your Partner in Transformative Research and Smart Solutions",
+      route: "/research"
     },
     {
       id: "consulting",
       label: "Trizen Consulting",
       heading: "Your Partner in Digital Transformation",
+      route: "/consulting"
     },
     {
       id: "training",
       label: "Trizen Training",
       heading: "Empowering Future-Ready Talent with Industry-Aligned Skills",
+      route: "/training"
     },
     {
       id: "ventures",
       label: "Trizen Ventures",
       heading: "From Vision to Venture — Powered by Trizen",
+      route: "/ventures"
     },
   ];
 
@@ -42,6 +48,12 @@ const HeroSection = () => {
 
     return () => clearInterval(interval);
   }, [activeTab]);
+
+  // Get current route based on active tab
+  const getCurrentRoute = () => {
+    const currentTab = tabContent.find(tab => tab.id === activeTab);
+    return currentTab ? currentTab.route : "/";
+  };
 
   return (
     <section className="bg-trizen-light py-12 md:py-16 lg:py-24">
@@ -64,12 +76,14 @@ const HeroSection = () => {
                 ))}
               </div>
 
-              <Button 
-                className="rounded-full px-5 py-5 md:px-6 md:py-6 bg-trizen-purple hover:bg-trizen-purple/90 transition-all hover:scale-105 text-white"
-              >
-                Know More
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
+              <Link to={getCurrentRoute()}>
+                <Button 
+                  className="rounded-full px-5 py-5 md:px-6 md:py-6 bg-trizen-purple hover:bg-trizen-purple/90 transition-all hover:scale-105 text-white"
+                >
+                  Know More
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
 
               <div className="mt-8 md:mt-12 overflow-x-auto md:overflow-x-visible">
                 <TabsList className={`flex ${isMobile ? 'flex-nowrap' : 'flex-wrap'} gap-3 md:gap-4 bg-transparent p-0 ${isMobile ? 'min-w-max' : 'w-full'}`}>
