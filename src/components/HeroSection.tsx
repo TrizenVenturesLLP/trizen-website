@@ -11,28 +11,28 @@ const HeroSection = () => {
   const tabContent = [
     {
       id: "teaching",
-      label: "Teaching Services",
-      heading: "Learn from the experts. We offer hands-on training in AI/ML, Web Development, and more.",
+      label: "AI & Machine Learning Training Programs",
+      heading: "Accelerate Your Career with AI and Full-Stack Development Training",
     },
     {
       id: "uiux",
-      label: "UI/UX & WebDevelopment",
-      heading: "We craft intuitive digital experiences and scalable web solutions that make an impact.",
+      label: "UI/UX & Web Solutions",
+      heading: "Design Intuitive UI/UX and Scalable Web Solutions to Drive Growth",
     },
     {
       id: "research",
-      label: "Research Development",
-      heading: "Supporting PhD and Final year Projects with end-to-end research, development, and publishing guidance.",
+      label: "Research & Project Support",
+      heading: "Full Research & Project Support for PhD and Final Year Students",
     },
     {
       id: "aiml",
-      label: "Multi-Agent Services",
-      heading: "From intelligent chatbots to custom AI agents, we build solutions that think, learn, and act.",
+      label: "AI Chatbot & Intelligent Agent Development",
+      heading: "Conversational AI & Intelligent Agent Solutions",
     },
     {
       id: "cloud",
-      label: "Cloud Solutions",
-      heading: "We deliver reliable, secure, and scalable cloud hosting tailored to your needs.",
+      label: "Cloud Hosting Solutions",
+      heading: "Secure and Scalable Cloud Hosting Tailored to Your Business Needs",
     }
   ];
 
