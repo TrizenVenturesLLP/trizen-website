@@ -1,6 +1,12 @@
 
-import { User, Search, HelpCircle, ChevronDown } from "lucide-react";
+import { User, Search, HelpCircle, ChevronDown, Menu, X } from "lucide-react";
 import { useState } from "react";
+import { 
+  Drawer,
+  DrawerContent,
+  DrawerClose,
+  DrawerTrigger
+} from "@/components/ui/drawer";
 
 const Navbar = () => {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
@@ -18,7 +24,7 @@ const Navbar = () => {
             <img src="/lovable-uploads/trizen-logo.png" alt="Trizen Logo" className="h-14" />
           </a>
 
-          {/* Navigation Links */}
+          {/* Navigation Links - Desktop */}
           <nav className="hidden lg:flex items-center space-x-8">
             <div className="navbar-link font-subheading font-medium">Consulting</div>
             
@@ -83,11 +89,68 @@ const Navbar = () => {
               <a href="#" className="block px-4 py-2 text-sm font-body hover:bg-gray-50">Register</a>
             </div>
           </div>
-          <button className="lg:hidden text-gray-600">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          </button>
+          
+          {/* Mobile Menu Button */}
+          <Drawer>
+            <DrawerTrigger asChild>
+              <button className="lg:hidden text-gray-600 hover:text-trizen-purple">
+                <Menu className="w-6 h-6" />
+              </button>
+            </DrawerTrigger>
+            <DrawerContent className="h-[90vh]">
+              <div className="px-6 py-6">
+                <div className="flex justify-between items-center mb-8">
+                  <h3 className="font-heading font-semibold text-xl">Menu</h3>
+                  <DrawerClose className="text-gray-500 hover:text-gray-800">
+                    <X className="w-5 h-5" />
+                  </DrawerClose>
+                </div>
+                
+                <nav className="space-y-6">
+                  <a href="#" className="block font-subheading font-medium text-lg py-2 border-b border-gray-100">Consulting</a>
+                  
+                  <div>
+                    <div className="font-subheading font-medium text-lg py-2 border-b border-gray-100">Capabilities</div>
+                    <div className="pl-4 mt-2 space-y-3">
+                      <a href="#" className="block text-base font-body py-1">Application Services</a>
+                      <a href="#" className="block text-base font-body py-1">Artificial Intelligence</a>
+                      <a href="#" className="block text-base font-body py-1">Automation</a>
+                      <a href="#" className="block text-base font-body py-1">Business Strategy</a>
+                      <a href="#" className="block text-base font-body py-1">Cloud</a>
+                      <a href="#" className="mt-2 text-trizen-blue flex items-center text-base font-subheading font-medium">
+                        See All Services
+                        <span className="ml-1">→</span>
+                      </a>
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <div className="font-subheading font-medium text-lg py-2 border-b border-gray-100">Industries</div>
+                    <div className="pl-4 mt-2 space-y-3">
+                      <a href="#" className="block text-base font-body py-1">Energy</a>
+                      <a href="#" className="block text-base font-body py-1">Financial Services</a>
+                      <a href="#" className="block text-base font-body py-1">Government</a>
+                      <a href="#" className="block text-base font-body py-1">Healthcare Services</a>
+                      <a href="#" className="block text-base font-body py-1">Retail</a>
+                    </div>
+                  </div>
+                  
+                  <a href="#" className="block font-subheading font-medium text-lg py-2 border-b border-gray-100">Strategic Partners</a>
+                  <a href="#" className="block font-subheading font-medium text-lg py-2 border-b border-gray-100">Insights</a>
+                  <a href="#" className="block font-subheading font-medium text-lg py-2 border-b border-gray-100">Careers</a>
+                  
+                  {/* Mobile User Options */}
+                  <div className="pt-4 border-t border-gray-200">
+                    <div className="font-subheading font-medium text-base mb-2 text-gray-500">My Trizen</div>
+                    <div className="space-y-3">
+                      <a href="#" className="block text-base font-body py-1">Log in</a>
+                      <a href="#" className="block text-base font-body py-1">Register</a>
+                    </div>
+                  </div>
+                </nav>
+              </div>
+            </DrawerContent>
+          </Drawer>
         </div>
       </div>
     </header>
