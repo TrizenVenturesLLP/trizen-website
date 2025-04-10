@@ -15,28 +15,28 @@ const HeroSection = () => {
   const tabContent = [
     {
       id: "research",
-      label: "Trizen Research",
+      label: "Research",
       heading: "Your Partner in Transformative Research and Smart Solutions",
       description: "Building cutting-edge research solutions for your toughest challenges.",
       route: "/research"
     },
     {
       id: "consulting",
-      label: "Trizen Consulting",
+      label: "Consulting",
       heading: "Your Partner in Digital Transformation",
       description: "Expert consulting to navigate the complexities of modern business.",
       route: "/consulting"
     },
     {
       id: "training",
-      label: "Trizen Training",
+      label: "Training",
       heading: "Empowering Future-Ready Talent with Industry-Aligned Skills",
       description: "Develop the skills you need to thrive in today's dynamic environment.",
       route: "/training"
     },
     {
       id: "ventures",
-      label: "Trizen Ventures",
+      label: "Ventures",
       heading: "From Vision to Venture — Powered by Trizen",
       description: "We invest in visionaries building the technology of tomorrow.",
       route: "/ventures"
