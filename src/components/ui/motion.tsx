@@ -10,6 +10,14 @@ type MotionProps = {
   slideInFromTop?: boolean;
   slideInFromBottom?: boolean;
   hoverScale?: boolean;
+  initial?: any;
+  animate?: any;
+  transition?: any;
+  variants?: any;
+  viewport?: any;
+  whileInView?: any;
+  whileHover?: any;
+  whileTap?: any;
 };
 
 export const motion = React.forwardRef<HTMLDivElement, MotionProps>(
@@ -22,6 +30,14 @@ export const motion = React.forwardRef<HTMLDivElement, MotionProps>(
     slideInFromTop = false,
     slideInFromBottom = false,
     hoverScale = false,
+    initial,
+    animate,
+    transition,
+    variants,
+    viewport,
+    whileInView,
+    whileHover,
+    whileTap,
     ...props 
   }, ref) => {
     const [isVisible, setIsVisible] = React.useState(!fadeInOnScroll);
