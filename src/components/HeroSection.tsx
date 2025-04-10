@@ -154,41 +154,44 @@ const HeroSection = () => {
               </div>
             </motion.div>
 
-            {/* Main Heading */}
-            <motion.h1 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-4xl md:text-5xl lg:text-7xl font-bold mb-6 tracking-tight"
-            >
-              {tabContent.map((tab) => (
-                <TabsContent 
-                  key={tab.id} 
-                  value={tab.id}
-                  className="data-[state=active]:animate-tab-fade-in"
-                >
-                  {tab.heading}
-                </TabsContent>
-              ))}
-            </motion.h1>
+            {/* Main Heading and Description in Tabs */}
+            <Tabs value={activeTab} onValueChange={setActiveTab}>
+              {/* Main Heading */}
+              <motion.h1 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className="text-4xl md:text-5xl lg:text-7xl font-bold mb-6 tracking-tight"
+              >
+                {tabContent.map((tab) => (
+                  <TabsContent 
+                    key={tab.id} 
+                    value={tab.id}
+                    className="data-[state=active]:animate-tab-fade-in"
+                  >
+                    {tab.heading}
+                  </TabsContent>
+                ))}
+              </motion.h1>
 
-            {/* Description */}
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-xl text-gray-300 max-w-3xl mx-auto mb-10"
-            >
-              {tabContent.map((tab) => (
-                <TabsContent 
-                  key={`desc-${tab.id}`} 
-                  value={tab.id}
-                  className="data-[state=active]:animate-tab-fade-in"
-                >
-                  {tab.description}
-                </TabsContent>
-              ))}
-            </motion.p>
+              {/* Description */}
+              <motion.p 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="text-xl text-gray-300 max-w-3xl mx-auto mb-10"
+              >
+                {tabContent.map((tab) => (
+                  <TabsContent 
+                    key={`desc-${tab.id}`} 
+                    value={tab.id}
+                    className="data-[state=active]:animate-tab-fade-in"
+                  >
+                    {tab.description}
+                  </TabsContent>
+                ))}
+              </motion.p>
+            </Tabs>
 
             {/* Action Buttons */}
             <motion.div 
