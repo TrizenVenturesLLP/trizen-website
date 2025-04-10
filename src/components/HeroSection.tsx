@@ -223,7 +223,7 @@ const HeroSection = () => {
               className="w-full"
             >
               <div className="mt-8 md:mt-12 overflow-x-auto md:overflow-x-visible">
-                <TabsList className={`flex ${isMobile ? 'flex-nowrap' : 'flex-wrap'} justify-center gap-3 md:gap-4 bg-transparent p-0 ${isMobile ? 'min-w-max' : 'w-full'}`}>
+                <TabsList className={`flex ${isMobile ? 'flex-nowrap' : 'flex-wrap'} justify-center gap-3 md:gap-4 p-0 ${isMobile ? 'min-w-max' : 'w-full'}`}>
                   {tabContent.map((tab) => (
                     <TabsTrigger
                       key={tab.id}
