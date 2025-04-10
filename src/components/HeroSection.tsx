@@ -61,22 +61,19 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="relative bg-black text-white overflow-hidden min-h-[85vh] flex items-center">
-      {/* Grid background */}
-      <div className="absolute inset-0 opacity-20">
-        <div className="grid grid-cols-12 h-full">
-          {Array.from({ length: 12 }).map((_, colIndex) => (
-            <div key={`col-${colIndex}`} className="border-r border-blue-500/20 h-full"></div>
-          ))}
-        </div>
-        <div className="grid grid-rows-8 w-full absolute top-0 bottom-0">
-          {Array.from({ length: 8 }).map((_, rowIndex) => (
-            <div key={`row-${rowIndex}`} className="border-b border-blue-500/20 w-full"></div>
-          ))}
-        </div>
+    <section className="relative bg-white text-black overflow-hidden min-h-[85vh] flex items-center">
+      {/* Background image with mask */}
+      <div className="absolute inset-0 z-0">
+        <div 
+          className="absolute inset-0 bg-cover bg-center" 
+          style={{ 
+            backgroundImage: "url('https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&q=80')" 
+          }}
+        ></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-white/50"></div>
       </div>
-
-      {/* Floating animated elements */}
+      
+      {/* Animation dots */}
       <div className="absolute inset-0 overflow-hidden">
         {Array.from({ length: 6 }).map((_, i) => (
           <motion.div
@@ -149,8 +146,8 @@ const HeroSection = () => {
               className="inline-block mx-auto mb-6 bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-sm border border-blue-500/30 rounded-full px-4 py-2"
             >
               <div className="flex items-center gap-2">
-                <Sparkles className="h-4 w-4 text-blue-400" />
-                <span className="text-sm font-medium">Exciting announcement</span>
+                <Sparkles className="h-4 w-4 text-blue-600" />
+                <span className="text-sm font-medium text-blue-800">Exciting announcement</span>
               </div>
             </motion.div>
 
@@ -161,7 +158,7 @@ const HeroSection = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
-                className="text-4xl md:text-5xl lg:text-7xl font-bold mb-6 tracking-tight"
+                className="text-4xl md:text-5xl lg:text-7xl font-bold mb-6 tracking-tight text-trizen-dark"
               >
                 {tabContent.map((tab) => (
                   <TabsContent 
@@ -179,7 +176,7 @@ const HeroSection = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
-                className="text-xl text-gray-300 max-w-3xl mx-auto mb-10"
+                className="text-xl text-gray-700 max-w-3xl mx-auto mb-10"
               >
                 {tabContent.map((tab) => (
                   <TabsContent 
@@ -203,7 +200,7 @@ const HeroSection = () => {
               <Link to={getCurrentRoute()}>
                 <Button 
                   size="lg"
-                  className="rounded-full bg-blue-500 hover:bg-blue-600 text-white transition-all hover:scale-105"
+                  className="rounded-full bg-blue-600 hover:bg-blue-700 text-white transition-all hover:scale-105"
                 >
                   Try it free
                   <ArrowRight className="ml-2 h-4 w-4" />
@@ -211,8 +208,8 @@ const HeroSection = () => {
               </Link>
               <Button 
                 size="lg"
-                variant="ghost" 
-                className="rounded-full text-white border-white/20 hover:bg-white/10"
+                variant="outline" 
+                className="rounded-full text-blue-700 border-blue-300 hover:bg-blue-50"
               >
                 Learn more
               </Button>
@@ -231,7 +228,7 @@ const HeroSection = () => {
                     <TabsTrigger
                       key={tab.id}
                       value={tab.id}
-                      className={`navbar-link flex items-center whitespace-nowrap mb-2 ${activeTab === tab.id ? 'text-blue-400' : 'text-gray-400'}`}
+                      className={`navbar-link flex items-center whitespace-nowrap mb-2 ${activeTab === tab.id ? 'text-blue-600' : 'text-gray-600'}`}
                     >
                       <span className="flex items-center gap-1">
                         {tab.label}
