@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
@@ -16,7 +15,7 @@ import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { motion } from "@/components/ui/motion";
+import { motion, HTMLMotionProps } from "framer-motion";
 
 // Research Areas Data
 const researchAreas = [
@@ -185,69 +184,70 @@ const Research = () => {
     : researchAreas.filter(area => area.category === selectedTab);
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <Navbar />
+    <div className="min-h-screen flex flex-col bg-[#f0effc]">
+   <Navbar />
       
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-indigo-900 to-blue-800 text-white overflow-hidden">
-        {/* Abstract Background Animation */}
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-0 left-0 w-full h-full">
-            <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="w-full h-full">
-              <path d="M0,0 L100,0 L100,100 L0,100 Z" fill="url(#grid)" />
-            </svg>
-            <defs>
-              <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
-                <path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.2)" strokeWidth="0.5" />
-              </pattern>
-            </defs>
-          </div>
-          <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-blue-400 opacity-20 blur-3xl"></div>
-          <div className="absolute bottom-0 left-10 w-72 h-72 rounded-full bg-indigo-600 opacity-20 blur-3xl"></div>
+      <section className="relative w-full">
+        {/* Background Image with Grayscale */}
+        <div className="absolute inset-0 w-full h-full">
+          <img 
+            src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=2070&auto=format&fit=crop"
+            alt="Research Background" 
+            className="w-full h-full object-cover filter grayscale"
+          />
+          <div className="absolute inset-0 bg-black/60"></div>
         </div>
-        
-        <div className="container mx-auto px-4 py-24 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center justify-center p-2 bg-blue-700/30 backdrop-blur-sm rounded-full mb-6">
-              <Badge variant="secondary" className="bg-blue-100 text-blue-700 hover:bg-blue-200">Trizen Research</Badge>
-            </div>
-            
-            <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-6">
-              Innovate, Research, Transform
-            </h1>
-            
-            <p className="text-xl md:text-2xl text-blue-100 mb-8 max-w-3xl mx-auto">
-              Empowering Academic Research and Real-World Solutions
-            </p>
-            
-            <div className="flex flex-wrap justify-center gap-4 mt-10">
-              <Button size="lg" className="bg-white text-indigo-900 hover:bg-blue-100">
-                Explore Research Areas
-                <ChevronRight className="ml-1 h-4 w-4" />
-              </Button>
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
-                Join a Project
-                <Users className="ml-1 h-4 w-4" />
-              </Button>
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
-                Publish With Us
-                <FileText className="ml-1 h-4 w-4" />
-              </Button>
+
+        {/* Content */}
+        <div className="relative z-10 container mx-auto ">
+          <div className="flex flex-col lg:flex-row items-center justify-between min-h-[600px] py-20">
+            <div className="w-full lg:w-2/3 text-center mx-auto">
+              <div className="max-w-4xl w-full mx-auto lg:mx-0">
+                <div className="inline-flex items-center justify-center p-2 bg-[#6c62e2]/30 backdrop-blur-sm rounded-full mb-6">
+                  <Badge variant="secondary" className="bg-[#f0effc] text-[#393283]">
+                    Trizen Research
+                  </Badge>
+                </div>
+                
+                <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-6 text-white">
+                  Innovate, Research, Transform
+                </h1>
+                
+                <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl">
+                  Empowering Academic Research and Real-World Solutions
+                </p>
+                
+                <div className="flex flex-wrap justify-center gap-4 mt-10">
+                  <Button size="lg" className="bg-[#f0effc] text-[#393283] hover:bg-[#8d86e0]/20">
+                    Explore Research Areas
+                    <ChevronRight className="ml-1 h-4 w-4" />
+                  </Button>
+                  <Button size="lg" variant="outline" className="border-[#8d86e0] text-[#393283] hover:bg-[#8d86e0]/10">
+                    Join a Project
+                    <Users className="ml-1 h-4 w-4" />
+                  </Button>
+                  <Button size="lg" variant="outline" className="border-[#8d86e0] text-[#393283] hover:bg-[#8d86e0]/10">
+                    Publish With Us
+                    <FileText className="ml-1 h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
         {/* Stats Counter */}
-        <div className="bg-gradient-to-r from-indigo-800 to-blue-700 py-8 w-full">
+        <div className="relative z-10 w-full bg-black/40 backdrop-blur-sm py-8">
           <div className="container mx-auto">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
               {stats.map((stat, index) => (
                 <div key={index} className="flex flex-col items-center justify-center">
                   <div className="flex items-center gap-2 mb-2">
-                    <span className="text-blue-300">{stat.icon}</span>
+                    <span className="text-[#8d86e0]">{stat.icon}</span>
                     <span className="text-3xl md:text-4xl font-bold text-white">{stat.value}</span>
                   </div>
-                  <span className="text-blue-100 text-sm md:text-base">{stat.label}</span>
+                  <span className="text-gray-300 text-sm md:text-base">{stat.label}</span>
                 </div>
               ))}
             </div>
@@ -336,22 +336,35 @@ const Research = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {filteredAreas.map((area, index) => (
-              <Card key={index} className="overflow-hidden border-blue-100 hover:shadow-lg transition-all duration-300 flex flex-col h-full group">
-                <div className={`bg-gradient-to-br ${area.color} p-1`}></div>
-                <CardHeader className="pt-6">
-                  <div className="mb-4">{area.icon}</div>
-                  <CardTitle className="text-xl text-indigo-900">{area.title}</CardTitle>
-                </CardHeader>
-                <CardContent className="flex-grow">
-                  <p className="text-slate-600">{area.description}</p>
-                </CardContent>
-                <CardFooter className="mt-auto">
-                  <Button variant="outline" className="text-blue-600 border-blue-200 hover:bg-blue-50 group-hover:border-blue-400 transition-all">
-                    Learn More
-                    <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </Button>
-                </CardFooter>
-              </Card>
+              <Link 
+                key={index} 
+                to={`/research/${area.title.toLowerCase().replace(/\s+/g, '-')}`}
+                className="block"
+              >
+                <motion.div
+                  whileHover={{ y: -5 }}
+                  transition={{ duration: 0.2 }}
+                  className="h-full"
+                  {...({} as HTMLMotionProps<"div">)}
+                >
+                  <Card className="overflow-hidden border-blue-100 hover:shadow-lg transition-all duration-300 flex flex-col h-full group">
+                    <div className={`bg-gradient-to-br ${area.color} p-1`}></div>
+                    <CardHeader className="pt-6">
+                      <div className="mb-4">{area.icon}</div>
+                      <CardTitle className="text-xl text-indigo-900">{area.title}</CardTitle>
+                    </CardHeader>
+                    <CardContent className="flex-grow">
+                      <p className="text-slate-600">{area.description}</p>
+                    </CardContent>
+                    <CardFooter className="mt-auto">
+                      <Button variant="outline" className="text-blue-600 border-blue-200 hover:bg-blue-50 group-hover:border-blue-400 transition-all">
+                        Learn More
+                        <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                      </Button>
+                    </CardFooter>
+                  </Card>
+                </motion.div>
+              </Link>
             ))}
           </div>
         </div>
