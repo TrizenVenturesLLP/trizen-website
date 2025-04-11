@@ -1,21 +1,22 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { motion, HTMLMotionProps } from "framer-motion";
 import { 
   ArrowLeft, MessageCircle, Calendar, 
-  Users, BookOpen, FileText, Download
+  Users, BookOpen, FileText, Download,
+  Clock, BarChart2, Target, Award
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Link } from "react-router-dom";
+import { Progress } from "@/components/ui/progress";
 
 // Sample project data - In real app, this would come from an API
 const projectDetails = {
   1: {
-    title: "Deep Learning for Medical Image Analysis and ",
+    title: "Deep Learning for Medical Image Analysis and Classification",
     summary: "Using advanced neural networks for accurate disease detection in medical imaging",
     description: "This project focuses on developing deep learning models for automated analysis of medical images. The system uses convolutional neural networks (CNNs) to detect and classify various medical conditions from X-ray, MRI, and CT scan images. The project aims to improve diagnostic accuracy and reduce the workload of medical professionals.",
     type: "major",
@@ -25,6 +26,13 @@ const projectDetails = {
     status: "ongoing",
     team: ["Dr. Sarah Johnson", "Alex Chen", "Maria Rodriguez"],
     timeline: "January 2024 - December 2024",
+    progress: 75,
+    objectives: [
+      "Develop CNN models for medical image classification",
+      "Create a web-based interface for medical professionals",
+      "Implement real-time analysis capabilities",
+      "Achieve 95% accuracy in disease detection"
+    ],
     deliverables: [
       "Research paper on CNN architecture optimization",
       "Trained model for medical image classification",
@@ -36,35 +44,13 @@ const projectDetails = {
       "Data Collection Protocol",
       "Model Architecture Documentation",
       "Evaluation Framework"
-    ]
-  },
-  2: {
-    title: "Natural Language Processing for Legal Documents",
-    summary: "Using NLP for efficient document analysis and classification",
-    description: "This project focuses on developing natural language processing models for automated analysis of legal documents. The system uses transformers to classify and summarize legal documents, helping legal professionals save time and improve accuracy.",
-    type: "major",
-    department: "cse",
-    year: "2024",
-    tags: ["Natural Language Processing", "Legal Documents", "Transformers"],
-    status: "completed",
-    team: ["Dr. John Smith", "Emily Chen", "Michael Brown"],
-    timeline: "February 2024 - November 2024",
-    deliverables: [
-      "Research paper on transformer model performance",
-      "Model training and evaluation results",
-      "Web-based interface for legal document analysis"
     ],
-    resources: [
-      "Model Training Data",
-      "Evaluation Metrics",
-      "User Manual"
-    ]
+    image: "https://images.unsplash.com/photo-1555255707-c07966088b7b?q=80&w=1936&fit=crop"
   }
-
   // Add more project details...
 };
 
-const ProjectDetails = () => {
+const ProjectOverview = () => {
   const { projectId } = useParams();
   const project = projectDetails[Number(projectId) as keyof typeof projectDetails];
 
@@ -75,8 +61,15 @@ const ProjectDetails = () => {
       <Navbar />
       
       {/* Hero Section */}
-      <section className="relative w-full min-h-[300px] flex items-center">
-        <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-[#393283] to-[#8d86e0]"></div>
+      <section className="relative w-full min-h-[400px] flex items-center">
+        <div className="absolute inset-0 w-full h-full">
+          <img 
+            src={project.image}
+            alt={project.title}
+            className="w-full h-full object-cover filter grayscale"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#393283]/90 to-[#8d86e0]/90"></div>
+        </div>
         <div className="relative z-10 container mx-auto px-4 py-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -85,8 +78,8 @@ const ProjectDetails = () => {
             className="max-w-4xl mx-auto"
             {...({} as HTMLMotionProps<"div">)}
           >
-            <Link to="/research/artificial-intelligence">
-              <Button  className="text-white bg-transparent hover:bg-transparent hover:border-white hover:text-white/80 mb-6">
+            <Link to="/research">
+              <Button variant="ghost" className="text-white hover:text-white/80 mb-6">
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 Back to Projects
               </Button>
@@ -94,12 +87,25 @@ const ProjectDetails = () => {
             <Badge variant="secondary" className="bg-white/20 text-white mb-4">
               {project.type.toUpperCase()} PROJECT
             </Badge>
-            <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
               {project.title}
             </h1>
             <p className="text-xl text-white/80 max-w-2xl">
               {project.summary}
             </p>
+            <div className="flex items-center gap-4 mt-6">
+              <Badge variant="outline" className={
+                project.status === "ongoing" 
+                  ? "border-green-500 text-green-400"
+                  : "border-blue-500 text-blue-400"
+              }>
+                {project.status}
+              </Badge>
+              <div className="flex items-center gap-2 text-white/80">
+                <Clock className="h-4 w-4" />
+                <span>{project.timeline}</span>
+              </div>
+            </div>
           </motion.div>
         </div>
       </section>
@@ -107,10 +113,10 @@ const ProjectDetails = () => {
       {/* Project Details */}
       <section className="py-12">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {/* Main Content */}
-            <div className="lg:col-span-2">
-              <Card className="mb-8">
+            <div className="lg:col-span-2 space-y-8">
+              <Card>
                 <CardHeader>
                   <CardTitle className="text-2xl text-[#393283]">Project Overview</CardTitle>
                 </CardHeader>
@@ -130,6 +136,24 @@ const ProjectDetails = () => {
 
               <Card>
                 <CardHeader>
+                  <CardTitle className="text-2xl text-[#393283]">Project Objectives</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-4">
+                    {project.objectives.map((objective, index) => (
+                      <li key={index} className="flex items-start">
+                        <div className="flex-shrink-0 mt-1">
+                          <Target className="h-5 w-5 text-[#6c62e2]" />
+                        </div>
+                        <p className="ml-3 text-gray-600">{objective}</p>
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
                   <CardTitle className="text-2xl text-[#393283]">Project Deliverables</CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -137,7 +161,7 @@ const ProjectDetails = () => {
                     {project.deliverables.map((deliverable, index) => (
                       <li key={index} className="flex items-start">
                         <div className="flex-shrink-0 mt-1">
-                          <BookOpen className="h-5 w-5 text-[#6c62e2]" />
+                          <Award className="h-5 w-5 text-[#6c62e2]" />
                         </div>
                         <p className="ml-3 text-gray-600">{deliverable}</p>
                       </li>
@@ -151,36 +175,34 @@ const ProjectDetails = () => {
             <div className="space-y-6">
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-xl text-[#393283]">Project Details</CardTitle>
+                  <CardTitle className="text-xl text-[#393283]">Project Progress</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-[#393283]">Overall Progress</span>
+                      <span className="text-sm font-medium text-[#6c62e2]">{project.progress}%</span>
+                    </div>
+                    <Progress 
+                      value={project.progress} 
+                      className="h-2 bg-[#8d86e0]/20" 
+                      indicatorClassName="bg-gradient-to-r from-[#6c62e2] to-[#8d86e0]"
+                    />
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-xl text-[#393283]">Team Members</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <div className="flex items-center">
-                    <Calendar className="h-5 w-5 text-[#6c62e2] mr-3" />
-                    <div>
-                      <p className="text-sm text-gray-500">Timeline</p>
-                      <p className="text-gray-600">{project.timeline}</p>
+                  {project.team.map((member, index) => (
+                    <div key={index} className="flex items-center">
+                      <Users className="h-5 w-5 text-[#6c62e2] mr-3" />
+                      <span className="text-gray-600">{member}</span>
                     </div>
-                  </div>
-                  <div className="flex items-center">
-                    <Users className="h-5 w-5 text-[#6c62e2] mr-3" />
-                    <div>
-                      <p className="text-sm text-gray-500">Team Members</p>
-                      <div className="space-y-1">
-                        {project.team.map((member, index) => (
-                          <p key={index} className="text-gray-600">{member}</p>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex items-center">
-                    <Badge variant="outline" className={
-                      project.status === "ongoing" 
-                        ? "border-green-500 text-green-600"
-                        : "border-blue-500 text-blue-600"
-                    }>
-                      {project.status}
-                    </Badge>
-                  </div>
+                  ))}
                 </CardContent>
               </Card>
 
@@ -226,4 +248,4 @@ const ProjectDetails = () => {
   );
 };
 
-export default ProjectDetails; 
+export default ProjectOverview; 

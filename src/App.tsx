@@ -13,10 +13,12 @@ import Training from "./pages/Training";
 import Research from "./pages/Research";
 import Consulting from "./pages/Consulting";
 import Ventures from "./pages/Ventures";
-import ResearchArea from "@/pages/ResearchArea";
+import ResearchArea from "@/pages/research/ResearchAreaTemplate";
 import ProjectDetails from "@/pages/ProjectDetails";
+import OngoingProjectDetails from "./pages/OngoingProjectDetails";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import ProjectOverview from "./pages/research/components/ProjectOverview";
 
 const queryClient = new QueryClient();
 
@@ -46,7 +48,7 @@ const App = () => (
               <Route path="/research/publications" element={<Research />} />
               <Route path="/research/collaborate" element={<Research />} />
               <Route path="/research/:areaId" element={<ResearchArea />} />
-              <Route path="/project/:projectId" element={<ProjectDetails />} />
+              <Route path="/project/:projectId" element={<ProjectOverview />} />
               <Route path="/consulting" element={<Consulting />} />
               <Route path="/consulting/services" element={<Consulting />} />
               <Route path="/consulting/industries" element={<Consulting />} />
@@ -58,6 +60,7 @@ const App = () => (
               <Route path="/ventures/partnerships" element={<Ventures />} />
               <Route path="/ventures/resources" element={<Ventures />} />
               <Route path="/ventures/events" element={<Ventures />} />
+              <Route path="/ongoing-project/:id" element={<OngoingProjectDetails />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>

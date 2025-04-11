@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 const squareData = [
   {
@@ -120,182 +120,124 @@ const ShuffleGrid = ({ activeTab }: { activeTab: string }) => {
   );
 };
 
+const tabContent = [
+  {
+    id: "research",
+    label: "Research",
+    heading: "Your Partner in Transformative Research and Smart Solutions",
+    description: "Building cutting-edge research solutions for your toughest challenges.",
+    route: "/research",
+    bgImage: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    bgColor: "from-[#393283] to-[#6c62e2]"
+  },
+  {
+    id: "consulting",
+    label: "Consulting",
+    heading: "Your Partner in Digital Transformation",
+    description: "Expert consulting to navigate the complexities of modern business.",
+    route: "/consulting",
+    bgImage: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    bgColor: "from-[#2c5282] to-[#4299e1]"
+  },
+  {
+    id: "training",
+    label: "Training",
+    heading: "Empowering Future-Ready Talent with Industry-Aligned Skills",
+    description: "Develop the skills you need to thrive in today's dynamic environment.",
+    route: "/training",
+    bgImage: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fA%3D%3D",
+    bgColor: "from-[#2d3748] to-[#4a5568]"
+  },
+  {
+    id: "ventures",
+    label: "Ventures",
+    heading: "From Vision to Venture — Powered by Trizen",
+    description: "We invest in visionaries building the technology of tomorrow.",
+    route: "/ventures",
+    bgImage: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    bgColor: "from-[#2c5282] to-[#48bb78]"
+  }
+];
+
 const HeroSection = () => {
   const [activeTab, setActiveTab] = useState("research");
   const isMobile = useIsMobile();
-
-  // Updated tab content with routes
-  const tabContent = [
-    {
-      id: "research",
-      label: "Research",
-      heading: "Your Partner in Transformative Research and Smart Solutions",
-      description: "Building cutting-edge research solutions for your toughest challenges.",
-      route: "/research"
-    },
-    {
-      id: "consulting",
-      label: "Consulting",
-      heading: "Your Partner in Digital Transformation",
-      description: "Expert consulting to navigate the complexities of modern business.",
-      route: "/consulting"
-    },
-    {
-      id: "training",
-      label: "Training",
-      heading: "Empowering Future-Ready Talent with Industry-Aligned Skills",
-      description: "Develop the skills you need to thrive in today's dynamic environment.",
-      route: "/training"
-    },
-    {
-      id: "ventures",
-      label: "Ventures",
-      heading: "From Vision to Venture — Powered by Trizen",
-      description: "We invest in visionaries building the technology of tomorrow.",
-      route: "/ventures"
-    },
-  ];
+  const [isAnimating, setIsAnimating] = useState(false);
 
   // Auto-rotate tabs
   useEffect(() => {
     const interval = setInterval(() => {
-      const currentIndex = tabContent.findIndex(tab => tab.id === activeTab);
-      const nextIndex = (currentIndex + 1) % tabContent.length;
-      setActiveTab(tabContent[nextIndex].id);
-    }, 5000); // Change tab every 5 seconds
+      if (!isAnimating) {
+        const currentIndex = tabContent.findIndex(tab => tab.id === activeTab);
+        const nextIndex = (currentIndex + 1) % tabContent.length;
+        setActiveTab(tabContent[nextIndex].id);
+      }
+    }, 5000);
 
     return () => clearInterval(interval);
-  }, [activeTab]);
+  }, [activeTab, isAnimating]);
 
-  // Get current route based on active tab
-  const getCurrentRoute = () => {
-    const currentTab = tabContent.find(tab => tab.id === activeTab);
-    return currentTab ? currentTab.route : "/";
+  const handleTabChange = (value: string) => {
+    setIsAnimating(true);
+    setActiveTab(value);
+    setTimeout(() => setIsAnimating(false), 1000);
   };
 
+  const currentTab = tabContent.find(tab => tab.id === activeTab);
+
   return (
-    <section className="relative bg-[#f0effc] text-[#393283] overflow-hidden min-h-[90vh] flex items-center">
-      {/* Background image with mask */}
+    <section className="relative min-h-[90vh] overflow-hidden">
+      {/* Background Image with Gradient Overlay */}
       <div className="absolute inset-0 z-0">
-        <div 
-          className="absolute inset-0 bg-cover bg-center" 
-          style={{ 
-            backgroundImage: "url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')" 
-          }}
-        ></div>
-        <div className="absolute inset-0 bg-gradient-to-r from-[#f0effc] via-[#f0effc]/90 to-[#f0effc]/50"></div>
-      </div>
-      
-      {/* Animation dots */}
-      <div className="absolute inset-0 overflow-hidden">
-        {Array.from({ length: 6 }).map((_, i) => (
+        {tabContent.map((tab) => (
           <motion.div
-            key={`dot-${i}`}
-            className="absolute w-1.5 h-1.5 rounded-full bg-[#6c62e2]/40"
-            initial={{ 
-              x: Math.random() * 100, 
-              y: Math.random() * 100,
-              opacity: Math.random() * 0.5 + 0.3
-            }}
+            key={tab.id}
+            initial={{ opacity: 0 }}
             animate={{ 
-              x: [
-                Math.random() * window.innerWidth, 
-                Math.random() * window.innerWidth, 
-                Math.random() * window.innerWidth
-              ],
-              y: [
-                Math.random() * window.innerHeight, 
-                Math.random() * window.innerHeight, 
-                Math.random() * window.innerHeight
-              ],
-              opacity: [0.3, 0.7, 0.3]
+              opacity: activeTab === tab.id ? 1 : 0,
+              transition: { duration: 0.8, ease: "easeInOut" }
             }}
-            transition={{
-              duration: Math.random() * 20 + 15,
-              repeat: Infinity,
-              ease: "linear"
+            className="absolute inset-0"
+            style={{ 
+              backgroundImage: `url(${tab.bgImage})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              filter: 'brightness(0.7)'
             }}
-          />
-        ))}
-        
-        {Array.from({ length: 3 }).map((_, i) => (
-          <motion.div
-            key={`circle-${i}`}
-            className="absolute rounded-full border border-[#8d86e0]/20"
-            style={{
-              width: `${Math.random() * 300 + 100}px`,
-              height: `${Math.random() * 300 + 100}px`,
-            }}
-            initial={{ 
-              x: Math.random() * window.innerWidth, 
-              y: Math.random() * window.innerHeight,
-              opacity: 0.1,
-              scale: 0.5
-            }}
-            animate={{ 
-              x: Math.random() * window.innerWidth,
-              y: Math.random() * window.innerHeight,
-              opacity: [0.1, 0.2, 0.1],
-              scale: [0.5, 1, 0.5]
-            }}
-            transition={{
-              duration: Math.random() * 30 + 20,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          />
+          >
+            <div 
+              className={`absolute inset-0 bg-gradient-to-r ${tab.bgColor} opacity-90`}
+            />
+          </motion.div>
         ))}
       </div>
 
+      {/* Content */}
       <div className="container mx-auto px-4 relative z-10 py-16 md:py-24">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
-          {/* Content Section */}
+          {/* Text Content */}
           <div className="md:col-span-7 text-center md:text-left">
-            {/* Main Heading and Description in Tabs */}
-            <Tabs value={activeTab} onValueChange={setActiveTab}>
-              {/* Main Heading */}
-              <motion.h1 
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeTab}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                className="text-4xl md:text-5xl lg:text-7xl font-bold mb-6 tracking-tight text-[#393283]"
-              >
-                {tabContent.map((tab) => (
-                  <TabsContent 
-                    key={tab.id} 
-                    value={tab.id}
-                    className="data-[state=active]:animate-tab-fade-in"
-                  >
-                    {tab.heading}
-                  </TabsContent>
-                ))}
-              </motion.h1>
-
-              {/* Description */}
-              <motion.p 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
-                className="text-xl text-[#8d86e0] max-w-3xl mx-auto mb-10"
               >
-                {tabContent.map((tab) => (
-                  <TabsContent 
-                    key={`desc-${tab.id}`} 
-                    value={tab.id}
-                    className="data-[state=active]:animate-tab-fade-in"
-                  >
-                    {tab.description}
-                  </TabsContent>
-                ))}
-              </motion.p>
-            </Tabs>
+                <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold mb-6 text-white">
+                  {currentTab?.heading}
+                </h1>
+                <p className="text-xl text-white/90 max-w-3xl mb-10">
+                  {currentTab?.description}
+                </p>
+              </motion.div>
+            </AnimatePresence>
 
-
-            {/* Tab selectors */}
+            {/* Tab Navigation */}
             <Tabs 
-              defaultValue="research" 
               value={activeTab} 
-              onValueChange={setActiveTab} 
+              onValueChange={handleTabChange}
               className="w-full"
             >
               <div className="mt-8 md:mt-12 overflow-x-auto md:overflow-x-visible">
@@ -305,23 +247,76 @@ const HeroSection = () => {
                       key={tab.id}
                       value={tab.id}
                       className={`navbar-link flex items-center whitespace-nowrap mb-2 ${
-                        activeTab === tab.id ? 'text-[#6c62e2]' : 'text-[#8d86e0]'
+                        activeTab === tab.id ? 'text-white' : 'text-white/70 hover:text-white'
                       }`}
                     >
                       <span className="flex items-center gap-1">
                         {tab.label}
-                        {activeTab === tab.id && !isMobile && <ChevronRight className="h-3.5 w-3.5 ml-0.5" />}
+                        {activeTab === tab.id && !isMobile && (
+                          <motion.div
+                            initial={{ x: -20, opacity: 0 }}
+                            animate={{ x: 0, opacity: 1 }}
+                            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                          >
+                            <ChevronRight className="h-3.5 w-3.5 ml-0.5" />
+                          </motion.div>
+                        )}
                       </span>
                     </TabsTrigger>
                   ))}
                 </TabsList>
               </div>
             </Tabs>
+
+            {/* CTA Button */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="mt-8"
+            >
+              <Link to={currentTab?.route || "/"}>
+                <Button 
+                  size="lg" 
+                  className="bg-white text-[#393283] hover:bg-white/90 transition-all duration-300"
+                >
+                  Explore {currentTab?.label}
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
+            </motion.div>
           </div>
 
-          {/* Shuffle Grid Section - Hidden on mobile */}
+          {/* Right Side Content */}
           <div className="hidden md:block md:col-span-5">
-            <ShuffleGrid activeTab={activeTab} />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+              className="relative"
+            >
+              <div className="absolute inset-0 bg-white/10 backdrop-blur-sm rounded-2xl" />
+              <div className="relative p-8">
+                <Sparkles className="h-12 w-12 text-white mb-4" />
+                <h3 className="text-2xl font-semibold text-white mb-4">
+                  Why Choose {currentTab?.label}?
+                </h3>
+                <ul className="space-y-3">
+                  <li className="flex items-center text-white/90">
+                    <span className="w-2 h-2 bg-white rounded-full mr-2" />
+                    Industry-leading expertise
+                  </li>
+                  <li className="flex items-center text-white/90">
+                    <span className="w-2 h-2 bg-white rounded-full mr-2" />
+                    Cutting-edge solutions
+                  </li>
+                  <li className="flex items-center text-white/90">
+                    <span className="w-2 h-2 bg-white rounded-full mr-2" />
+                    Proven track record
+                  </li>
+                </ul>
+              </div>
+            </motion.div>
           </div>
         </div>
       </div>
