@@ -139,7 +139,7 @@ const HeroSection = () => {
           {/* Content Section */}
           <div className="md:col-span-10 md:col-start-2 text-center">
             {/* Announcement badge */}
-            <motion.div 
+            {/* <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
@@ -149,7 +149,7 @@ const HeroSection = () => {
                 <Sparkles className="h-4 w-4 text-blue-600" />
                 <span className="text-sm font-medium text-blue-800">Exciting announcement</span>
               </div>
-            </motion.div>
+            </motion.div> */}
 
             {/* Main Heading and Description in Tabs */}
             <Tabs value={activeTab} onValueChange={setActiveTab}>
