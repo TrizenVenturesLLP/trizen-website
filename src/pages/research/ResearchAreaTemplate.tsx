@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from "framer-motion";
 import { 
   Search, Star, Sparkles, 
-  Clock, FileDown, Info
+  Clock, FileDown, Info,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -29,7 +29,14 @@ import {
 } from "@/components/ui/tabs";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface Project {
   id: string | number;
@@ -57,6 +64,21 @@ const ResearchArea: React.FC = () => {
   const [hoveredProject, setHoveredProject] = React.useState<string | null>(null);
   const [currentPage, setCurrentPage] = React.useState(1);
   const projectsPerPage = 7;
+
+  // Research areas data
+  const researchAreas = [
+    { id: 'artificial-intelligence', name: 'Artificial Intelligence' },
+    { id: 'cybersecurity', name: 'Cybersecurity' },
+    { id: 'internet-of-things', name: 'Internet of Things' },
+    { id: 'cloud-computing', name: 'Cloud Computing' },
+    { id: 'blockchain', name: 'Blockchain Technology' }
+  ];
+
+  const navigate = useNavigate();
+
+  const handleResearchAreaChange = (value: string) => {
+    navigate(`/research/${value}`);
+  };
 
   // Dynamically import the research area data based on the route parameter
   const [areaData, setAreaData] = React.useState<ResearchAreaProps | null>(null);
@@ -178,6 +200,34 @@ const ResearchArea: React.FC = () => {
       <section className="py-12">
         <div className="container mx-auto px-4">
           <div className="bg-white rounded-xl shadow-sm p-6">
+            {/* Research Area Switcher */}
+            <div className="mb-6">
+              <div className="flex flex-col md:flex-row gap-4 items-start">
+                <div className="flex flex-col gap-2 flex-grow">
+                  <label className="text-sm font-medium text-gray-500">Switch Research Area</label>
+                  <Select defaultValue={areaId} onValueChange={handleResearchAreaChange}>
+                    <SelectTrigger className="w-full md:w-[300px] bg-white border-[#8d86e0]/20">
+                      <SelectValue placeholder="Select Research Area" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {researchAreas.map(area => (
+                        <SelectItem key={area.id} value={area.id}>
+                          {area.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+                <Link to="/research/submit-idea">
+                  <Button 
+                    className="bg-[#6c62e2] text-white hover:bg-[#393283] transition-colors w-full md:w-auto"
+                  >
+                    Want to work on your own idea!
+                  </Button>
+                </Link>
+              </div>
+            </div>
+
             {/* Controls */}
             <div className="flex flex-col md:flex-row gap-4 items-center justify-between mb-6">
               <div className="w-full md:w-1/3">
@@ -192,19 +242,37 @@ const ResearchArea: React.FC = () => {
                 </div>
               </div>
               
-              <div className="flex items-center gap-4">
-                <Tabs defaultValue="all" onValueChange={setSelectedTab}>
-                  <TabsList className="bg-[#f0effc]">
-                    <TabsTrigger value="all">All</TabsTrigger>
-                    <TabsTrigger value="trendy">Trendy</TabsTrigger>
-                    <TabsTrigger value="new">New</TabsTrigger>
-                    <TabsTrigger value="standard">Standard</TabsTrigger>
-                  </TabsList>
-                </Tabs>
+              <div className="flex items-center gap-4 max-w-full overflow-x-auto">
+                {/* Desktop View - Tabs */}
+                <div className="hidden md:block">
+                  <Tabs defaultValue="all" onValueChange={setSelectedTab}>
+                    <TabsList className="bg-[#f0effc]">
+                      <TabsTrigger value="all">All</TabsTrigger>
+                      <TabsTrigger value="trendy">Trendy</TabsTrigger>
+                      <TabsTrigger value="new">New</TabsTrigger>
+                      <TabsTrigger value="standard">Standard</TabsTrigger>
+                    </TabsList>
+                  </Tabs>
+                </div>
+
+                {/* Mobile View - Dropdown */}
+                <div className="md:hidden w-full">
+                  <Select defaultValue="all" onValueChange={setSelectedTab}>
+                    <SelectTrigger className="w-full bg-[#f0effc]">
+                      <SelectValue placeholder="Filter by status" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">All Projects</SelectItem>
+                      <SelectItem value="trendy">Trendy Projects</SelectItem>
+                      <SelectItem value="new">New Projects</SelectItem>
+                      <SelectItem value="standard">Standard Projects</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
 
                 <Button 
                   variant="outline" 
-                  className="text-[#393283] border-[#8d86e0] hover:bg-[#8d86e0]/10"
+                  className="text-[#393283] border-[#8d86e0] hover:bg-[#8d86e0]/10 whitespace-nowrap"
                   onClick={downloadTitles}
                 >
                   <FileDown className="mr-2 h-4 w-4" />
@@ -215,62 +283,94 @@ const ResearchArea: React.FC = () => {
 
             {/* Projects Table */}
             <div className="rounded-lg border border-[#8d86e0]/20">
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead className="w-[80px]">S.No</TableHead>
-                    <TableHead className="w-[120px]">Project Code</TableHead>
-                    <TableHead>Title</TableHead>
-                    <TableHead className="w-[120px]">Status</TableHead>
-                    <TableHead className="w-[100px]">Action</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {currentProjects.map((project, index) => (
-                    <TableRow key={project.id}
-                      onMouseEnter={() => setHoveredProject(String(project.id))}
-                      onMouseLeave={() => setHoveredProject(null)}
-                      className="group"
-                    >
-                      <TableCell className="font-medium">{startIndex + index + 1}</TableCell>
-                      <TableCell className="font-medium">{project.id}</TableCell>
-                      <TableCell>
-                        <TooltipProvider>
-                          <Tooltip>
-                            <TooltipTrigger asChild>
-                              <Link 
-                                to={`/project/${project.id}`}
-                                className="block group-hover:text-[#6c62e2] transition-colors"
-                              >
-                                {project.title}
-                              </Link>
-                            </TooltipTrigger>
-                            <TooltipContent side="bottom" className="max-w-sm">
-                              <p>{project.objective || project.summary}</p>
-                            </TooltipContent>
-                          </Tooltip>
-                        </TooltipProvider>
-                      </TableCell>
-                      <TableCell>
-                        <Badge variant="outline" className={getStatusColor(project.status)}>
-                          <span className="mr-1">{getStatusIcon(project.status)}</span>
-                          {project.status}
-                        </Badge>
-                      </TableCell>
-                      <TableCell>
-                        <Link to={`/project/${project.id}`}>
-                          <Button 
-                            variant="ghost" 
-                            className="text-[#393283] hover:text-[#6c62e2] hover:bg-[#8d86e0]/10"
-                          >
-                            <Info className="h-4 w-4" />
-                          </Button>
-                        </Link>
-                      </TableCell>
+              {/* Desktop View */}
+              <div className="hidden md:block">
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead className="w-[80px]">S.No</TableHead>
+                      <TableHead className="w-[120px]">Project Code</TableHead>
+                      <TableHead>Title</TableHead>
+                      <TableHead className="w-[120px]">Status</TableHead>
+                      <TableHead className="w-[100px]">Action</TableHead>
                     </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
+                  </TableHeader>
+                  <TableBody>
+                    {currentProjects.map((project, index) => (
+                      <TableRow key={project.id}
+                        onMouseEnter={() => setHoveredProject(String(project.id))}
+                        onMouseLeave={() => setHoveredProject(null)}
+                        className="group"
+                      >
+                        <TableCell className="font-medium">{startIndex + index + 1}</TableCell>
+                        <TableCell className="font-medium">{project.id}</TableCell>
+                        <TableCell>
+                          <TooltipProvider>
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <Link 
+                                  to={`/project/${project.id}`}
+                                  className="block group-hover:text-[#6c62e2] transition-colors"
+                                >
+                                  {project.title}
+                                </Link>
+                              </TooltipTrigger>
+                              <TooltipContent side="bottom" className="max-w-sm">
+                                <p>{project.objective || project.summary}</p>
+                              </TooltipContent>
+                            </Tooltip>
+                          </TooltipProvider>
+                        </TableCell>
+                        <TableCell>
+                          <Badge variant="outline" className={getStatusColor(project.status)}>
+                            <span className="mr-1">{getStatusIcon(project.status)}</span>
+                            {project.status}
+                          </Badge>
+                        </TableCell>
+                        <TableCell>
+                          <Link to={`/project/${project.id}`}>
+                            <Button 
+                              variant="ghost" 
+                              className="text-[#393283] hover:text-[#6c62e2] hover:bg-[#8d86e0]/10"
+                            >
+                              <Info className="h-4 w-4" />
+                            </Button>
+                          </Link>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
+
+              {/* Mobile View */}
+              <div className="md:hidden space-y-4 p-3">
+                {currentProjects.map((project, index) => (
+                  <div key={project.id} className="bg-white rounded-lg border border-[#8d86e0]/20 p-3 space-y-3">
+                    <div>
+                      <div className="text-xs text-gray-500">Project Code: {project.id}</div>
+                      <Link 
+                        to={`/project/${project.id}`}
+                        className="font-small text-[#393283] hover:text-[#6c62e2] block mt-1"
+                      >
+                        {project.title}
+                      </Link>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-gray-500">#{startIndex + index + 1}</span>
+                      <Link to={`/project/${project.id}`}>
+                        <Button 
+                          variant="outline"
+                          size="sm"
+                          className="text-[#393283] border-[#8d86e0] hover:bg-[#8d86e0]/10"
+                        >
+                          View Details
+                        </Button>
+                      </Link>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
 
             {/* Pagination */}

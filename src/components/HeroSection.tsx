@@ -1,170 +1,124 @@
-import { useState, useEffect, useRef } from "react";
-import { ArrowRight, ChevronRight, Sparkles } from "lucide-react";
+import { useState, useEffect } from "react";
+import { ArrowRight, Brain, Rocket, Target, ChevronRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { useIsMobile } from "@/hooks/use-mobile";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-
-const squareData = [
-  {
-    id: 1,
-    src: "https://images.unsplash.com/photo-1547347298-4074fc3086f0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80",
-  },
-  {
-    id: 2,
-    src: "https://images.unsplash.com/photo-1510925758641-869d353cecc7?ixlib=rb-4.0.3&auto=format&fit=crop&w=687&q=80",
-  },
-  {
-    id: 3,
-    src: "https://images.unsplash.com/photo-1629901925121-8a141c2a42f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=687&q=80",
-  },
-  {
-    id: 4,
-    src: "https://images.unsplash.com/photo-1580238053495-b9720401fd45?ixlib=rb-4.0.3&auto=format&fit=crop&w=687&q=80",
-  },
-  {
-    id: 5,
-    src: "https://images.unsplash.com/photo-1569074187119-c87815b476da?ixlib=rb-4.0.3&auto=format&fit=crop&w=1325&q=80",
-  },
-  {
-    id: 6,
-    src: "https://images.unsplash.com/photo-1556817411-31ae72fa3ea0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80",
-  },
-  {
-    id: 7,
-    src: "https://images.unsplash.com/photo-1599586120429-48281b6f0ece?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80",
-  },
-  {
-    id: 8,
-    src: "https://plus.unsplash.com/premium_photo-1671436824833-91c0741e89c9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80",
-  },
-  {
-    id: 9,
-    src: "https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80",
-  },
-  {
-    id: 10,
-    src: "https://images.unsplash.com/photo-1610768764270-790fbec18178?ixlib=rb-4.0.3&auto=format&fit=crop&w=687&q=80",
-  },
-  {
-    id: 11,
-    src: "https://images.unsplash.com/photo-1507034589631-9433cc6bc453?ixlib=rb-4.0.3&auto=format&fit=crop&w=684&q=80",
-  },
-  {
-    id: 12,
-    src: "https://images.unsplash.com/photo-1533107862482-0e6974b06ec4?ixlib=rb-4.0.3&auto=format&fit=crop&w=882&q=80",
-  },
-  {
-    id: 13,
-    src: "https://images.unsplash.com/photo-1560089000-7433a4ebbd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=870&q=80",
-  },
-  {
-    id: 14,
-    src: "https://images.unsplash.com/photo-1517466787929-bc90951d0974?ixlib=rb-4.0.3&auto=format&fit=crop&w=686&q=80",
-  },
-  {
-    id: 15,
-    src: "https://images.unsplash.com/photo-1606244864456-8bee63fce472?ixlib=rb-4.0.3&auto=format&fit=crop&w=681&q=80",
-  },
-  {
-    id: 16,
-    src: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1820&q=80",
-  },
-];
-
-const shuffle = (array: any[]) => {
-  let currentIndex = array.length,
-    randomIndex;
-
-  while (currentIndex != 0) {
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex--;
-
-    [array[currentIndex], array[randomIndex]] = [
-      array[randomIndex],
-      array[currentIndex],
-    ];
-  }
-
-  return array;
-};
-
-const generateSquares = () => {
-  return shuffle(squareData).map((sq) => (
-    <motion.div
-      key={sq.id}
-      layout
-      transition={{ duration: 1.5, type: "spring" }}
-      className="w-full h-full"
-      style={{
-        backgroundImage: `url(${sq.src})`,
-        backgroundSize: "cover",
-      }}
-    ></motion.div>
-  ));
-};
-
-const ShuffleGrid = ({ activeTab }: { activeTab: string }) => {
-  const [squares, setSquares] = useState(generateSquares());
-
-  useEffect(() => {
-    // Shuffle squares whenever the active tab changes
-    setSquares(generateSquares());
-  }, [activeTab]);
-
-  return (
-    <div className="grid grid-cols-4 grid-rows-4 h-[450px] gap-1">
-      {squares.map((sq) => sq)}
-    </div>
-  );
-};
 
 const tabContent = [
   {
     id: "research",
     label: "Research",
-    heading: "Your Partner in Transformative Research and Smart Solutions",
+    heading: "Transformative Research Solutions",
+    subheading: "Your Partner in Innovation",
     description: "Building cutting-edge research solutions for your toughest challenges.",
     route: "/research",
     bgImage: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    bgColor: "from-[#393283] to-[#6c62e2]"
+    bgColor: "from-[#393283] to-[#6c62e2]",
+    features: [
+      {
+        icon: Brain,
+        title: "Expert Analysis",
+        description: "Deep insights from industry leaders"
+      },
+      {
+        icon: Rocket,
+        title: "Innovation Driven",
+        description: "Cutting-edge research methodologies"
+      },
+      {
+        icon: Target,
+        title: "Precision Focused",
+        description: "Accurate and actionable results"
+      }
+    ]
   },
   {
     id: "consulting",
     label: "Consulting",
-    heading: "Your Partner in Digital Transformation",
+    heading: "Digital Transformation Experts",
+    subheading: "Your Strategic Partner",
     description: "Expert consulting to navigate the complexities of modern business.",
     route: "/consulting",
     bgImage: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    bgColor: "from-[#2c5282] to-[#4299e1]"
+    bgColor: "from-[#2c5282] to-[#4299e1]",
+    features: [
+      {
+        icon: Brain,
+        title: "Strategic Planning",
+        description: "Customized solutions for your business"
+      },
+      {
+        icon: Rocket,
+        title: "Digital Excellence",
+        description: "Transform your digital presence"
+      },
+      {
+        icon: Target,
+        title: "Growth Focused",
+        description: "Drive sustainable business growth"
+      }
+    ]
   },
   {
     id: "training",
     label: "Training",
-    heading: "Empowering Future-Ready Talent with Industry-Aligned Skills",
+    heading: "Future-Ready Talent Development",
+    subheading: "Empowering Your Team",
     description: "Develop the skills you need to thrive in today's dynamic environment.",
     route: "/training",
     bgImage: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fA%3D%3D",
-    bgColor: "from-[#2d3748] to-[#4a5568]"
+    bgColor: "from-[#2d3748] to-[#4a5568]",
+    features: [
+      {
+        icon: Brain,
+        title: "Expert Instructors",
+        description: "Learn from industry professionals"
+      },
+      {
+        icon: Rocket,
+        title: "Hands-on Learning",
+        description: "Practical, real-world experience"
+      },
+      {
+        icon: Target,
+        title: "Career Growth",
+        description: "Skills that drive your success"
+      }
+    ]
   },
   {
     id: "ventures",
     label: "Ventures",
-    heading: "From Vision to Venture — Powered by Trizen",
+    heading: "From Vision to Venture",
+    subheading: "Powered by Innovation",
     description: "We invest in visionaries building the technology of tomorrow.",
     route: "/ventures",
     bgImage: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    bgColor: "from-[#2c5282] to-[#48bb78]"
+    bgColor: "from-[#2c5282] to-[#48bb78]",
+    features: [
+      {
+        icon: Brain,
+        title: "Innovation Hub",
+        description: "Support for groundbreaking ideas"
+      },
+      {
+        icon: Rocket,
+        title: "Growth Support",
+        description: "Resources to scale your vision"
+      },
+      {
+        icon: Target,
+        title: "Strategic Partnerships",
+        description: "Connect with industry leaders"
+      }
+    ]
   }
 ];
 
 const HeroSection = () => {
   const [activeTab, setActiveTab] = useState("research");
-  const isMobile = useIsMobile();
   const [isAnimating, setIsAnimating] = useState(false);
 
-  // Auto-rotate tabs
   useEffect(() => {
     const interval = setInterval(() => {
       if (!isAnimating) {
@@ -186,7 +140,7 @@ const HeroSection = () => {
   const currentTab = tabContent.find(tab => tab.id === activeTab);
 
   return (
-    <section className="relative min-h-[90vh] overflow-hidden">
+    <section className="relative min-h-screen overflow-hidden">
       {/* Background Image with Gradient Overlay */}
       <div className="absolute inset-0 z-0">
         {tabContent.map((tab) => (
@@ -206,118 +160,151 @@ const HeroSection = () => {
             }}
           >
             <div 
-              className={`absolute inset-0 bg-gradient-to-r ${tab.bgColor} opacity-90`}
+              className={`absolute inset-0 bg-gradient-to-b ${tab.bgColor} opacity-90`}
             />
           </motion.div>
         ))}
       </div>
 
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <motion.div
+          animate={{
+            scale: [1, 1.2, 1],
+            rotate: [0, 90, 0],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+          className="absolute -top-1/2 -left-1/2 w-full h-full bg-white/5 rounded-full blur-3xl"
+        />
+        <motion.div
+          animate={{
+            scale: [1.2, 1, 1.2],
+            rotate: [90, 0, 90],
+          }}
+          transition={{
+            duration: 15,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+          className="absolute -bottom-1/2 -right-1/2 w-full h-full bg-white/5 rounded-full blur-3xl"
+        />
+      </div>
+
       {/* Content */}
       <div className="container mx-auto px-4 relative z-10 py-16 md:py-24">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
-          {/* Text Content */}
-          <div className="md:col-span-7 text-center md:text-left">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeTab}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-              >
-                <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold mb-6 text-white">
-                  {currentTab?.heading}
-                </h1>
-                <p className="text-xl text-white/90 max-w-3xl mb-10">
-                  {currentTab?.description}
-                </p>
-              </motion.div>
-            </AnimatePresence>
-
-            {/* Tab Navigation */}
-            <Tabs 
-              value={activeTab} 
-              onValueChange={handleTabChange}
-              className="w-full"
-            >
-              <div className="mt-8 md:mt-12 overflow-x-auto md:overflow-x-visible">
-                <TabsList className={`flex ${isMobile ? 'flex-nowrap' : 'flex-wrap'} justify-center md:justify-start gap-3 md:gap-4 bg-transparent p-0 ${isMobile ? 'min-w-max' : 'w-full'}`}>
-                  {tabContent.map((tab) => (
-                    <TabsTrigger
-                      key={tab.id}
-                      value={tab.id}
-                      className={`navbar-link flex items-center whitespace-nowrap mb-2 ${
-                        activeTab === tab.id ? 'text-white' : 'text-white/70 hover:text-white'
-                      }`}
-                    >
-                      <span className="flex items-center gap-1">
-                        {tab.label}
-                        {activeTab === tab.id && !isMobile && (
-                          <motion.div
-                            initial={{ x: -20, opacity: 0 }}
-                            animate={{ x: 0, opacity: 1 }}
-                            transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                          >
-                            <ChevronRight className="h-3.5 w-3.5 ml-0.5" />
-                          </motion.div>
-                        )}
-                      </span>
-                    </TabsTrigger>
-                  ))}
-                </TabsList>
-              </div>
-            </Tabs>
-
-            {/* CTA Button */}
+        <div className="max-w-4xl mx-auto">
+          <AnimatePresence mode="wait">
             <motion.div
+              key={activeTab}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="mt-8"
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="space-y-8 text-center"
             >
-              <Link to={currentTab?.route || "/"}>
-                <Button 
-                  size="lg" 
-                  className="bg-white text-[#393283] hover:bg-white/90 transition-all duration-300"
-                >
-                  Explore {currentTab?.label}
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </Link>
-            </motion.div>
-          </div>
+              {/* Header Section */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mx-auto"
+              >
+                {/* <Sparkles className="h-4 w-4 text-white" /> */}
+                <Link to="/research/submit-idea flex">
+                <span className="text-sm font-medium text-white">Transform Your Ideas</span>
+                {/* <ChevronRight className="h-4 w-4 text-white" /> */}
+                </Link>
+              </motion.div>
 
-          {/* Right Side Content */}
-          <div className="hidden md:block md:col-span-5">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5 }}
-              className="relative"
-            >
-              <div className="absolute inset-0 bg-white/10 backdrop-blur-sm rounded-2xl" />
-              <div className="relative p-8">
-                <Sparkles className="h-12 w-12 text-white mb-4" />
-                <h3 className="text-2xl font-semibold text-white mb-4">
-                  Why Choose {currentTab?.label}?
-                </h3>
-                <ul className="space-y-3">
-                  <li className="flex items-center text-white/90">
-                    <span className="w-2 h-2 bg-white rounded-full mr-2" />
-                    Industry-leading expertise
-                  </li>
-                  <li className="flex items-center text-white/90">
-                    <span className="w-2 h-2 bg-white rounded-full mr-2" />
-                    Cutting-edge solutions
-                  </li>
-                  <li className="flex items-center text-white/90">
-                    <span className="w-2 h-2 bg-white rounded-full mr-2" />
-                    Proven track record
-                  </li>
-                </ul>
+              {/* Main Content */}
+              <div className="space-y-4">
+                <motion.h2
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4 }}
+                  className="text-2xl font-medium text-white/80"
+                >
+                  {currentTab?.subheading}
+                </motion.h2>
+                <motion.h1
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5 }}
+                  className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight"
+                >
+                  {currentTab?.heading}
+                </motion.h1>
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.6 }}
+                  className="text-xl text-white/90 max-w-2xl mx-auto"
+                >
+                  {currentTab?.description}
+                </motion.p>
               </div>
+
+              {/* Features Grid */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.7 }}
+                className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12"
+              >
+                {currentTab?.features.map((feature, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.8 + index * 0.1 }}
+                    className="relative group"
+                  >
+                    <div className="absolute inset-0 bg-white/10 backdrop-blur-sm rounded-2xl transform group-hover:scale-105 transition-all duration-300 border border-white/20" />
+                    <div className="relative p-6">
+                      <div className="p-3 rounded-xl bg-white/20 inline-block mb-4">
+                        <feature.icon className="h-6 w-6 text-white" />
+                      </div>
+                      <h3 className="text-xl font-semibold text-white mb-2">
+                        {feature.title}
+                      </h3>
+                      <p className="text-sm text-white/70">
+                        {feature.description}
+                      </p>
+                    </div>
+                  </motion.div>
+                ))}
+              </motion.div>
+
+              {/* CTA Buttons */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1 }}
+                className="flex flex-wrap gap-4 justify-center mt-12"
+              >
+                <Link to={currentTab?.route || "/"}>
+                  <Button 
+                    size="lg" 
+                    className="bg-white text-[#393283] hover:bg-white/90 transition-all duration-300 shadow-lg hover:shadow-xl"
+                  >
+                    Explore {currentTab?.label}
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
+                {/* <Button 
+                  size="lg" 
+                  variant="outline" 
+                  className="border-white text-white hover:bg-white/10 backdrop-blur-sm"
+                >
+                  Learn More
+                </Button> */}
+              </motion.div>
             </motion.div>
-          </div>
+          </AnimatePresence>
         </div>
       </div>
     </section>

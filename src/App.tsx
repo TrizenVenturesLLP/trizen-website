@@ -19,6 +19,7 @@ import OngoingProjectDetails from "./pages/OngoingProjectDetails";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ProjectOverview from "./pages/research/components/ProjectOverview";
+import SubmitIdea from "@/pages/research/SubmitIdea";
 
 const queryClient = new QueryClient();
 
@@ -47,6 +48,7 @@ const App = () => (
               <Route path="/research/projects" element={<Research />} />
               <Route path="/research/publications" element={<Research />} />
               <Route path="/research/collaborate" element={<Research />} />
+              <Route path="/research/submit-idea" element={<SubmitIdea />} />
               <Route path="/research/:areaId" element={<ResearchArea />} />
               <Route path="/project/:projectId" element={<ProjectOverview />} />
               <Route path="/consulting" element={<Consulting />} />
