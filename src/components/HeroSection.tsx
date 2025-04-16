@@ -207,18 +207,18 @@ const HeroSection = () => {
               className="space-y-8 text-center"
             >
               {/* Header Section */}
-              <motion.div
+              {/* <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mx-auto"
-              >
+              > */}
                 {/* <Sparkles className="h-4 w-4 text-white" /> */}
-                <Link to="/research/submit-idea flex">
+                {/* <Link to="/research/submit-idea flex">
                 <span className="text-sm font-medium text-white">Transform Your Ideas</span>
-                {/* <ChevronRight className="h-4 w-4 text-white" /> */}
-                </Link>
-              </motion.div>
+                <ChevronRight className="h-4 w-4 text-white" />
+                </Link> */}
+              {/* </motion.div> */}
 
               {/* Main Content */}
               <div className="space-y-4">

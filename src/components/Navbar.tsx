@@ -10,7 +10,7 @@ const Navbar = () => {
 
   return (
     <header className="sticky bg-[#f0effc] top-0 w-full z-50">
-      <div className="container mx-auto px-4 py-3 flex items-center justify-between">
+      <div className="container mx-auto px-4 py-1.5 flex items-center justify-between">
         <div className="flex items-center gap-10">
           {/* Logo */}
           <a href="/" className="flex items-center">
