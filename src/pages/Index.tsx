@@ -13,7 +13,7 @@ const Index = () => {
         <HeroSection />
         <OurWingsSection />
       </main>
-      <FloatingCard />
+      {/* <FloatingCard /> */}
       <Footer />
     </div>
   );
