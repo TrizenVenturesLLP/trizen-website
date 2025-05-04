@@ -16,6 +16,12 @@ const CertificateVerify = () => {
 
   useEffect(() => {
     const fetchCertificate = async () => {
+      if (!id) {
+        setError('Certificate ID is missing');
+        setLoading(false);
+        return;
+      }
+
       try {
         // In a real implementation, this would be a call to your backend API
         // For now, we'll simulate a certificate lookup
@@ -25,26 +31,43 @@ const CertificateVerify = () => {
         
         // The actual file path
         const url = `/certificates/${id}.pdf`;
+        console.log('Attempting to fetch certificate from:', url);
         
         // Check if certificate exists by trying to fetch it
-        const response = await fetch(url, { method: 'HEAD' });
-        
-        if (response.ok) {
-          setCertificateUrl(url);
-          setCertificateExists(true);
-          toast({
-            title: "Certificate verified",
-            description: "The certificate has been successfully loaded"
+        try {
+          const response = await fetch(url, { 
+            method: 'HEAD',
+            cache: 'no-cache' // Prevent caching issues
           });
-        } else {
-          setError('Invalid certificate ID');
-          console.error('Certificate not found:', url);
+          
+          if (response.ok) {
+            setCertificateUrl(url);
+            setCertificateExists(true);
+            toast({
+              title: "Certificate verified",
+              description: "The certificate has been successfully loaded"
+            });
+            console.log('Certificate found:', url);
+          } else {
+            setError(`Invalid certificate ID (${response.status}: ${response.statusText})`);
+            console.error('Certificate not found:', url, response.status, response.statusText);
+          }
+        } catch (fetchErr) {
+          console.error('Fetch error details:', fetchErr);
+          throw new Error(`Network error while checking certificate: ${fetchErr.message}`);
         }
+        
         setLoading(false);
       } catch (err) {
-        setError('Failed to load certificate');
+        setError('Failed to load certificate: ' + (err.message || 'Unknown error'));
         setLoading(false);
         console.error('Error fetching certificate:', err);
+        
+        toast({
+          variant: "destructive",
+          title: "Error",
+          description: "Failed to verify certificate. Please try again later."
+        });
       }
     };
 
