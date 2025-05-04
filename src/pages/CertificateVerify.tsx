@@ -3,15 +3,17 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { Loader2 } from 'lucide-react';
+import { Loader2, Download, FilePdf, Image } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
+import { Button } from '@/components/ui/button';
 
 const CertificateVerify = () => {
   const { id } = useParams<{ id: string }>();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [certificateUrl, setCertificateUrl] = useState<string | null>(null);
+  const [certificatePngUrl, setCertificatePngUrl] = useState<string | null>(null);
+  const [certificatePdfUrl, setCertificatePdfUrl] = useState<string | null>(null);
   const [certificateExists, setCertificateExists] = useState(false);
 
   useEffect(() => {
@@ -29,28 +31,45 @@ const CertificateVerify = () => {
         // Simulating API call delay
         await new Promise(resolve => setTimeout(resolve, 1000));
         
-        // The actual file path
-        const url = `/certificates/${id}.pdf`;
-        console.log('Attempting to fetch certificate from:', url);
+        // The file paths for PNG and PDF
+        const pngUrl = `/certificates/${id}.png`;
+        const pdfUrl = `/certificates/${id}.pdf`;
         
-        // Check if certificate exists by trying to fetch it
+        console.log('Attempting to fetch PNG certificate from:', pngUrl);
+        console.log('PDF version will be available at:', pdfUrl);
+        
+        // First check if PNG exists - this is what we'll display
         try {
-          const response = await fetch(url, { 
+          const pngResponse = await fetch(pngUrl, { 
             method: 'HEAD',
-            cache: 'no-cache' // Prevent caching issues
+            cache: 'no-cache'
           });
           
-          if (response.ok) {
-            setCertificateUrl(url);
+          const pdfResponse = await fetch(pdfUrl, { 
+            method: 'HEAD',
+            cache: 'no-cache'
+          });
+          
+          // If either format exists, we consider the certificate valid
+          if (pngResponse.ok || pdfResponse.ok) {
+            if (pngResponse.ok) {
+              setCertificatePngUrl(pngUrl);
+              console.log('PNG certificate found:', pngUrl);
+            }
+            
+            if (pdfResponse.ok) {
+              setCertificatePdfUrl(pdfUrl);
+              console.log('PDF certificate found:', pdfUrl);
+            }
+            
             setCertificateExists(true);
             toast({
               title: "Certificate verified",
               description: "The certificate has been successfully loaded"
             });
-            console.log('Certificate found:', url);
           } else {
-            setError(`Invalid certificate ID (${response.status}: ${response.statusText})`);
-            console.error('Certificate not found:', url, response.status, response.statusText);
+            setError(`Invalid certificate ID (Status: PNG-${pngResponse.status}, PDF-${pdfResponse.status})`);
+            console.error('Certificate not found:', { png: pngUrl, pdf: pdfUrl });
           }
         } catch (fetchErr) {
           console.error('Fetch error details:', fetchErr);
@@ -107,30 +126,59 @@ const CertificateVerify = () => {
                   <p className="text-gray-600">Certificate ID: {id}</p>
                 </div>
                 
-                {/* PDF Viewer */}
-                <div className="w-full bg-white border border-gray-200 rounded-lg overflow-hidden h-[70vh]">
+                {/* Certificate Display Section */}
+                <div className="w-full bg-white border border-gray-200 rounded-lg overflow-hidden mb-6">
                   {certificateExists && (
-                    <object
-                      data={certificateUrl || ''}
-                      type="application/pdf"
-                      width="100%"
-                      height="100%"
-                      className="w-full h-full"
-                    >
-                      <div className="p-4 text-center">
-                        <p>Your browser does not support embedded PDFs.</p>
-                        <a 
-                          href={certificateUrl || '#'} 
-                          className="inline-block mt-4 bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition duration-300"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          Download Certificate
-                        </a>
-                      </div>
-                    </object>
+                    <>
+                      {certificatePngUrl ? (
+                        <div className="relative">
+                          <img 
+                            src={certificatePngUrl} 
+                            alt="Certificate" 
+                            className="w-full h-auto max-h-[70vh] object-contain"
+                          />
+                        </div>
+                      ) : certificatePdfUrl ? (
+                        <div className="h-[70vh] flex flex-col items-center justify-center bg-gray-100 p-8">
+                          <FilePdf className="h-20 w-20 text-red-500 mb-4" />
+                          <p className="text-center text-gray-600 mb-4">
+                            This certificate is available as a PDF document.
+                            <br />Use the download button below to view it.
+                          </p>
+                        </div>
+                      ) : (
+                        <div className="h-[70vh] flex items-center justify-center bg-gray-100">
+                          <p>Certificate format not supported for preview.</p>
+                        </div>
+                      )}
+                    </>
                   )}
                 </div>
+                
+                {/* Download Options */}
+                {certificateExists && (
+                  <div className="flex justify-center mt-4">
+                    {certificatePdfUrl && (
+                      <Button 
+                        className="flex items-center space-x-2 bg-blue-600 hover:bg-blue-700"
+                        onClick={() => window.open(certificatePdfUrl || '', '_blank')}
+                      >
+                        <Download className="h-4 w-4" />
+                        <span>Download PDF Certificate</span>
+                      </Button>
+                    )}
+                    
+                    {certificatePngUrl && !certificatePdfUrl && (
+                      <Button 
+                        className="flex items-center space-x-2 bg-blue-600 hover:bg-blue-700"
+                        onClick={() => window.open(certificatePngUrl || '', '_blank')}
+                      >
+                        <Image className="h-4 w-4" />
+                        <span>Download PNG Certificate</span>
+                      </Button>
+                    )}
+                  </div>
+                )}
               </div>
             )}
           </div>
