@@ -4,12 +4,15 @@ import { useParams } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Loader2 } from 'lucide-react';
+import { toast } from '@/hooks/use-toast';
+import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 
 const CertificateVerify = () => {
   const { id } = useParams<{ id: string }>();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [certificateUrl, setCertificateUrl] = useState<string | null>(null);
+  const [certificateExists, setCertificateExists] = useState(false);
 
   useEffect(() => {
     const fetchCertificate = async () => {
@@ -18,17 +21,26 @@ const CertificateVerify = () => {
         // For now, we'll simulate a certificate lookup
         
         // Simulating API call delay
-        await new Promise(resolve => setTimeout(resolve, 1500));
+        await new Promise(resolve => setTimeout(resolve, 1000));
         
-        // Check if certificate exists (would be a real API call in production)
-        if (id && id.length > 8) {
-          // This path would point to your actual certificate storage in production
-          setCertificateUrl(`/certificates/${id}.pdf`);
-          setLoading(false);
+        // The actual file path
+        const url = `/certificates/${id}.pdf`;
+        
+        // Check if certificate exists by trying to fetch it
+        const response = await fetch(url, { method: 'HEAD' });
+        
+        if (response.ok) {
+          setCertificateUrl(url);
+          setCertificateExists(true);
+          toast({
+            title: "Certificate verified",
+            description: "The certificate has been successfully loaded"
+          });
         } else {
           setError('Invalid certificate ID');
-          setLoading(false);
+          console.error('Certificate not found:', url);
         }
+        setLoading(false);
       } catch (err) {
         setError('Failed to load certificate');
         setLoading(false);
@@ -56,9 +68,10 @@ const CertificateVerify = () => {
               </div>
             ) : error ? (
               <div className="text-center py-8">
-                <div className="bg-red-100 text-red-700 p-4 rounded-lg mb-4">
-                  <p>{error}</p>
-                </div>
+                <Alert variant="destructive" className="mb-4">
+                  <AlertTitle>Error</AlertTitle>
+                  <AlertDescription>{error}</AlertDescription>
+                </Alert>
                 <p className="mt-4">
                   Please check the certificate ID and try again. If you continue to experience issues,
                   contact our support team.
@@ -73,25 +86,27 @@ const CertificateVerify = () => {
                 
                 {/* PDF Viewer */}
                 <div className="w-full bg-white border border-gray-200 rounded-lg overflow-hidden h-[70vh]">
-                  <object
-                    data={certificateUrl || ''}
-                    type="application/pdf"
-                    width="100%"
-                    height="100%"
-                    className="w-full h-full"
-                  >
-                    <div className="p-4 text-center">
-                      <p>Your browser does not support embedded PDFs.</p>
-                      <a 
-                        href={certificateUrl || '#'} 
-                        className="inline-block mt-4 bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition duration-300"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Download Certificate
-                      </a>
-                    </div>
-                  </object>
+                  {certificateExists && (
+                    <object
+                      data={certificateUrl || ''}
+                      type="application/pdf"
+                      width="100%"
+                      height="100%"
+                      className="w-full h-full"
+                    >
+                      <div className="p-4 text-center">
+                        <p>Your browser does not support embedded PDFs.</p>
+                        <a 
+                          href={certificateUrl || '#'} 
+                          className="inline-block mt-4 bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition duration-300"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          Download Certificate
+                        </a>
+                      </div>
+                    </object>
+                  )}
                 </div>
               </div>
             )}
