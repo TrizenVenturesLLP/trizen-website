@@ -1,4 +1,3 @@
-
 # Step 1: Build the Vite app
 FROM node:20-alpine as build
 
@@ -14,13 +13,8 @@ FROM nginx:stable-alpine
 # Copy built app
 COPY --from=build /app/dist /usr/share/nginx/html
 
-# Create certificates directory and ensure proper permissions
-RUN mkdir -p /usr/share/nginx/html/certificates && \
-    chmod 755 /usr/share/nginx/html/certificates
-
-# Copy certificates if they exist in the build
-COPY --from=build /app/public/certificates/*.pdf /usr/share/nginx/html/certificates/ 2>/dev/null || :
-COPY --from=build /app/public/certificates/*.png /usr/share/nginx/html/certificates/ 2>/dev/null || :
+# Copy all certificates (if present)
+COPY --from=build /app/public/certificates /usr/share/nginx/html/certificates
 
 # Copy nginx configuration
 COPY nginx.conf /etc/nginx/conf.d/default.conf
