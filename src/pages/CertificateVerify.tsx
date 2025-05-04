@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { Loader2, Download, FilePdf, Image } from 'lucide-react';
+import { Loader2, Download, FileText, Image } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
@@ -140,7 +140,7 @@ const CertificateVerify = () => {
                         </div>
                       ) : certificatePdfUrl ? (
                         <div className="h-[70vh] flex flex-col items-center justify-center bg-gray-100 p-8">
-                          <FilePdf className="h-20 w-20 text-red-500 mb-4" />
+                          <FileText className="h-20 w-20 text-red-500 mb-4" />
                           <p className="text-center text-gray-600 mb-4">
                             This certificate is available as a PDF document.
                             <br />Use the download button below to view it.
