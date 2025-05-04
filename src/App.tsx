@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -19,6 +20,7 @@ import OngoingProjectDetails from "./pages/OngoingProjectDetails";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ProjectOverview from "./pages/research/components/ProjectOverview";
+import CertificateVerify from "./pages/CertificateVerify";
 
 const queryClient = new QueryClient();
 
@@ -61,6 +63,8 @@ const App = () => (
               <Route path="/ventures/resources" element={<Ventures />} />
               <Route path="/ventures/events" element={<Ventures />} />
               <Route path="/ongoing-project/:id" element={<OngoingProjectDetails />} />
+              {/* New certificate verification route */}
+              <Route path="/verify/:id" element={<CertificateVerify />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
