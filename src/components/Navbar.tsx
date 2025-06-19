@@ -32,8 +32,8 @@ const Navbar = () => {
               Consulting
             </a>
             <a 
-              href="/training" 
-              className={`navbar-link ${currentPath === '/training' ? 'text-trizen-purple font-medium' : ''}`}
+              href="https://lms.trizenventures.com/" 
+              className={`navbar-link ${currentPath === 'https://lms.trizenventures.com/' ? 'text-trizen-purple font-medium' : ''}`}
             >
               Training
             </a>
