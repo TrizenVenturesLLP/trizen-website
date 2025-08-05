@@ -1,0 +1,26 @@
+# New Certificate IDs for Additional Certificates
+
+## Certificate 1
+ID: X9K2MN
+Verification URL: https://yourdomain.com/verify/X9K2MN
+Files needed:
+- public/certificates/X9K2MN.png
+- public/certificates/X9K2MN.pdf
+
+## Certificate 2  
+ID: P7Q4RS
+Verification URL: https://yourdomain.com/verify/P7Q4RS
+Files needed:
+- public/certificates/P7Q4RS.png
+- public/certificates/P7Q4RS.pdf
+
+## Existing Certificate IDs for Reference:
+- BJAK1DV
+- R7M3QA
+- sample-cert-123456
+
+## Notes:
+- Each ID is 6 characters long (following the existing pattern)
+- Contains a mix of letters and numbers
+- Unique from existing certificates
+- QR codes should point to the verification URLs above 

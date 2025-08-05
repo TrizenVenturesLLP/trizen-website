@@ -21,6 +21,8 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ProjectOverview from "./pages/research/components/ProjectOverview";
 import CertificateVerify from "./pages/CertificateVerify";
+import CertificateManager from "./pages/CertificateManager";
+import CertificateTest from "./pages/CertificateTest";
 
 const queryClient = new QueryClient();
 
@@ -65,6 +67,11 @@ const App = () => (
               <Route path="/ongoing-project/:id" element={<OngoingProjectDetails />} />
               {/* New certificate verification route */}
               <Route path="/verify/:id" element={<CertificateVerify />} />
+              {/* Certificate management route */}
+              <Route path="/certificate-manager" element={<CertificateManager />} />
+              <Route path="/certificate-manager/:id" element={<CertificateManager />} />
+              {/* Certificate test route */}
+              <Route path="/certificate-test" element={<CertificateTest />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
