@@ -148,24 +148,24 @@ const tabContent = [
     bgImage: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fA%3D%3D",
     bgColor: "from-[#2d3748] to-[#4a5568]"
   },
-  {
-    id: "insights",
-    label: "Insights",
-    heading: "Connect and Collaborate with Industry Leaders",
-    description: "Join our community of innovators and thought leaders.",
-    route: "https://connect.trizenventures.com/",
-    bgImage: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    bgColor: "from-[#2c5282] to-[#48bb78]"
-  },
-  {
-    id: "careers",
-    label: "Careers",
-    heading: "Build Your Future with Trizen",
-    description: "Join our team and help shape the future of technology.",
-    route: "https://careers.trizenventures.com/",
-    bgImage: "https://images.unsplash.com/photo-1586281380349-632531db7ed4?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    bgColor: "from-[#2d3748] to-[#4a5568]"
-  },
+  // {
+  //   id: "insights",
+  //   label: "Insights",
+  //   heading: "Connect and Collaborate with Industry Leaders",
+  //   description: "Join our community of innovators and thought leaders.",
+  //   route: "https://connect.trizenventures.com/",
+  //   bgImage: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  //   bgColor: "from-[#2c5282] to-[#48bb78]"
+  // },
+  // {
+  //   id: "careers",
+  //   label: "Careers",
+  //   heading: "Build Your Future with Trizen",
+  //   description: "Join our team and help shape the future of technology.",
+  //   route: "https://careers.trizenventures.com/",
+  //   bgImage: "https://images.unsplash.com/photo-1586281380349-632531db7ed4?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  //   bgColor: "from-[#2d3748] to-[#4a5568]"
+  // },
   {
     id: "ventures",
     label: "Ventures",
