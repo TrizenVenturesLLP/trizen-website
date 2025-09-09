@@ -38,14 +38,14 @@ const Navbar = () => {
               Training
             </a>
             <a 
-              href="/insights" 
-              className={`navbar-link ${currentPath === '/insights' ? 'text-trizen-purple font-medium' : ''}`}
+              href="https://connect.trizenventures.com/" 
+              className={`navbar-link ${currentPath === 'https://connect.trizenventures.com/' ? 'text-trizen-purple font-medium' : ''}`}
             >
               Insights
             </a>
             <a 
-              href="/careers" 
-              className={`navbar-link ${currentPath === '/careers' ? 'text-trizen-purple font-medium' : ''}`}
+              href="https://careers.trizenventures.com/" 
+              className={`navbar-link ${currentPath === 'https://careers.trizenventures.com/' ? 'text-trizen-purple font-medium' : ''}`}
             >
               Careers
             </a>
@@ -97,25 +97,25 @@ const Navbar = () => {
                   Consulting
                 </a>
                 <a 
-                  href="/training" 
+                  href="https://lms.trizenventures.com/" 
                   className={`block px-4 py-2 text-base font-medium ${
-                    currentPath === '/training' ? 'text-trizen-purple' : 'text-trizen-dark hover:text-trizen-purple'
+                    currentPath === 'https://lms.trizenventures.com/' ? 'text-trizen-purple' : 'text-trizen-dark hover:text-trizen-purple'
                   }`}
                 >
                   Training
                 </a>
                 <a 
-                  href="/insights" 
+                  href="https://connect.trizenventures.com/" 
                   className={`block px-4 py-2 text-base font-medium ${
-                    currentPath === '/insights' ? 'text-trizen-purple' : 'text-trizen-dark hover:text-trizen-purple'
+                    currentPath === 'https://connect.trizenventures.com/' ? 'text-trizen-purple' : 'text-trizen-dark hover:text-trizen-purple'
                   }`}
                 >
                   Insights
                 </a>
                 <a 
-                  href="/careers" 
+                  href="https://careers.trizenventures.com/" 
                   className={`block px-4 py-2 text-base font-medium ${
-                    currentPath === '/careers' ? 'text-trizen-purple' : 'text-trizen-dark hover:text-trizen-purple'
+                    currentPath === 'https://careers.trizenventures.com/' ? 'text-trizen-purple' : 'text-trizen-dark hover:text-trizen-purple'
                   }`}
                 >
                   Careers
