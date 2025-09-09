@@ -26,7 +26,7 @@ const Navbar = () => {
               Research
             </a>
             <a 
-              href="/consulting" 
+              href="/consulting"
               className={`navbar-link ${currentPath === '/consulting' ? 'text-trizen-purple font-medium' : ''}`}
             >
               Consulting

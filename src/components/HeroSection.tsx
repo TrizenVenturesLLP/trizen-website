@@ -144,8 +144,26 @@ const tabContent = [
     label: "Training",
     heading: "Empowering Future-Ready Talent with Industry-Aligned Skills",
     description: "Develop the skills you need to thrive in today's dynamic environment.",
-    route: "/training",
+    route: "https://lms.trizenventures.com/",
     bgImage: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fA%3D%3D",
+    bgColor: "from-[#2d3748] to-[#4a5568]"
+  },
+  {
+    id: "insights",
+    label: "Insights",
+    heading: "Connect and Collaborate with Industry Leaders",
+    description: "Join our community of innovators and thought leaders.",
+    route: "https://connect.trizenventures.com/",
+    bgImage: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    bgColor: "from-[#2c5282] to-[#48bb78]"
+  },
+  {
+    id: "careers",
+    label: "Careers",
+    heading: "Build Your Future with Trizen",
+    description: "Join our team and help shape the future of technology.",
+    route: "https://careers.trizenventures.com/",
+    bgImage: "https://images.unsplash.com/photo-1586281380349-632531db7ed4?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     bgColor: "from-[#2d3748] to-[#4a5568]"
   },
   {
@@ -275,15 +293,27 @@ const HeroSection = () => {
               transition={{ delay: 0.2 }}
               className="mt-8"
             >
-              <Link to={currentTab?.route || "/"}>
-                <Button 
-                  size="lg" 
-                  className="bg-white text-[#393283] hover:bg-white/90 transition-all duration-300"
-                >
-                  Explore {currentTab?.label}
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </Link>
+              {currentTab?.route?.startsWith('http') ? (
+                <a href={currentTab.route} target="_blank" rel="noopener noreferrer">
+                  <Button 
+                    size="lg" 
+                    className="bg-white text-[#393283] hover:bg-white/90 transition-all duration-300"
+                  >
+                    Explore {currentTab.label}
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </a>
+              ) : (
+                <Link to={currentTab?.route || "/"}>
+                  <Button 
+                    size="lg" 
+                    className="bg-white text-[#393283] hover:bg-white/90 transition-all duration-300"
+                  >
+                    Explore {currentTab?.label}
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
+              )}
             </motion.div>
           </div>
 
