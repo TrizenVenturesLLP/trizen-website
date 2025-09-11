@@ -38,7 +38,6 @@ const Footer = () => {
                 alt="Trizen Logo" 
                 className="h-10 mr-2 bg-white p-1 rounded"
               />
-              <span className="text-xl font-bold">Trizen</span>
             </div>
             <p className="text-gray-300 mb-4">
               Empowering individuals and organizations through innovation and education.
