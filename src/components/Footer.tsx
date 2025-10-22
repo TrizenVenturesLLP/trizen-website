@@ -34,7 +34,7 @@ const Footer = () => {
           <div>
             <div className="flex items-center mb-4">
               <img 
-                src="/lovable-uploads/trizen-logo3.png" 
+                src="/lovable-uploads/trizen-logo.png" 
                 alt="Trizen Logo" 
                 className="h-10 mr-2 bg-white p-1 rounded"
               />
