@@ -20,7 +20,14 @@ export interface CertificateData {
 }
 
 export class QRCodeGenerator {
-  private static baseUrl = window.location.origin;
+  private static getBaseUrl(): string {
+    // Use environment variable for production, fallback to window.location.origin
+    if (typeof window !== 'undefined') {
+      return window.location.origin;
+    }
+    // Server-side fallback
+    return process.env.VITE_APP_BASE_URL || 'https://trizenventures.com';
+  }
 
   /**
    * Generate QR code as data URL
@@ -30,7 +37,7 @@ export class QRCodeGenerator {
     options: QRCodeOptions = {}
   ): Promise<string> {
     try {
-      const verificationUrl = `${this.baseUrl}/verify/${certificateId}`;
+      const verificationUrl = `${this.getBaseUrl()}/verify/${certificateId}`;
       
       const defaultOptions = {
         width: 200,
@@ -61,7 +68,7 @@ export class QRCodeGenerator {
     options: QRCodeOptions = {}
   ): Promise<string> {
     try {
-      const verificationUrl = `${this.baseUrl}/verify/${certificateId}`;
+      const verificationUrl = `${this.getBaseUrl()}/verify/${certificateId}`;
       
       const defaultOptions = {
         width: 200,
@@ -96,7 +103,7 @@ export class QRCodeGenerator {
     options: QRCodeOptions = {}
   ): Promise<HTMLCanvasElement> {
     try {
-      const verificationUrl = `${this.baseUrl}/verify/${certificateId}`;
+      const verificationUrl = `${this.getBaseUrl()}/verify/${certificateId}`;
       
       const defaultOptions = {
         width: 200,
@@ -135,7 +142,7 @@ export class QRCodeGenerator {
     if (!this.validateCertificateId(certificateId)) {
       throw new Error('Invalid certificate ID format');
     }
-    return `${this.baseUrl}/verify/${certificateId}`;
+    return `${this.getBaseUrl()}/verify/${certificateId}`;
   }
 
   /**
