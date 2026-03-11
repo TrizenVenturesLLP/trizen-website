@@ -131,10 +131,10 @@ const HeroSection = () => {
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.4, delay: 0.1 }}
               >
-                <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 text-white">
+                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-5 text-white">
                   {currentTab?.heading}
                 </h1>
-                <p className="text-xl md:text-2xl text-white/90 max-w-3xl mb-10">
+                <p className="text-base md:text-lg text-white/90 max-w-3xl mb-8">
                   {currentTab?.description}
                 </p>
               </motion.div>
@@ -154,7 +154,7 @@ const HeroSection = () => {
                     <TabsTrigger
                       key={tab.id}
                       value={tab.id}
-                      className={`navbar-link flex items-center whitespace-nowrap mb-2 text-base md:text-lg ${
+                      className={`navbar-link flex items-center whitespace-nowrap mb-2 text-sm md:text-base ${
                         activeTab === tab.id
                           ? "text-white"
                           : "text-white/70 hover:text-white"
@@ -172,7 +172,7 @@ const HeroSection = () => {
                               damping: 30,
                             }}
                           >
-                            <ChevronRight className="h-4 w-4 ml-0.5" />
+                            <ChevronRight className="h-3.5 w-3.5 ml-0.5" />
                           </motion.div>
                         )}
                       </span>
@@ -234,20 +234,20 @@ const HeroSection = () => {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.4 }}
-              className="relative min-h-[280px] lg:min-h-[320px]"
+              className="relative min-h-[200px] lg:min-h-[220px]"
             >
-              <div className="absolute inset-0 bg-white/10 backdrop-blur-md rounded-3xl border border-white/20" />
-              <div className="relative p-10 lg:p-12">
-                <h3 className="text-3xl lg:text-4xl font-semibold text-white mb-6">
+              <div className="absolute inset-0 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20" />
+              <div className="relative p-6 lg:p-8">
+                <h3 className="text-xl lg:text-2xl font-semibold text-white mb-4">
                   Why {currentTab?.label}?
                 </h3>
-                <ul className="space-y-4">
+                <ul className="space-y-3">
                   {currentTab?.whyChoose?.map((item, i) => (
                     <li
                       key={i}
-                      className="flex items-center text-white/90 text-lg lg:text-xl"
+                      className="flex items-center text-white/90 text-sm lg:text-base"
                     >
-                      <span className="w-2.5 h-2.5 bg-white rounded-full mr-3 flex-shrink-0" />
+                      <span className="w-2 h-2 bg-white rounded-full mr-2 flex-shrink-0" />
                       {item}
                     </li>
                   ))}
