@@ -110,7 +110,7 @@ export default {
 				'tab-fade-in': 'tab-fade-in 0.4s ease-out forwards'
 			},
 			fontFamily: {
-				sans: ['Segoe UI', 'sans-serif']
+				sans: ['Inter', 'sans-serif']
 			}
 		}
 	},
