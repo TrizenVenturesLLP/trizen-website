@@ -4,6 +4,11 @@ FROM node:20-alpine as build
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm install
+
+# Optional manual cache-bust: pass --build-arg CACHE_BUST=<timestamp>
+ARG CACHE_BUST=1
+RUN echo "CACHE_BUST=${CACHE_BUST}"
+
 COPY . .
 RUN npm run build
 
