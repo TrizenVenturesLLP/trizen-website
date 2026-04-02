@@ -12,7 +12,7 @@ import { toast } from '@/hooks/use-toast';
 
 interface CertificateGeneratorProps {
   certificateId: string;
-  onGenerate?: (pngDataUrl: string, pdfBlob: Blob) => void;
+  onGenerate?: (pngDataUrl: string, pdfBlob: Blob) => void | Promise<void>;
 }
 
 const CertificateGenerator: React.FC<CertificateGeneratorProps> = ({
@@ -127,13 +127,13 @@ const CertificateGenerator: React.FC<CertificateGeneratorProps> = ({
       const pdfBlob = await generatePDF();
 
       if (onGenerate) {
-        onGenerate(pngDataUrl, pdfBlob);
+        await onGenerate(pngDataUrl, pdfBlob);
+      } else {
+        toast({
+          title: "Certificate Generated",
+          description: "Certificate has been generated successfully"
+        });
       }
-
-      toast({
-        title: "Certificate Generated",
-        description: "Certificate has been generated successfully"
-      });
     } catch (err) {
       setError(`Failed to generate certificate: ${err.message}`);
       toast({

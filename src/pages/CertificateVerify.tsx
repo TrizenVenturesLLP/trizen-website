@@ -7,6 +7,7 @@ import { Loader2, Download, FileText, Image } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
+import { resolveCertificate } from '@/lib/certificateStorage';
 
 const CertificateVerify = () => {
   const { id } = useParams<{ id: string }>();
@@ -15,84 +16,59 @@ const CertificateVerify = () => {
   const [certificatePngUrl, setCertificatePngUrl] = useState<string | null>(null);
   const [certificatePdfUrl, setCertificatePdfUrl] = useState<string | null>(null);
   const [certificateExists, setCertificateExists] = useState(false);
+  const [displayId, setDisplayId] = useState<string | null>(null);
 
   useEffect(() => {
+    let revoked: string[] = [];
+
     const fetchCertificate = async () => {
-      if (!id) {
-        setError('Certificate ID is missing');
-        setLoading(false);
-        return;
-      }
+      setLoading(true);
+      setError(null);
+      setCertificatePngUrl(null);
+      setCertificatePdfUrl(null);
+      setCertificateExists(false);
+      setDisplayId(null);
 
       try {
-        // In a real implementation, this would be a call to your backend API
-        // For now, we'll simulate a certificate lookup
-        
-        // Simulating API call delay
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        
-        // The file paths for PNG and PDF
-        const pngUrl = `/certificates/${id}.png`;
-        const pdfUrl = `/certificates/${id}.pdf`;
-        
-        console.log('Attempting to fetch PNG certificate from:', pngUrl);
-        console.log('PDF version will be available at:', pdfUrl);
-        
-        // First check if PNG exists - this is what we'll display
-        try {
-          const pngResponse = await fetch(pngUrl, { 
-            method: 'HEAD',
-            cache: 'no-cache'
-          });
-          
-          const pdfResponse = await fetch(pdfUrl, { 
-            method: 'HEAD',
-            cache: 'no-cache'
-          });
-          
-          // If either format exists, we consider the certificate valid
-          if (pngResponse.ok || pdfResponse.ok) {
-            if (pngResponse.ok) {
-              setCertificatePngUrl(pngUrl);
-              console.log('PNG certificate found:', pngUrl);
-            }
-            
-            if (pdfResponse.ok) {
-              setCertificatePdfUrl(pdfUrl);
-              console.log('PDF certificate found:', pdfUrl);
-            }
-            
-            setCertificateExists(true);
-            toast({
-              title: "Certificate verified",
-              description: "The certificate has been successfully loaded"
-            });
-          } else {
-            setError(`Invalid certificate ID (Status: PNG-${pngResponse.status}, PDF-${pdfResponse.status})`);
-            console.error('Certificate not found:', { png: pngUrl, pdf: pdfUrl });
-          }
-        } catch (fetchErr) {
-          console.error('Fetch error details:', fetchErr);
-          throw new Error(`Network error while checking certificate: ${fetchErr.message}`);
+        const result = await resolveCertificate(id);
+        revoked = result.objectUrls;
+        setDisplayId(result.basename);
+
+        if (result.error && !result.certificateExists) {
+          setError(result.error);
+          setLoading(false);
+          return;
         }
-        
-        setLoading(false);
-      } catch (err) {
-        setError('Failed to load certificate: ' + (err.message || 'Unknown error'));
-        setLoading(false);
-        console.error('Error fetching certificate:', err);
-        
+
+        if (result.certificateExists) {
+          setCertificatePngUrl(result.certificatePngUrl);
+          setCertificatePdfUrl(result.certificatePdfUrl);
+          setCertificateExists(true);
+          toast({
+            title: "Certificate verified",
+            description: "The certificate has been successfully loaded"
+          });
+        } else {
+          setError(result.error || 'Certificate not found');
+        }
+      } catch (err: unknown) {
+        const message = err instanceof Error ? err.message : 'Unknown error';
+        setError('Failed to load certificate: ' + message);
         toast({
           variant: "destructive",
           title: "Error",
           description: "Failed to verify certificate. Please try again later."
         });
+      } finally {
+        setLoading(false);
       }
     };
 
-    if (id) {
-      fetchCertificate();
-    }
+    fetchCertificate();
+
+    return () => {
+      revoked.forEach((u) => URL.revokeObjectURL(u));
+    };
   }, [id]);
 
   return (
@@ -123,7 +99,7 @@ const CertificateVerify = () => {
               <div className="flex flex-col">
                 <div className="mb-6">
                   <h2 className="text-2xl font-semibold mb-2">Certificate Found</h2>
-                  <p className="text-gray-600">Certificate ID: {id}</p>
+                  <p className="text-gray-600">Certificate ID: {displayId ?? id}</p>
                 </div>
                 
                 {/* Certificate Display Section */}

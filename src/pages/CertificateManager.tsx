@@ -12,6 +12,12 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
 import { QrCode, FileText, Image, CheckCircle, XCircle } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
+import {
+  saveCertificateToIndexedDB,
+  uploadCertificateToSupabase,
+  isSupabaseConfigured,
+  dataUrlToBlob,
+} from '@/lib/certificateStorage';
 
 const CertificateManager = () => {
   const { id } = useParams<{ id: string }>();
@@ -39,14 +45,32 @@ const CertificateManager = () => {
   };
 
   const handleGenerate = async (pngDataUrl: string, pdfBlob: Blob) => {
-    // Here you could implement server-side saving of the certificates
-    // For now, we'll just show a success message
-    console.log('Certificate generated:', { pngDataUrl, pdfBlob });
-    
-    toast({
-      title: "Certificate Generated Successfully",
-      description: "Both PNG and PDF versions have been created with embedded QR codes."
-    });
+    const id = certificateId;
+    try {
+      await saveCertificateToIndexedDB(id, pngDataUrl, pdfBlob);
+
+      if (isSupabaseConfigured()) {
+        const pngBlob = dataUrlToBlob(pngDataUrl);
+        await uploadCertificateToSupabase(id, pngBlob, pdfBlob);
+        toast({
+          title: "Certificate saved",
+          description: "Stored locally, uploaded to cloud storage, and ready to verify from any device.",
+        });
+      } else {
+        toast({
+          title: "Certificate saved locally",
+          description:
+            "This browser can verify this ID. For public verification, add VITE_SUPABASE_* env vars or deploy PNG/PDF to public/certificates/.",
+        });
+      }
+    } catch (e: unknown) {
+      const msg = e instanceof Error ? e.message : "Save failed";
+      toast({
+        variant: "destructive",
+        title: "Could not persist certificate",
+        description: msg,
+      });
+    }
   };
 
   const testQRCode = async () => {

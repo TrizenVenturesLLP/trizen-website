@@ -52,6 +52,11 @@ This system provides automated certificate generation with embedded QR codes tha
    - ID generation and validation
    - Testing and verification
 
+5. **CertificateStorage** (`src/lib/certificateStorage.ts`)
+   - Persists PNG/PDF after **Generate Certificate** (IndexedDB in the browser)
+   - Optional Supabase Storage upload for **public** verification (set `VITE_SUPABASE_*` in `.env`; see `.env.example`)
+   - Verification resolution order: Supabase (if configured) → static `/certificates/{id}.*` → IndexedDB (same browser only)
+
 ## Certificate IDs
 
 ### New Certificate IDs (Ready to Use)
