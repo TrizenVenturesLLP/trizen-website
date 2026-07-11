@@ -1,21 +1,36 @@
-
-import Navbar from "@/components/Navbar";
-import HeroSection from "@/components/HeroSection";
-import OurWingsSection from "@/components/OurWingsSection";
-import FloatingCard from "@/components/FloatingCard";
-import Footer from "@/components/Footer";
+import {
+  Hero,
+  LogoBar,
+  MetricsStrip,
+  HomeServices,
+  TechStack,
+  HomeCaseStudies,
+  CTABanner,
+  FadeIn,
+  PageMeta,
+} from "@/components/marketing";
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex flex-col">
-      <Navbar />
-      <main className="flex-grow">
-        <HeroSection />
-        <OurWingsSection />
-      </main>
-      {/* <FloatingCard /> */}
-      <Footer />
-    </div>
+    <>
+      <PageMeta
+        title="Home"
+        path="/"
+        description="Trizen helps enterprises design, deploy, and scale AI systems that deliver measurable operational outcomes."
+      />
+      <Hero />
+      <LogoBar />
+      <MetricsStrip />
+      <HomeServices />
+      <TechStack />
+      <HomeCaseStudies />
+      <FadeIn>
+        <CTABanner
+          secondaryLabel="View Case Studies"
+          secondaryHref="/case-studies"
+        />
+      </FadeIn>
+    </>
   );
 };
 

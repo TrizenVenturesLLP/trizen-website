@@ -1,6 +1,6 @@
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useEffect } from "react";
-import { AlertTriangle } from "lucide-react"; // Lucide icon for a clean warning symbol
+import { AlertTriangle } from "lucide-react";
 
 const NotFound = () => {
   const location = useLocation();
@@ -13,21 +13,21 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-50 to-purple-100 px-4">
-      <div className="bg-white p-8 rounded-2xl shadow-xl text-center max-w-md animate-fade-in">
-        <div className="flex justify-center mb-4 text-yellow-500">
+    <div className="min-h-[60vh] flex items-center justify-center bg-zinc-50 px-4 py-20">
+      <div className="bg-white p-8 rounded-2xl border border-zinc-200 shadow-sm text-center max-w-md">
+        <div className="flex justify-center mb-4 text-indigo-600">
           <AlertTriangle className="w-12 h-12" />
         </div>
-        <h1 className="text-3xl font-semibold mb-2">Lost in space?</h1>
-        <p className="text-gray-600 mb-6">
-          The page you're looking for doesn't seem to exist. It might have been moved or deleted.
+        <h1 className="text-3xl font-semibold text-zinc-900 mb-2">Page not found</h1>
+        <p className="text-zinc-600 mb-6">
+          The page you&apos;re looking for doesn&apos;t seem to exist. It might have been moved or deleted.
         </p>
-        <a
-          href="/"
-          className="inline-block bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition duration-300"
+        <Link
+          to="/"
+          className="inline-block bg-indigo-600 text-white px-6 py-2.5 rounded-lg hover:bg-indigo-700 transition duration-300"
         >
           Go to Home
-        </a>
+        </Link>
       </div>
     </div>
   );

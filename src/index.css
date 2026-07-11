@@ -4,45 +4,86 @@
 @tailwind utilities;
 
 @layer base {
+  /* Light tokens — available when theme is light */
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 0 0% 98%;
+    --foreground: 225 18% 8%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 225 18% 8%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 225 18% 8%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 239 84% 59%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 240 5% 96%;
+    --secondary-foreground: 225 18% 12%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 240 5% 96%;
+    --muted-foreground: 240 4% 42%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 239 84% 59%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 240 6% 90%;
+    --input: 240 6% 90%;
+    --ring: 239 84% 59%;
 
     --radius: 0.5rem;
 
     --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-foreground: 225 18% 8%;
+    --sidebar-primary: 239 84% 59%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 5% 96%;
+    --sidebar-accent-foreground: 225 18% 12%;
+    --sidebar-border: 240 6% 90%;
+    --sidebar-ring: 239 84% 59%;
+  }
+
+  /* Optional dark — kept for dark bookend surfaces / future toggle */
+  .dark {
+    --background: 225 18% 5%;
+    --foreground: 0 0% 95%;
+
+    --card: 240 6% 10%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 240 6% 10%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 239 84% 67%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 240 4% 16%;
+    --secondary-foreground: 0 0% 95%;
+
+    --muted: 240 4% 16%;
+    --muted-foreground: 240 5% 65%;
+
+    --accent: 239 84% 67%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 4% 16%;
+    --input: 240 4% 16%;
+    --ring: 239 84% 67%;
+
+    --sidebar-background: 240 10% 4%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 239 84% 67%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 4% 16%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 240 4% 16%;
+    --sidebar-ring: 239 84% 67%;
   }
 
   * {
@@ -50,7 +91,20 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans;
+    @apply bg-background text-foreground font-sans antialiased;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Visible keyboard focus for accessibility */
+  :focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
   }
 
   @keyframes fadeIn {
@@ -64,13 +118,165 @@
 }
 
 @layer components {
+  /* Enterprise light panels */
+  .glass-panel {
+    @apply relative overflow-hidden border border-zinc-200 bg-white;
+    box-shadow: 0 1px 2px rgb(15 23 42 / 0.04);
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+
+  .glass-panel-light {
+    @apply relative overflow-hidden border border-zinc-200 bg-white;
+    box-shadow: 0 1px 2px rgb(15 23 42 / 0.04);
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+
+  .glass-soft-light {
+    @apply border border-zinc-100 bg-zinc-50;
+    box-shadow: inset 0 1px 0 0 rgb(255 255 255 / 0.8);
+  }
+
+  .glass-soft {
+    box-shadow: inset 0 1px 0 0 rgb(255 255 255 / 0.8);
+  }
+
+  /* Soft indigo CTA surface on light pages */
+  .glass-frost {
+    background-color: rgb(238 242 255 / 0.85);
+    border-color: rgb(199 210 254);
+    box-shadow:
+      inset 0 1px 0 0 rgb(255 255 255 / 0.9),
+      0 20px 50px -30px rgb(79 70 229 / 0.2);
+    transform: translateZ(0);
+  }
+
+  .inner-shadow-inset-light {
+    box-shadow: inset 0 1px 1px 0 rgb(15 23 42 / 0.04);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .card-lift:hover {
+      transform: translate3d(0, -2px, 0);
+      border-color: rgb(199 210 254);
+      box-shadow: 0 8px 20px -12px rgb(79 70 229 / 0.12);
+    }
+
+    .card-lift-light:hover {
+      transform: translate3d(0, -2px, 0);
+      border-color: rgb(199 210 254);
+      box-shadow: 0 8px 18px -12px rgb(15 23 42 / 0.1);
+    }
+  }
+
+  .glow-accent {
+    box-shadow: 0 6px 18px -10px hsl(var(--primary) / 0.18);
+  }
+
+  /* Gradient blobs */
+  .gradient-blob {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(64px);
+    transform: translateZ(0);
+    animation: blob-drift 22s ease-in-out infinite;
+  }
+
+  .gradient-blob-a {
+    top: -10%;
+    left: 20%;
+    width: min(55vw, 480px);
+    height: min(55vw, 480px);
+    background: hsl(220 20% 50% / 0.14);
+  }
+
+  .gradient-blob-b {
+    top: 35%;
+    right: -5%;
+    width: min(40vw, 360px);
+    height: min(40vw, 360px);
+    background: hsl(200 30% 55% / 0.1);
+    animation-delay: -6s;
+    animation-duration: 26s;
+  }
+
+  .gradient-blob-c {
+    bottom: -15%;
+    left: 35%;
+    width: min(45vw, 400px);
+    height: min(45vw, 400px);
+    background: hsl(210 15% 45% / 0.08);
+    animation-delay: -11s;
+    animation-duration: 30s;
+  }
+
+  @keyframes blob-drift {
+    0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+    33% { transform: translate3d(3%, 4%, 0) scale(1.05); }
+    66% { transform: translate3d(-4%, 2%, 0) scale(0.96); }
+  }
+
+  /* Animated network SVGs */
+  .network-draw path,
+  .network-draw line {
+    stroke-dasharray: 180;
+    stroke-dashoffset: 180;
+    animation: network-draw 2.8s ease-out forwards;
+  }
+
+  .network-pulse {
+    animation: network-pulse 3.5s ease-in-out infinite;
+  }
+
+  @keyframes network-draw {
+    to { stroke-dashoffset: 0; }
+  }
+
+  @keyframes network-pulse {
+    0%, 100% { opacity: 0.45; }
+    50% { opacity: 1; }
+  }
+
+  /* Micro interactions */
+  .btn-micro {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .btn-micro:hover {
+      transform: translate3d(0, -1px, 0);
+    }
+    .btn-micro:active {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-b from-white to-white/70 bg-clip-text text-transparent;
+  }
+
+  /* Soft card lift — hover-capable devices only */
+  .card-lift {
+    @apply transition-[transform,border-color,box-shadow] duration-300 ease-out;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gradient-blob,
+    .network-draw path,
+    .network-draw line,
+    .network-pulse {
+      animation: none !important;
+    }
+  }
+
   .navbar-link {
-    @apply relative px-1 py-2 text-trizen-dark font-medium text-sm hover:text-trizen-purple transition-colors duration-200 cursor-pointer;
+    @apply relative px-1 py-2 text-foreground/80 font-medium text-sm hover:text-primary transition-colors duration-200 cursor-pointer;
   }
 
   .navbar-link:after {
     content: '';
-    @apply absolute bottom-0 left-0 w-0 h-[2px] bg-trizen-purple transition-all duration-300;
+    @apply absolute bottom-0 left-0 w-0 h-[2px] bg-primary transition-all duration-300;
   }
 
   .navbar-link:hover:after {
@@ -78,7 +284,7 @@
   }
 
   .navbar-dropdown {
-    @apply invisible opacity-0 absolute top-full left-0 w-48 bg-white shadow-lg rounded-md overflow-hidden transition-all duration-300 transform -translate-y-2 z-50;
+    @apply invisible opacity-0 absolute top-full left-0 w-48 glass-panel rounded-md overflow-hidden transition-all duration-300 transform -translate-y-2 z-50;
   }
 
   .navbar-dropdown-trigger:hover .navbar-dropdown {
@@ -90,11 +296,11 @@
   }
 
   .tab-button.active {
-    @apply bg-trizen-purple text-white;
+    @apply bg-primary text-primary-foreground;
   }
 
   .tab-button:not(.active) {
-    @apply bg-trizen-gray text-trizen-dark hover:bg-opacity-80;
+    @apply bg-secondary text-secondary-foreground hover:bg-secondary/80;
   }
 
   .tab-content {

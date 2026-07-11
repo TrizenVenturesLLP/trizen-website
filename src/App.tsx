@@ -1,83 +1,127 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { lazy, Suspense } from "react";
+import { BrowserRouter, Routes, Route, Navigate, useParams } from "react-router-dom";
+import SiteLayout from "./layouts/SiteLayout";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
-import Contribute from "./pages/Contribute";
-import Events from "./pages/Events";
-import Gallery from "./pages/Gallery";
-import AboutUs from "./pages/AboutUs";
-import Training from "./pages/Training";
-import Research from "./pages/Research";
-import Consulting from "./pages/Consulting";
-import Ventures from "./pages/Ventures";
-import ResearchArea from "@/pages/research/ResearchAreaTemplate";
-import ProjectDetails from "@/pages/ProjectDetails";
-import OngoingProjectDetails from "./pages/OngoingProjectDetails";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import ProjectOverview from "./pages/research/components/ProjectOverview";
-import CertificateVerify from "./pages/CertificateVerify";
-import CertificateManager from "./pages/CertificateManager";
-import CertificateTest from "./pages/CertificateTest";
+import Services from "./pages/Services";
+import Products from "./pages/Products";
+import CaseStudies from "./pages/CaseStudies";
+import Insights from "./pages/Insights";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import { productSlugAliases } from "./content/products";
 
-const queryClient = new QueryClient();
+const ServiceDetail = lazy(() => import("./pages/ServiceDetail"));
+const ProductDetail = lazy(() => import("./pages/ProductDetail"));
+const Industries = lazy(() => import("./pages/Industries"));
+const IndustryDetail = lazy(() => import("./pages/IndustryDetail"));
+const CaseStudyDetail = lazy(() => import("./pages/CaseStudyDetail"));
+const Ventures = lazy(() => import("./pages/Ventures"));
+const CertificateVerify = lazy(() => import("./pages/CertificateVerify"));
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: { staleTime: 60_000, refetchOnWindowFocus: false },
+  },
+});
+
+const enableCertAdmin = import.meta.env.VITE_ENABLE_CERT_ADMIN === "true";
+const CertificateManager = enableCertAdmin
+  ? lazy(() => import("./pages/CertificateManager"))
+  : null;
+
+/** Map legacy /accelerators/:slug → /products/:slug */
+const AcceleratorRedirect = () => {
+  const { slug } = useParams<{ slug: string }>();
+  if (!slug) return <Navigate replace to="/products" />;
+  const mapped = productSlugAliases[slug] ?? slug;
+  return <Navigate replace to={`/products/${mapped}`} />;
+};
+
+const PageFallback = () => (
+  <div
+    className="container mx-auto px-4 py-24 min-h-[40vh]"
+    role="status"
+    aria-live="polite"
+    aria-label="Loading page"
+  >
+    <div className="h-8 w-48 rounded bg-zinc-100 animate-pulse mb-4" />
+    <div className="h-4 w-full max-w-xl rounded bg-zinc-100 animate-pulse mb-2" />
+    <div className="h-4 w-2/3 max-w-md rounded bg-zinc-100 animate-pulse" />
+  </div>
+);
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
+    <TooltipProvider delayDuration={300}>
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <div className="flex flex-col min-h-screen">
-          {/* <Navbar /> */}
-          <main className="flex-grow">
+        <SiteLayout>
+          <Suspense fallback={<PageFallback />}>
             <Routes>
               <Route path="/" element={<Index />} />
-              <Route path="/contribute" element={<Contribute />} />
-              <Route path="/events" element={<Events />} />
-              <Route path="/gallery" element={<Gallery />} />
-              <Route path="/about-us" element={<AboutUs />} />
-              <Route path="/training" element={<Training />} />
-              <Route path="/training/courses" element={<Training />} />
-              <Route path="/training/certifications" element={<Training />} />
-              <Route path="/training/corporate" element={<Training />} />
-              <Route path="/training/events" element={<Training />} />
-              <Route path="/research" element={<Research />} />
-              <Route path="/research/areas" element={<Research />} />
-              <Route path="/research/projects" element={<Research />} />
-              <Route path="/research/publications" element={<Research />} />
-              <Route path="/research/collaborate" element={<Research />} />
-              <Route path="/research/:areaId" element={<ResearchArea />} />
-              <Route path="/project/:projectId" element={<ProjectOverview />} />
-              <Route path="/consulting" element={<Consulting />} />
-              <Route path="/consulting/services" element={<Consulting />} />
-              <Route path="/consulting/industries" element={<Consulting />} />
-              <Route path="/consulting/casestudies" element={<Consulting />} />
-              <Route path="/consulting/contact" element={<Consulting />} />
+              <Route path="/services" element={<Services />} />
+              <Route path="/services/:slug" element={<ServiceDetail />} />
+              <Route
+                path="/services/ai-consulting-strategy"
+                element={<Navigate replace to="/services/ai-consulting" />}
+              />
+              <Route
+                path="/services/enterprise-agents"
+                element={<Navigate replace to="/services/ai-agents" />}
+              />
+
+              <Route path="/products" element={<Products />} />
+              <Route path="/products/:slug" element={<ProductDetail />} />
+
+              <Route path="/industries" element={<Industries />} />
+              <Route path="/industries/:slug" element={<IndustryDetail />} />
+              <Route path="/insights" element={<Insights />} />
+              <Route path="/case-studies" element={<CaseStudies />} />
+              <Route path="/case-studies/:slug" element={<CaseStudyDetail />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
+
               <Route path="/ventures" element={<Ventures />} />
-              <Route path="/ventures/portfolio" element={<Ventures />} />
-              <Route path="/ventures/approach" element={<Ventures />} />
-              <Route path="/ventures/partnerships" element={<Ventures />} />
-              <Route path="/ventures/resources" element={<Ventures />} />
-              <Route path="/ventures/events" element={<Ventures />} />
-              <Route path="/ongoing-project/:id" element={<OngoingProjectDetails />} />
-              {/* New certificate verification route */}
+              <Route path="/ventures/*" element={<Navigate replace to="/ventures" />} />
+
               <Route path="/verify/:id" element={<CertificateVerify />} />
-              {/* Certificate management route */}
-              <Route path="/certificate-manager" element={<CertificateManager />} />
-              <Route path="/certificate-manager/:id" element={<CertificateManager />} />
-              {/* Certificate test route */}
-              <Route path="/certificate-test" element={<CertificateTest />} />
-              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+
+              {enableCertAdmin && CertificateManager && (
+                <>
+                  <Route path="/certificate-manager" element={<CertificateManager />} />
+                  <Route path="/certificate-manager/:id" element={<CertificateManager />} />
+                </>
+              )}
+
+              {/* Deprecated IA → Products */}
+              <Route path="/solutions" element={<Navigate replace to="/products" />} />
+              <Route path="/solutions/*" element={<Navigate replace to="/products" />} />
+              <Route path="/accelerators" element={<Navigate replace to="/products" />} />
+              <Route path="/accelerators/:slug" element={<AcceleratorRedirect />} />
+
+              <Route path="/consulting" element={<Navigate replace to="/services" />} />
+              <Route path="/consulting/*" element={<Navigate replace to="/services" />} />
+              <Route path="/research" element={<Navigate replace to="/products" />} />
+              <Route path="/research/*" element={<Navigate replace to="/products" />} />
+              <Route path="/training" element={<Navigate replace to="/services" />} />
+              <Route path="/training/*" element={<Navigate replace to="/services" />} />
+              <Route path="/contribute" element={<Navigate replace to="/about" />} />
+              <Route path="/gallery" element={<Navigate replace to="/about" />} />
+              <Route path="/events" element={<Navigate replace to="/about" />} />
+              <Route path="/project/:projectId" element={<Navigate replace to="/products" />} />
+              <Route path="/ongoing-project/:id" element={<Navigate replace to="/case-studies" />} />
+              <Route path="/certificate-test" element={<Navigate replace to="/" />} />
+
               <Route path="*" element={<NotFound />} />
             </Routes>
-          </main>
-          {/* <Footer /> */}
-        </div>
+          </Suspense>
+        </SiteLayout>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
