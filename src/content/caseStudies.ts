@@ -137,10 +137,15 @@ export const caseStudies: CaseStudy[] = [
   },
 ];
 
+/** Published case studies only */
+export function getAllCaseStudies(): CaseStudy[] {
+  return caseStudies.filter((study) => !study.draft);
+}
+
 export function getCaseStudyBySlug(slug: string): CaseStudy | undefined {
-  return caseStudies.find((study) => study.slug === slug);
+  return caseStudies.find((study) => study.slug === slug && !study.draft);
 }
 
 export function getFeaturedCaseStudies(): CaseStudy[] {
-  return caseStudies.filter((study) => study.featured && !study.draft);
+  return getAllCaseStudies().filter((study) => study.featured);
 }

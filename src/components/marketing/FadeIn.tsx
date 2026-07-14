@@ -18,8 +18,8 @@ const MotionTag = {
 } as const;
 
 /**
- * Soft scroll-enter — short travel, calm easing, once-only.
- * Tuned to feel natural on long homepage scrolls (not laggy or snappy).
+ * Site-wide scroll/mount enter motion. Prefer this over raw framer-motion on pages.
+ * Respects reduced motion; once-only; calm easing.
  */
 const FadeIn = ({
   children,
@@ -42,10 +42,10 @@ const FadeIn = ({
       className={cn("transform-gpu will-change-transform", className)}
       initial={{ y }}
       whileInView={{ y: 0 }}
-      viewport={{ once: true, amount: 0.15, margin: "0px 0px -24px 0px" }}
+      viewport={{ once: true, amount: 0.12, margin: "0px 0px -20px 0px" }}
       transition={{
-        duration: 0.55,
-        delay: Math.min(delaySec, 0.18),
+        duration: 0.5,
+        delay: Math.min(delaySec, 0.22),
         ease: [0.22, 1, 0.36, 1],
       }}
     >

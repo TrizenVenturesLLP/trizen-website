@@ -1,7 +1,5 @@
 import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route, Navigate, useParams } from "react-router-dom";
 import SiteLayout from "./layouts/SiteLayout";
@@ -22,14 +20,7 @@ const ProductDetail = lazy(() => import("./pages/ProductDetail"));
 const Industries = lazy(() => import("./pages/Industries"));
 const IndustryDetail = lazy(() => import("./pages/IndustryDetail"));
 const CaseStudyDetail = lazy(() => import("./pages/CaseStudyDetail"));
-const Ventures = lazy(() => import("./pages/Ventures"));
 const CertificateVerify = lazy(() => import("./pages/CertificateVerify"));
-
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: { staleTime: 60_000, refetchOnWindowFocus: false },
-  },
-});
 
 const enableCertAdmin = import.meta.env.VITE_ENABLE_CERT_ADMIN === "true";
 const CertificateManager = enableCertAdmin
@@ -58,80 +49,76 @@ const PageFallback = () => (
 );
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider delayDuration={300}>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <SiteLayout>
-          <Suspense fallback={<PageFallback />}>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/services" element={<Services />} />
-              <Route path="/services/:slug" element={<ServiceDetail />} />
-              <Route
-                path="/services/ai-consulting-strategy"
-                element={<Navigate replace to="/services/ai-consulting" />}
-              />
-              <Route
-                path="/services/enterprise-agents"
-                element={<Navigate replace to="/services/ai-agents" />}
-              />
+  <TooltipProvider delayDuration={300}>
+    <Toaster />
+    <BrowserRouter>
+      <SiteLayout>
+        <Suspense fallback={<PageFallback />}>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/services/:slug" element={<ServiceDetail />} />
+            <Route
+              path="/services/ai-consulting-strategy"
+              element={<Navigate replace to="/services/ai-consulting" />}
+            />
+            <Route
+              path="/services/enterprise-agents"
+              element={<Navigate replace to="/services/ai-agents" />}
+            />
 
-              <Route path="/products" element={<Products />} />
-              <Route path="/products/:slug" element={<ProductDetail />} />
+            <Route path="/products" element={<Products />} />
+            <Route path="/products/:slug" element={<ProductDetail />} />
 
-              <Route path="/industries" element={<Industries />} />
-              <Route path="/industries/:slug" element={<IndustryDetail />} />
-              <Route path="/insights" element={<Insights />} />
-              <Route path="/case-studies" element={<CaseStudies />} />
-              <Route path="/case-studies/:slug" element={<CaseStudyDetail />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/privacy" element={<Privacy />} />
-              <Route path="/terms" element={<Terms />} />
+            <Route path="/industries" element={<Industries />} />
+            <Route path="/industries/:slug" element={<IndustryDetail />} />
+            <Route path="/insights" element={<Insights />} />
+            <Route path="/case-studies" element={<CaseStudies />} />
+            <Route path="/case-studies/:slug" element={<CaseStudyDetail />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/terms" element={<Terms />} />
 
-              <Route path="/ventures" element={<Ventures />} />
-              <Route path="/ventures/*" element={<Navigate replace to="/ventures" />} />
+            <Route path="/verify/:id" element={<CertificateVerify />} />
 
-              <Route path="/verify/:id" element={<CertificateVerify />} />
+            {enableCertAdmin && CertificateManager && (
+              <>
+                <Route path="/certificate-manager" element={<CertificateManager />} />
+                <Route path="/certificate-manager/:id" element={<CertificateManager />} />
+              </>
+            )}
 
-              {enableCertAdmin && CertificateManager && (
-                <>
-                  <Route path="/certificate-manager" element={<CertificateManager />} />
-                  <Route path="/certificate-manager/:id" element={<CertificateManager />} />
-                </>
-              )}
+            {/* Deprecated IA → Products */}
+            <Route path="/solutions" element={<Navigate replace to="/products" />} />
+            <Route path="/solutions/*" element={<Navigate replace to="/products" />} />
+            <Route path="/accelerators" element={<Navigate replace to="/products" />} />
+            <Route path="/accelerators/:slug" element={<AcceleratorRedirect />} />
 
-              {/* Deprecated IA → Products */}
-              <Route path="/solutions" element={<Navigate replace to="/products" />} />
-              <Route path="/solutions/*" element={<Navigate replace to="/products" />} />
-              <Route path="/accelerators" element={<Navigate replace to="/products" />} />
-              <Route path="/accelerators/:slug" element={<AcceleratorRedirect />} />
+            <Route path="/consulting" element={<Navigate replace to="/services" />} />
+            <Route path="/consulting/*" element={<Navigate replace to="/services" />} />
+            <Route path="/research" element={<Navigate replace to="/products" />} />
+            <Route path="/research/*" element={<Navigate replace to="/products" />} />
+            <Route path="/training" element={<Navigate replace to="/services" />} />
+            <Route path="/training/*" element={<Navigate replace to="/services" />} />
+            <Route path="/contribute" element={<Navigate replace to="/about" />} />
+            <Route path="/gallery" element={<Navigate replace to="/about" />} />
+            <Route path="/ventures" element={<Navigate replace to="/about" />} />
+            <Route path="/ventures/*" element={<Navigate replace to="/about" />} />
+            <Route path="/events" element={<Navigate replace to="/products/trizen-community" />} />
+            <Route path="/project/:projectId" element={<Navigate replace to="/products" />} />
+            <Route path="/ongoing-project/:id" element={<Navigate replace to="/case-studies" />} />
+            <Route path="/certificate-test" element={<Navigate replace to="/" />} />
 
-              <Route path="/consulting" element={<Navigate replace to="/services" />} />
-              <Route path="/consulting/*" element={<Navigate replace to="/services" />} />
-              <Route path="/research" element={<Navigate replace to="/products" />} />
-              <Route path="/research/*" element={<Navigate replace to="/products" />} />
-              <Route path="/training" element={<Navigate replace to="/services" />} />
-              <Route path="/training/*" element={<Navigate replace to="/services" />} />
-              <Route path="/contribute" element={<Navigate replace to="/about" />} />
-              <Route path="/gallery" element={<Navigate replace to="/about" />} />
-              <Route path="/events" element={<Navigate replace to="/products/trizen-community" />} />
-              <Route path="/project/:projectId" element={<Navigate replace to="/products" />} />
-              <Route path="/ongoing-project/:id" element={<Navigate replace to="/case-studies" />} />
-              <Route path="/certificate-test" element={<Navigate replace to="/" />} />
+            <Route path="/products/trizen-certify" element={<Navigate replace to="/products/trizen-hr" />} />
+            <Route path="/products/trizen-labs" element={<Navigate replace to="/products/trizen-community" />} />
 
-              <Route path="/products/trizen-certify" element={<Navigate replace to="/products/trizen-hr" />} />
-              <Route path="/products/trizen-labs" element={<Navigate replace to="/products/trizen-community" />} />
-
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Suspense>
-        </SiteLayout>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
+      </SiteLayout>
+    </BrowserRouter>
+  </TooltipProvider>
 );
 
 export default App;

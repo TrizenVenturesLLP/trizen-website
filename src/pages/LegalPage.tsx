@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
 import PageMeta from "@/components/marketing/PageMeta";
+import FadeIn from "@/components/marketing/FadeIn";
 import { legalLastUpdated, type LegalSection } from "@/content/legal";
 import { siteConfig } from "@/content/site";
 
@@ -32,11 +32,7 @@ const LegalPage = ({
 
       <section className="border-b border-zinc-200 bg-white pt-28 pb-20 sm:pt-32 md:pt-36 md:pb-28">
         <div className="container mx-auto px-4 max-w-3xl">
-          <motion.div
-            initial={{ y: 16 }}
-            animate={{ y: 0 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-          >
+          <FadeIn y={12}>
             <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-indigo-600 mb-4">
               {eyebrow}
             </p>
@@ -47,13 +43,16 @@ const LegalPage = ({
             <p className="text-sm text-zinc-500">
               Last updated: {legalLastUpdated} · {siteConfig.name}
             </p>
-          </motion.div>
+          </FadeIn>
         </div>
       </section>
 
       <section className="py-14 md:py-20 border-b border-zinc-200 bg-zinc-50">
         <div className="container mx-auto px-4 max-w-3xl">
-          <nav aria-label="On this page" className="mb-12 rounded-2xl border border-zinc-200 bg-white p-5 md:p-6">
+          <nav
+            aria-label="On this page"
+            className="mb-12 rounded-2xl border border-zinc-200 bg-white p-5 md:p-6"
+          >
             <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-zinc-400 mb-3">
               On this page
             </p>
@@ -72,44 +71,38 @@ const LegalPage = ({
           </nav>
 
           <div className="space-y-12">
-            {sections.map((section) => (
-              <motion.article
-                key={section.id}
-                id={section.id}
-                initial={{ y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.4, ease: "easeOut" }}
-                className="scroll-mt-28"
-              >
-                <h2 className="text-xl font-semibold tracking-tight text-zinc-900 mb-4">
-                  {section.title}
-                </h2>
-                {section.paragraphs.map((paragraph) => (
-                  <p
-                    key={paragraph.slice(0, 48)}
-                    className="text-zinc-600 leading-relaxed mb-4 last:mb-0"
-                  >
-                    {paragraph}
-                  </p>
-                ))}
-                {section.bullets?.length ? (
-                  <ul className="mt-4 space-y-2.5">
-                    {section.bullets.map((item) => (
-                      <li
-                        key={item.slice(0, 48)}
-                        className="flex gap-3 text-sm text-zinc-600 leading-relaxed"
-                      >
-                        <span
-                          className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-indigo-500"
-                          aria-hidden
-                        />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                ) : null}
-              </motion.article>
+            {sections.map((section, index) => (
+              <article key={section.id} id={section.id} className="scroll-mt-28">
+                <FadeIn delay={Math.min(index * 0.04, 0.16)}>
+                  <h2 className="text-xl font-semibold tracking-[-0.02em] text-zinc-900 mb-4">
+                    {section.title}
+                  </h2>
+                  {section.paragraphs.map((paragraph) => (
+                    <p
+                      key={paragraph.slice(0, 48)}
+                      className="text-zinc-600 leading-relaxed mb-4 last:mb-0"
+                    >
+                      {paragraph}
+                    </p>
+                  ))}
+                  {section.bullets?.length ? (
+                    <ul className="mt-4 space-y-2.5">
+                      {section.bullets.map((item) => (
+                        <li
+                          key={item.slice(0, 48)}
+                          className="flex gap-3 text-sm text-zinc-600 leading-relaxed"
+                        >
+                          <span
+                            className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-indigo-500"
+                            aria-hidden
+                          />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : null}
+                </FadeIn>
+              </article>
             ))}
           </div>
 

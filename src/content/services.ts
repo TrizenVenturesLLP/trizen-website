@@ -27,6 +27,35 @@ export const serviceCategories: ServiceCategory[] = [
   "Build",
 ];
 
+/** Category band copy on /services index */
+export interface ServiceCategoryCopy {
+  headline: string;
+  blurb: string;
+}
+
+export const serviceCategoryCopy: Record<ServiceCategory, ServiceCategoryCopy> = {
+  Strategy: {
+    headline: "Direction before delivery",
+    blurb:
+      "Advisory and roadmaps that turn ambitious AI ideas into funded, governed programs leadership can stand behind.",
+  },
+  Automation: {
+    headline: "Operations that run themselves",
+    blurb:
+      "Workflows, agents, voice, and messaging systems that remove friction across back-office, supply chain, and customer operations.",
+  },
+  Intelligence: {
+    headline: "Data that actually drives decisions",
+    blurb:
+      "Data engineering, analytics, ML, and language systems built on your real data, not generic models.",
+  },
+  Build: {
+    headline: "Products your teams can own",
+    blurb:
+      "Custom AI applications engineered for production, security, compliance, and clean handoff to your teams.",
+  },
+};
+
 export const services: Service[] = [
   {
     slug: "ai-consulting",
@@ -438,16 +467,26 @@ export const services: Service[] = [
   },
 ];
 
+/** Published services only */
+export function getAllServices(): Service[] {
+  return services.filter((s) => !s.draft);
+}
+
 export function getServiceBySlug(slug: string): Service | undefined {
-  return services.find((service) => service.slug === slug);
+  const resolved = serviceSlugAliases[slug] ?? slug;
+  return services.find((service) => service.slug === resolved && !service.draft);
 }
 
 export function getFeaturedServices(): Service[] {
-  return services.filter((s) => s.featured && !s.draft);
+  return getAllServices().filter((s) => s.featured);
 }
 
 export function getServicesByCategory(category: ServiceCategory): Service[] {
-  return services.filter((s) => s.category === category && !s.draft);
+  return getAllServices().filter((s) => s.category === category);
+}
+
+export function getServiceCategoryCopy(category: ServiceCategory): ServiceCategoryCopy {
+  return serviceCategoryCopy[category];
 }
 
 /** Map service category → blueprint diagram (reuse on detail pages) */

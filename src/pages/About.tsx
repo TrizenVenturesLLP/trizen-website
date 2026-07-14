@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
 import {
   CircleGauge,
   ShieldCheck,
@@ -11,6 +10,8 @@ import SectionHeader from "@/components/marketing/SectionHeader";
 import CTABanner from "@/components/marketing/CTABanner";
 import CardMedia from "@/components/marketing/CardMedia";
 import PageMeta from "@/components/marketing/PageMeta";
+import FadeIn from "@/components/marketing/FadeIn";
+import { BookButton } from "@/components/page";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/content/site";
 
@@ -51,11 +52,7 @@ const About = () => {
       />
       <section className="border-b border-zinc-200 bg-white pt-28 pb-20 sm:pt-32 md:pt-36 md:pb-28">
         <div className="container mx-auto px-4 max-w-4xl">
-          <motion.div
-            initial={{ y: 16 }}
-            animate={{ y: 0 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-          >
+          <FadeIn y={12}>
             <SectionHeader
               eyebrow="About Trizen"
               title="Enterprise AI transformation partner"
@@ -67,30 +64,18 @@ const About = () => {
               initiatives land as governed systems, not isolated experiments.
             </p>
             <div className="mt-10 flex flex-col sm:flex-row gap-4">
-              <Button asChild size="lg" className="btn-micro btn-book pl-6 pr-2 shadow-none">
-                <Link to="/contact">
-                  Book a Consultation
-                  <span className="btn-book__arrow" aria-hidden="true">
-                    <ArrowRight />
-                  </span>
-                </Link>
-              </Button>
+              <BookButton className="pl-6 pr-2" />
               <Button asChild variant="outline" size="lg">
                 <Link to="/case-studies">View case studies</Link>
               </Button>
             </div>
-          </motion.div>
+          </FadeIn>
         </div>
       </section>
 
       <section className="py-16 md:py-24 border-b border-zinc-200 bg-zinc-50">
         <div className="container mx-auto px-4 max-w-4xl">
-          <motion.div
-            initial={{ y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.45, ease: "easeOut" }}
-          >
+          <FadeIn>
             <h2 className="text-2xl md:text-3xl font-semibold tracking-[-0.03em] text-zinc-900 mb-6">
               What we stand for
             </h2>
@@ -98,16 +83,13 @@ const About = () => {
               Enterprises do not need more AI tooling. They need an operating partner who can
               prioritize the right bets, ship securely, and leave teams with systems they can own.
             </p>
-          </motion.div>
+          </FadeIn>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {values.map((value, index) => (
-              <motion.div
+              <FadeIn
                 key={value.title}
-                initial={{ y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.45, delay: index * 0.08, ease: "easeOut" }}
+                delay={index * 0.06}
                 className="glass-panel-light rounded-2xl p-7 md:p-8"
               >
                 <div className="mb-5 flex items-center gap-3">
@@ -118,11 +100,11 @@ const About = () => {
                     {String(index + 1).padStart(2, "0")}
                   </span>
                 </div>
-                <h3 className="text-lg font-semibold tracking-tight text-zinc-900 mb-2">
+                <h3 className="text-lg font-semibold tracking-[-0.02em] text-zinc-900 mb-2">
                   {value.title}
                 </h3>
                 <p className="text-sm text-zinc-600 leading-relaxed">{value.description}</p>
-              </motion.div>
+              </FadeIn>
             ))}
           </div>
         </div>
@@ -130,13 +112,7 @@ const About = () => {
 
       <section className="py-16 md:py-24 border-b border-zinc-200 bg-white">
         <div className="container mx-auto px-4 max-w-4xl">
-          <motion.div
-            initial={{ y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.45, ease: "easeOut" }}
-            className="glass-panel-light rounded-2xl overflow-hidden"
-          >
+          <FadeIn className="glass-panel-light rounded-2xl overflow-hidden">
             <CardMedia
               theme="light"
               blueprint="engagement"
@@ -170,7 +146,7 @@ const About = () => {
                 ))}
               </ul>
             </div>
-          </motion.div>
+          </FadeIn>
         </div>
       </section>
 

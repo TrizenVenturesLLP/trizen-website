@@ -1,21 +1,19 @@
-import { Link, useParams } from "react-router-dom";
-import { ArrowLeft, ArrowRight, Check, ExternalLink } from "lucide-react";
+import { useParams } from "react-router-dom";
+import { ArrowRight, ExternalLink } from "lucide-react";
 import NotFound from "@/pages/NotFound";
 import CTABanner from "@/components/marketing/CTABanner";
 import CardMedia from "@/components/marketing/CardMedia";
 import PageMeta from "@/components/marketing/PageMeta";
 import FadeIn from "@/components/marketing/FadeIn";
 import { Button } from "@/components/ui/button";
-import { getProductBySlug } from "@/content/products";
-
-const deploymentCopy: Record<string, string> = {
-  "Standalone SaaS":
-    "Cloud-hosted product your HR and ops teams run day to day—configure policies, onboard roles, and scale seats as the organization grows.",
-  "Standalone console & API":
-    "Operator console plus REST API and webhooks. Connect your Meta WhatsApp Business account, sync templates, and wire backends with signed receipt events.",
-  "Community program":
-    "Recurring offline meetups and a WhatsApp community layer—owned by members, supported by Trizen Ventures. Show up, build trust, and RSVP each month.",
-};
+import {
+  PageHero,
+  PageSection,
+  CheckList,
+  CapabilityGrid,
+  SectionTitle,
+} from "@/components/page";
+import { getDeploymentModelCopy, getProductBySlug } from "@/content/products";
 
 const ProductDetail = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -35,40 +33,26 @@ const ProductDetail = () => {
         description={product.oneLineValueProp}
       />
 
-      {/* 1. Intro */}
-      <section className="bg-white pt-28 pb-8 sm:pt-32 md:pt-36 md:pb-10">
-        <div className="container mx-auto px-4 max-w-5xl">
-          <FadeIn>
-            <Link
-              to="/products"
-              className="inline-flex items-center text-sm text-zinc-600 hover:text-indigo-600 transition-colors mb-8"
-            >
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              All products
-            </Link>
-            <p className="font-mono text-xs font-medium uppercase tracking-widest text-indigo-600 mb-4">
-              {product.category}
-            </p>
-            <h1 className="text-3xl md:text-5xl font-semibold tracking-[-0.035em] text-zinc-900 mb-4 leading-tight">
-              {product.name}
-            </h1>
-            <p className="text-xl text-zinc-600 mb-3 max-w-3xl">{product.headline}</p>
-            <p className="text-base text-zinc-600 max-w-3xl leading-relaxed mb-6">
-              {product.oneLineValueProp}
-            </p>
-            <div className="flex flex-col sm:flex-row sm:items-center gap-3">
-              <Button asChild size="sm" className="w-fit">
-                <a href={product.externalUrl} target="_blank" rel="noopener noreferrer">
-                  {product.externalLabel}
-                  <ExternalLink className="ml-1.5 h-3.5 w-3.5" />
-                </a>
-              </Button>
-            </div>
-          </FadeIn>
-        </div>
-      </section>
+      <PageHero
+        compact
+        back={{ to: "/products", label: "All products" }}
+        eyebrow={product.category}
+        title={product.name}
+        subtitle={product.headline}
+        description={
+          <p className="text-base text-zinc-600 max-w-3xl leading-relaxed">
+            {product.oneLineValueProp}
+          </p>
+        }
+      >
+        <Button asChild size="sm" className="w-fit">
+          <a href={product.externalUrl} target="_blank" rel="noopener noreferrer">
+            {product.externalLabel}
+            <ExternalLink className="ml-1.5 h-3.5 w-3.5" />
+          </a>
+        </Button>
+      </PageHero>
 
-      {/* 2. Hero product visual — pulled closer to intro */}
       <section className="relative -mt-2 md:-mt-4 pb-10 md:pb-14 bg-white border-b border-zinc-200">
         <div className="container mx-auto px-4 max-w-5xl">
           <FadeIn>
@@ -82,7 +66,6 @@ const ProductDetail = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-white/55 via-white/70 to-white/90" />
               </div>
-
               <img
                 src={product.coverImage}
                 alt={`${product.name} product preview`}
@@ -91,7 +74,6 @@ const ProductDetail = () => {
                 loading="eager"
                 decoding="async"
               />
-
               <div className="absolute top-4 right-4 md:top-6 md:right-6 rounded-2xl border border-zinc-200/80 bg-white/95 px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm font-medium text-zinc-700 shadow-sm backdrop-blur-md">
                 {product.deploymentModel}
               </div>
@@ -100,109 +82,68 @@ const ProductDetail = () => {
         </div>
       </section>
 
-      {/* 3. Problem */}
-      <section className="py-14 md:py-20 border-b border-zinc-200 bg-zinc-50">
-        <div className="container mx-auto px-4 max-w-5xl">
-          <FadeIn>
-            <h2 className="font-mono text-xs uppercase tracking-[0.16em] text-indigo-600 mb-3">
-              Problem
-            </h2>
-            <p className="text-lg text-zinc-700 leading-relaxed max-w-3xl">
-              {product.problem}
-            </p>
-          </FadeIn>
-        </div>
-      </section>
+      <PageSection tone="muted">
+        <SectionTitle eyebrow>Problem</SectionTitle>
+        <p className="text-lg text-zinc-700 leading-relaxed max-w-3xl">{product.problem}</p>
+      </PageSection>
 
-      {/* 4. How it works + capabilities */}
-      <section className="py-14 md:py-20 border-b border-zinc-200 bg-white">
-        <div className="container mx-auto px-4 max-w-5xl">
-          <FadeIn>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center mb-10">
-              <div>
-                <h2 className="font-mono text-xs uppercase tracking-[0.16em] text-indigo-600 mb-3">
-                  How it works
-                </h2>
-                <p className="text-lg text-zinc-700 leading-relaxed">{product.howItWorks}</p>
-              </div>
-              <div className="glass-panel-light rounded-2xl overflow-hidden min-h-[200px]">
-                <CardMedia
-                  theme="light"
-                  blueprint={product.blueprint}
-                  className="min-h-[200px] aspect-[16/10] border-0"
-                />
-              </div>
+      <PageSection animate={false}>
+        <FadeIn>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center mb-10">
+            <div>
+              <SectionTitle eyebrow>How it works</SectionTitle>
+              <p className="text-lg text-zinc-700 leading-relaxed">{product.howItWorks}</p>
             </div>
-            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {product.capabilities.map((item) => (
-                <li
-                  key={item}
-                  className="flex gap-3 rounded-xl border border-zinc-200 bg-zinc-50 px-5 py-4 text-sm text-zinc-700"
-                >
-                  <Check className="h-4 w-4 text-indigo-600 shrink-0 mt-0.5" />
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </FadeIn>
-        </div>
-      </section>
+            <div className="glass-panel-light rounded-2xl overflow-hidden min-h-[200px]">
+              <CardMedia
+                theme="light"
+                blueprint={product.blueprint}
+                className="min-h-[200px] aspect-[16/10] border-0"
+              />
+            </div>
+          </div>
+          <CapabilityGrid items={product.capabilities} withCheck />
+        </FadeIn>
+      </PageSection>
 
-      {/* 5. Outcomes + proof */}
-      <section className="py-14 md:py-20 border-b border-zinc-200 bg-zinc-50">
-        <div className="container mx-auto px-4 max-w-5xl">
-          <FadeIn>
-            <h2 className="font-mono text-xs uppercase tracking-[0.16em] text-indigo-600 mb-6">
-              Outcomes
-            </h2>
-            <ul className="space-y-4 mb-10">
-              {product.outcomes.map((item) => (
-                <li key={item} className="flex gap-3 text-zinc-700">
-                  <Check className="h-5 w-5 text-indigo-600 shrink-0" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-            <h3 className="font-mono text-xs uppercase tracking-[0.16em] text-indigo-600 mb-4">
-              Proof points
-            </h3>
-            <ul className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-              {product.metrics.map((metric) => (
-                <li
-                  key={metric}
-                  className="rounded-xl border border-zinc-200 bg-white px-5 py-4 text-sm font-medium text-zinc-800"
-                >
-                  {metric}
-                </li>
-              ))}
-            </ul>
-          </FadeIn>
-        </div>
-      </section>
+      <PageSection tone="muted">
+        <SectionTitle eyebrow className="mb-6">
+          Outcomes
+        </SectionTitle>
+        <CheckList
+          items={product.outcomes}
+          itemClassName="text-base text-zinc-700"
+          iconClassName="h-5 w-5 mt-0"
+          className="mb-10"
+        />
+        <SectionTitle eyebrow as="h3" className="mb-4">
+          Proof points
+        </SectionTitle>
+        <ul className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          {product.metrics.map((metric) => (
+            <li
+              key={metric}
+              className="rounded-xl border border-zinc-200 bg-white px-5 py-4 text-sm font-medium text-zinc-800"
+            >
+              {metric}
+            </li>
+          ))}
+        </ul>
+      </PageSection>
 
-      {/* 6. Deployment */}
-      <section className="py-14 md:py-16 border-b border-zinc-200 bg-white">
-        <div className="container mx-auto px-4 max-w-5xl">
-          <FadeIn>
-            <h2 className="font-mono text-xs uppercase tracking-[0.16em] text-indigo-600 mb-3">
-              Deployment model
-            </h2>
-            <p className="text-lg text-zinc-700 max-w-2xl mb-6">
-              {product.deploymentModel}.{" "}
-              {deploymentCopy[product.deploymentModel] ??
-                "We configure governance and leave your team with clear runbooks."}
-            </p>
-            <Button asChild>
-              <a href={product.externalUrl} target="_blank" rel="noopener noreferrer">
-                {product.externalLabel}
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </a>
-            </Button>
-          </FadeIn>
-        </div>
-      </section>
+      <PageSection pad="tight">
+        <SectionTitle eyebrow>Deployment model</SectionTitle>
+        <p className="text-lg text-zinc-700 max-w-2xl mb-6">
+          {product.deploymentModel}. {getDeploymentModelCopy(product.deploymentModel)}
+        </p>
+        <Button asChild>
+          <a href={product.externalUrl} target="_blank" rel="noopener noreferrer">
+            {product.externalLabel}
+            <ArrowRight className="ml-2 h-4 w-4" />
+          </a>
+        </Button>
+      </PageSection>
 
-      {/* 7. CTA */}
       <CTABanner
         title={`Talk to us about ${product.name}`}
         description="Book a consultation to map fit, or open the live product to explore the experience yourself."

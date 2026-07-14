@@ -166,6 +166,19 @@ export const products: Product[] = [
   },
 ];
 
+/** Narrative copy for each deployment model (product detail) */
+export const deploymentModelCopy: Record<DeploymentModel, string> = {
+  "Standalone SaaS":
+    "Cloud-hosted product your HR and ops teams run day to day—configure policies, onboard roles, and scale seats as the organization grows.",
+  "Standalone console & API":
+    "Operator console plus REST API and webhooks. Connect your Meta WhatsApp Business account, sync templates, and wire backends with signed receipt events.",
+  "Community program":
+    "Recurring offline meetups and a WhatsApp community layer—owned by members, supported by Trizen Ventures. Show up, build trust, and RSVP each month.",
+};
+
+const defaultDeploymentCopy =
+  "We configure governance and leave your team with clear runbooks.";
+
 /** Legacy accelerator / product slugs → current product slugs */
 export const productSlugAliases: Record<string, string> = {
   "trizen-hr": "trizen-hr",
@@ -177,15 +190,20 @@ export const productSlugAliases: Record<string, string> = {
   trizendialog: "trizen-dialog",
 };
 
+/** Published products only */
+export function getAllProducts(): Product[] {
+  return products.filter((p) => !p.draft);
+}
+
 export function getProductBySlug(slug: string): Product | undefined {
   const resolved = productSlugAliases[slug] ?? slug;
   return products.find((p) => p.slug === resolved && !p.draft);
 }
 
 export function getFeaturedProducts(): Product[] {
-  return products.filter((p) => p.featured && !p.draft);
+  return getAllProducts().filter((p) => p.featured);
 }
 
-export function getAllProducts(): Product[] {
-  return products.filter((p) => !p.draft);
+export function getDeploymentModelCopy(model: DeploymentModel): string {
+  return deploymentModelCopy[model] ?? defaultDeploymentCopy;
 }

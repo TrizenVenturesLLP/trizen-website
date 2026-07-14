@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, ArrowRight } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetClose, SheetTitle } from "@/components/ui/sheet";
 import OptimizedImage from "@/components/ui/OptimizedImage";
+import { BookButton } from "@/components/page";
 import { primaryNav, siteConfig, type NavLink } from "@/content/site";
 import { cn } from "@/lib/utils";
 
@@ -87,18 +88,10 @@ const Navbar = () => {
         </nav>
 
         <div className="flex items-center gap-2 shrink-0">
-          <Button
-            asChild
+          <BookButton
             size="sm"
-            className="btn-micro btn-book hidden sm:inline-flex touch-manipulation pl-3.5 pr-1.5 shadow-none"
-          >
-            <Link to={siteConfig.contactHref}>
-              Book a Consultation
-              <span className="btn-book__arrow" aria-hidden="true">
-                <ArrowRight />
-              </span>
-            </Link>
-          </Button>
+            className="hidden sm:inline-flex touch-manipulation pl-3.5 pr-1.5"
+          />
 
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>

@@ -1,8 +1,9 @@
 import { FormEvent, useState } from "react";
-import { motion } from "framer-motion";
-import { ArrowRight, Calendar, Check, Clock, Mail, Send, Video } from "lucide-react";
+import { Calendar, Check, Clock, Mail, Send, Video } from "lucide-react";
 import SectionHeader from "@/components/marketing/SectionHeader";
 import PageMeta from "@/components/marketing/PageMeta";
+import FadeIn from "@/components/marketing/FadeIn";
+import { BookButton } from "@/components/page";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -73,16 +74,11 @@ const Contact = () => {
         description="Book a consultation with Trizen. Schedule a call or send a project brief and we'll respond with next steps."
       />
 
-      {/* Hero */}
       <section className="relative overflow-hidden border-b border-zinc-200 section-mesh pt-28 pb-20 sm:pt-32 md:pt-36 md:pb-28">
         <div className="mobile-orb -right-10 top-12 h-48 w-48 bg-indigo-400/20 md:hidden" aria-hidden />
         <div className="mobile-orb -left-8 bottom-0 h-40 w-40 bg-sky-400/15 md:hidden" aria-hidden />
         <div className="container relative mx-auto px-4 max-w-3xl">
-          <motion.div
-            initial={{ y: 16 }}
-            animate={{ y: 0 }}
-            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          >
+          <FadeIn y={12}>
             <SectionHeader
               tone="light"
               eyebrow="Contact"
@@ -100,21 +96,17 @@ const Contact = () => {
                 </li>
               ))}
             </ul>
-          </motion.div>
+          </FadeIn>
         </div>
       </section>
 
-      {/* Booking + brief */}
       <section className="relative overflow-hidden py-14 md:py-20 border-b border-zinc-200 section-mesh-muted">
         <div className="mobile-orb right-0 top-24 h-44 w-44 bg-indigo-400/15 md:hidden" aria-hidden />
         <div className="container relative mx-auto px-4 max-w-6xl">
           <div className="flex flex-col lg:flex-row lg:items-stretch gap-5 md:gap-6 lg:gap-0">
-            {/* Schedule card */}
-            <motion.article
-              initial={{ y: 14 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
-              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            <FadeIn
+              as="article"
+              y={12}
               className={cn(
                 "card-sheen relative flex h-full flex-col overflow-hidden rounded-2xl md:rounded-3xl border border-indigo-100/90",
                 "bg-gradient-to-br from-white via-indigo-50/40 to-sky-50/50",
@@ -153,22 +145,14 @@ const Contact = () => {
                   ))}
                 </ul>
 
-                <Button
-                  asChild
-                  size="lg"
-                  className="btn-micro btn-book mt-auto w-full min-h-12 pl-6 pr-2 shadow-none"
-                >
-                  <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">
-                    Book a time on Calendly
-                    <span className="btn-book__arrow" aria-hidden="true">
-                      <ArrowRight />
-                    </span>
-                  </a>
-                </Button>
+                <BookButton
+                  href={CALENDLY_URL}
+                  label="Book a time on Calendly"
+                  className="mt-auto w-full min-h-12 pl-6 pr-2"
+                />
               </div>
-            </motion.article>
+            </FadeIn>
 
-            {/* OR divider — horizontal on mobile, vertical on desktop */}
             <div
               className="flex shrink-0 items-center gap-4 lg:flex-col lg:justify-center lg:gap-3 lg:px-5 xl:px-7"
               role="separator"
@@ -181,14 +165,7 @@ const Contact = () => {
               <div className="h-px flex-1 bg-gradient-to-r from-transparent via-zinc-300 to-transparent lg:h-auto lg:w-px lg:flex-1 lg:bg-gradient-to-b lg:from-transparent lg:via-zinc-300 lg:to-transparent" />
             </div>
 
-            {/* Form card */}
-            <motion.div
-              initial={{ y: 14 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
-              transition={{ duration: 0.5, delay: 0.06, ease: [0.22, 1, 0.36, 1] }}
-              className="h-full lg:flex-1 lg:min-w-0"
-            >
+            <FadeIn delay={0.06} y={12} className="h-full lg:flex-1 lg:min-w-0">
               <form
                 onSubmit={handleSubmit}
                 className={cn(
@@ -274,7 +251,7 @@ const Contact = () => {
                   </Button>
                 </div>
               </form>
-            </motion.div>
+            </FadeIn>
           </div>
 
           <p className="mt-8 text-center text-xs text-zinc-500">

@@ -134,6 +134,11 @@ export const industries: Industry[] = [
   },
 ];
 
+/** Published industries only */
+export function getAllIndustries(): Industry[] {
+  return industries.filter((industry) => !industry.draft);
+}
+
 export function getIndustryBySlug(slug: string): Industry | undefined {
-  return industries.find((industry) => industry.slug === slug);
+  return industries.find((industry) => industry.slug === slug && !industry.draft);
 }

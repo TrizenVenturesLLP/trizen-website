@@ -118,14 +118,8 @@
 }
 
 @layer components {
-  /* Enterprise light panels */
-  .glass-panel {
-    @apply relative overflow-hidden border border-zinc-200 bg-white;
-    box-shadow: 0 1px 2px rgb(15 23 42 / 0.04);
-    transform: translateZ(0);
-    backface-visibility: hidden;
-  }
-
+  /* Enterprise light panels — single surface system (glass-panel aliases light) */
+  .glass-panel,
   .glass-panel-light {
     @apply relative overflow-hidden border border-zinc-200 bg-white;
     box-shadow: 0 1px 2px rgb(15 23 42 / 0.04);
@@ -220,12 +214,7 @@
   }
 
   @media (hover: hover) and (pointer: fine) {
-    .card-lift:hover {
-      transform: translate3d(0, -2px, 0);
-      border-color: rgb(199 210 254);
-      box-shadow: 0 8px 20px -12px rgb(79 70 229 / 0.12);
-    }
-
+    .card-lift:hover,
     .card-lift-light:hover {
       transform: translate3d(0, -2px, 0);
       border-color: rgb(199 210 254);
@@ -458,8 +447,9 @@
     @apply bg-gradient-to-b from-white to-white/70 bg-clip-text text-transparent;
   }
 
-  /* Soft card lift — hover-capable devices only */
-  .card-lift {
+  /* Soft card lift — single system (card-lift aliases light) */
+  .card-lift,
+  .card-lift-light {
     @apply transition-[transform,border-color,box-shadow] duration-300 ease-out;
   }
 

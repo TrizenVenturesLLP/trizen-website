@@ -10,6 +10,8 @@
 /training/*              /services       301
 /contribute              /about          301
 /gallery                 /about          301
+/ventures                /about          301
+/ventures/*              /about          301
 /events                  /products/trizen-community  301
 /project/*               /products       301
 /ongoing-project/*       /case-studies   301

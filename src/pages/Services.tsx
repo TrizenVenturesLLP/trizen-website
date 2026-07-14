@@ -1,43 +1,17 @@
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import SectionHeader from "@/components/marketing/SectionHeader";
 import CTABanner from "@/components/marketing/CTABanner";
 import BlueprintDiagram from "@/components/marketing/BlueprintDiagram";
 import PageMeta from "@/components/marketing/PageMeta";
+import FadeIn from "@/components/marketing/FadeIn";
 import {
   getBlueprintForCategory,
+  getServiceCategoryCopy,
   getServicesByCategory,
   serviceCategories,
-  type ServiceCategory,
 } from "@/content/services";
 import { cn } from "@/lib/utils";
-
-const categoryCopy: Record<
-  ServiceCategory,
-  { headline: string; blurb: string }
-> = {
-  Strategy: {
-    headline: "Direction before delivery",
-    blurb:
-      "Advisory and roadmaps that turn ambitious AI ideas into funded, governed programs leadership can stand behind.",
-  },
-  Automation: {
-    headline: "Operations that run themselves",
-    blurb:
-      "Workflows, agents, voice, and messaging systems that remove friction across back-office, supply chain, and customer operations.",
-  },
-  Intelligence: {
-    headline: "Data that actually drives decisions",
-    blurb:
-      "Data engineering, analytics, ML, and language systems built on your real data, not generic models.",
-  },
-  Build: {
-    headline: "Products your teams can own",
-    blurb:
-      "Custom AI applications engineered for production, security, compliance, and clean handoff to your teams.",
-  },
-};
 
 const Services = () => {
   return (
@@ -48,32 +22,25 @@ const Services = () => {
         description="Enterprise AI consulting, automation, agents, data platforms, and custom build, delivered as one operating partner."
       />
 
-      {/* Hero */}
       <section className="relative overflow-hidden border-b border-zinc-200 section-mesh pt-28 pb-20 sm:pt-32 md:pt-36 md:pb-28">
         <div className="mobile-orb -right-10 top-10 h-48 w-48 bg-indigo-400/20 md:hidden" aria-hidden />
         <div className="container relative mx-auto px-4">
-          <motion.div
-            initial={{ y: 16 }}
-            animate={{ y: 0 }}
-            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className="max-w-3xl"
-          >
+          <FadeIn className="max-w-3xl" y={12}>
             <SectionHeader
               tone="light"
               eyebrow="What we do"
               title="AI that transforms how enterprises operate"
               description="We help organizations move from scattered AI experiments to governed, production-grade systems, delivered as one accountable operating partner, not disconnected pilots."
             />
-          </motion.div>
+          </FadeIn>
         </div>
       </section>
 
-      {/* Category catalogs */}
       {serviceCategories.map((category, categoryIndex) => {
         const items = getServicesByCategory(category);
         if (!items.length) return null;
         const blueprint = getBlueprintForCategory(category);
-        const copy = categoryCopy[category];
+        const copy = getServiceCategoryCopy(category);
         const muted = categoryIndex % 2 === 1;
 
         return (
@@ -98,14 +65,7 @@ const Services = () => {
             )}
 
             <div className="container relative mx-auto px-4">
-              {/* Category header */}
-              <motion.div
-                initial={{ y: 18 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-                className="mb-10 md:mb-12"
-              >
+              <FadeIn className="mb-10 md:mb-12" y={12}>
                 <div className="flex flex-col sm:flex-row sm:items-start gap-5 sm:gap-6 min-w-0">
                   <div
                     className="relative flex h-20 w-36 sm:h-24 sm:w-44 shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-indigo-100/80 bg-white shadow-md shadow-indigo-500/5 ring-1 ring-white"
@@ -134,23 +94,11 @@ const Services = () => {
                     </p>
                   </div>
                 </div>
-              </motion.div>
+              </FadeIn>
 
-              {/* Service cards */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
                 {items.map((service, index) => (
-                  <motion.div
-                    key={service.slug}
-                    initial={{ y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-40px" }}
-                    transition={{
-                      duration: 0.45,
-                      delay: Math.min(index * 0.05, 0.25),
-                      ease: [0.22, 1, 0.36, 1],
-                    }}
-                    className="h-full"
-                  >
+                  <FadeIn key={service.slug} delay={index * 0.05} className="h-full" y={12}>
                     <Link
                       to={`/services/${service.slug}`}
                       className={cn(
@@ -178,7 +126,7 @@ const Services = () => {
                         <ArrowRight className="ml-1.5 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                       </span>
                     </Link>
-                  </motion.div>
+                  </FadeIn>
                 ))}
               </div>
             </div>
