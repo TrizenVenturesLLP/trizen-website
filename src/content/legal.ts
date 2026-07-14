@@ -108,7 +108,7 @@ export const privacySections: LegalSection[] = [
     id: "contact",
     title: "12. Contact us",
     paragraphs: [
-      "For privacy questions or requests, contact Trizen Ventures LLP at nukaraju@trizenventures.com or via the contact form at /contact.",
+      "For privacy questions or requests, contact Trizen Ventures LLP at contact@trizenventures.com or via the contact form at /contact.",
     ],
   },
 ];
@@ -203,7 +203,7 @@ export const termsSections: LegalSection[] = [
     id: "contact-terms",
     title: "12. Contact",
     paragraphs: [
-      "Questions about these Terms: Trizen Ventures LLP, nukaraju@trizenventures.com, or https://trizenventures.com/contact.",
+      "Questions about these Terms: Trizen Ventures LLP, contact@trizenventures.com, or https://trizenventures.com/contact.",
     ],
   },
 ];

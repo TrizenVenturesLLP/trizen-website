@@ -1,9 +1,52 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ChevronDown, Linkedin } from "lucide-react";
+import {
+  Briefcase,
+  ChevronDown,
+  Facebook,
+  Globe,
+  Instagram,
+  Linkedin,
+  Mail,
+  MapPin,
+  Phone,
+} from "lucide-react";
 import OptimizedImage from "@/components/ui/OptimizedImage";
-import { footerColumns, siteConfig, type FooterColumn } from "@/content/site";
+import {
+  footerColumns,
+  siteConfig,
+  socialLinks,
+  type FooterColumn,
+  type SocialNetwork,
+} from "@/content/site";
 import { cn } from "@/lib/utils";
+
+/** X (Twitter) mark — Lucide has no official X glyph in this version */
+const XIcon = ({ className }: { className?: string }) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    className={className}
+    aria-hidden="true"
+  >
+    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.727-8.835L1.254 2.25H8.08l4.253 5.622L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z" />
+  </svg>
+);
+
+const socialIcon = (id: SocialNetwork, className = "h-4 w-4") => {
+  switch (id) {
+    case "linkedin":
+      return <Linkedin className={className} aria-hidden="true" />;
+    case "x":
+      return <XIcon className={className} />;
+    case "facebook":
+      return <Facebook className={className} aria-hidden="true" />;
+    case "instagram":
+      return <Instagram className={className} aria-hidden="true" />;
+    case "careers":
+      return <Briefcase className={className} aria-hidden="true" />;
+  }
+};
 
 const FooterNavColumn = ({
   column,
@@ -19,7 +62,6 @@ const FooterNavColumn = ({
 
   return (
     <div className="border-b border-zinc-200 md:border-0 pb-1 md:pb-0">
-      {/* Mobile: accordion trigger · Desktop: static heading */}
       <button
         type="button"
         id={buttonId}
@@ -84,6 +126,7 @@ const FooterNavColumn = ({
 
 const Footer = () => {
   const [openTitle, setOpenTitle] = useState<string | null>(null);
+  const office = siteConfig.registeredOffice;
 
   return (
     <footer
@@ -109,15 +152,30 @@ const Footer = () => {
             <p className="text-sm text-zinc-600 leading-relaxed max-w-sm mb-6">
               {siteConfig.description}
             </p>
-            <a
-              href={siteConfig.linkedInHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 min-h-11 text-sm text-zinc-600 hover:text-indigo-600 transition-colors touch-manipulation"
-            >
-              <Linkedin className="h-4 w-4" aria-hidden="true" />
-              LinkedIn
-            </a>
+
+            <nav aria-label="Social and careers">
+              <ul className="flex flex-wrap items-center gap-2">
+                {socialLinks.map((link) => (
+                  <li key={link.id}>
+                    <a
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={link.label}
+                      title={link.label}
+                      className={cn(
+                        "inline-flex h-10 w-10 items-center justify-center rounded-xl",
+                        "border border-zinc-200 bg-white text-zinc-600",
+                        "hover:border-indigo-200 hover:bg-indigo-50 hover:text-indigo-600",
+                        "transition-colors touch-manipulation"
+                      )}
+                    >
+                      {socialIcon(link.id)}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
           </div>
 
           {footerColumns.map((column) => (
@@ -134,9 +192,57 @@ const Footer = () => {
           ))}
         </div>
 
+        {/* Registered office + contact information */}
+        <div className="border-t border-zinc-200 pt-8 mb-8 grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+          <div>
+            <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-indigo-600 mb-3">
+              {office.label}
+            </p>
+            <address className="not-italic flex gap-2.5 text-sm text-zinc-600 leading-relaxed max-w-md">
+              <MapPin
+                className="h-4 w-4 shrink-0 mt-0.5 text-indigo-600"
+                aria-hidden="true"
+              />
+              <span>
+                {office.lines.map((line) => (
+                  <span key={line} className="block">
+                    {line}
+                  </span>
+                ))}
+              </span>
+            </address>
+          </div>
+
+          <div>
+            <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-indigo-600 mb-3">
+              Contact Information
+            </p>
+            <ul className="space-y-3 text-sm text-zinc-600">
+              <li>
+                <a
+                  href={`tel:${siteConfig.phoneTel}`}
+                  className="inline-flex items-center gap-2.5 min-h-10 hover:text-indigo-600 transition-colors touch-manipulation"
+                >
+                  <Phone className="h-4 w-4 shrink-0 text-indigo-600" aria-hidden="true" />
+                  {siteConfig.phoneDisplay}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={`mailto:${siteConfig.email}`}
+                  className="inline-flex items-center gap-2.5 min-h-10 hover:text-indigo-600 transition-colors touch-manipulation"
+                >
+                  <Mail className="h-4 w-4 shrink-0 text-indigo-600" aria-hidden="true" />
+                  {siteConfig.email}
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
         <div className="border-t border-zinc-200 pt-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <p className="text-xs text-zinc-500">
-            © {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
+            © {new Date().getFullYear()} {siteConfig.name} LLP. All rights reserved.
           </p>
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-zinc-500">
             <Link to="/privacy" className="hover:text-indigo-600 transition-colors">
