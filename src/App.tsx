@@ -13,6 +13,8 @@ import CaseStudies from "./pages/CaseStudies";
 import Insights from "./pages/Insights";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import Privacy from "./pages/Privacy";
+import Terms from "./pages/Terms";
 import { productSlugAliases } from "./content/products";
 
 const ServiceDetail = lazy(() => import("./pages/ServiceDetail"));
@@ -86,6 +88,8 @@ const App = () => (
               <Route path="/case-studies/:slug" element={<CaseStudyDetail />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/privacy" element={<Privacy />} />
+              <Route path="/terms" element={<Terms />} />
 
               <Route path="/ventures" element={<Ventures />} />
               <Route path="/ventures/*" element={<Navigate replace to="/ventures" />} />
@@ -113,10 +117,13 @@ const App = () => (
               <Route path="/training/*" element={<Navigate replace to="/services" />} />
               <Route path="/contribute" element={<Navigate replace to="/about" />} />
               <Route path="/gallery" element={<Navigate replace to="/about" />} />
-              <Route path="/events" element={<Navigate replace to="/about" />} />
+              <Route path="/events" element={<Navigate replace to="/products/trizen-community" />} />
               <Route path="/project/:projectId" element={<Navigate replace to="/products" />} />
               <Route path="/ongoing-project/:id" element={<Navigate replace to="/case-studies" />} />
               <Route path="/certificate-test" element={<Navigate replace to="/" />} />
+
+              <Route path="/products/trizen-certify" element={<Navigate replace to="/products/trizen-hr" />} />
+              <Route path="/products/trizen-labs" element={<Navigate replace to="/products/trizen-community" />} />
 
               <Route path="*" element={<NotFound />} />
             </Routes>

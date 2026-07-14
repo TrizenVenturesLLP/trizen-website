@@ -5,10 +5,11 @@ import { techStackCategories } from "@/content/techStack";
 const TechStack = () => {
   return (
     <section
-      className="py-24 md:py-32 border-b border-zinc-200 bg-zinc-50 text-zinc-900"
+      className="relative overflow-hidden py-24 md:py-32 border-b border-zinc-200 section-mesh-muted text-zinc-900"
       aria-labelledby="tech-stack-heading"
     >
-      <div className="container mx-auto px-4">
+      <div className="mobile-orb left-1/2 top-8 h-40 w-40 -translate-x-1/2 bg-indigo-400/15 md:hidden" aria-hidden />
+      <div className="container relative mx-auto px-4">
         <FadeIn className="mb-10 md:mb-14">
           <SectionHeader
             tone="light"

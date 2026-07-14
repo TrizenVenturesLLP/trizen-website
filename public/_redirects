@@ -10,7 +10,7 @@
 /training/*              /services       301
 /contribute              /about          301
 /gallery                 /about          301
-/events                  /about          301
+/events                  /products/trizen-community  301
 /project/*               /products       301
 /ongoing-project/*       /case-studies   301
 /certificate-test        /               301
@@ -19,7 +19,11 @@
 /solutions               /products       301
 /solutions/*             /products       301
 /accelerators            /products       301
-/accelerators/trizen-certify  /products/trizen-certify  301
-/accelerators/trizen-labs     /products/trizen-labs     301
-/accelerators/trizen-deploy   /products/trizen-dialog   301
+/accelerators/trizen-certify  /products/trizen-hr         301
+/accelerators/trizen-labs     /products/trizen-community  301
+/accelerators/trizen-deploy   /products/trizen-dialog     301
 /accelerators/*          /products       301
+
+# Renamed product slugs
+/products/trizen-certify /products/trizen-hr         301
+/products/trizen-labs    /products/trizen-community  301

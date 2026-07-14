@@ -15,7 +15,7 @@ const IndustryDetail = () => {
 
   return (
     <>
-      <section className="border-b border-zinc-200 py-16 md:py-24">
+      <section className="border-b border-zinc-200 pt-28 pb-16 sm:pt-32 md:pt-36 md:pb-24">
         <div className="container mx-auto px-4 max-w-4xl">
           <motion.div
             initial={{ y: 16 }}

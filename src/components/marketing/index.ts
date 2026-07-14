@@ -13,5 +13,6 @@ export { default as GradientBlobs } from "./GradientBlobs";
 export { default as AnimatedCounter } from "./AnimatedCounter";
 export { default as NetworkMesh } from "./NetworkMesh";
 export { default as HomeServices } from "./HomeServices";
+export { default as HomeProducts } from "./HomeProducts";
 export { default as HomeCaseStudies } from "./HomeCaseStudies";
 export { default as TechStack } from "./TechStack";

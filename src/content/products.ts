@@ -1,12 +1,12 @@
 export type ProductCategory =
-  | "Credentialing"
-  | "Co-innovation"
-  | "Meta API Infrastructure";
+  | "Workforce Ops"
+  | "WhatsApp Ops"
+  | "Community & Events";
 
 export type DeploymentModel =
-  | "Embedded in engagement"
-  | "Standalone API"
-  | "Embedded or standalone";
+  | "Standalone SaaS"
+  | "Standalone console & API"
+  | "Community program";
 
 export interface Product {
   id: string;
@@ -21,120 +21,160 @@ export interface Product {
   metrics: string[];
   capabilities: string[];
   outcomes: string[];
-  /** CardMedia / blueprint variant */
-  blueprint: "certify" | "labs" | "dialog";
+  /** Live product URL */
+  externalUrl: string;
+  externalLabel: string;
+  /** CTA on Products index cards */
+  cardCta: string;
+  /** Landing / product UI cover for detail hero */
+  coverImage: string;
+  /** Optional tighter crop for product cards (home / index) */
+  cardImage?: string;
+  /** CSS object-position for cover crop (default top) */
+  coverPosition?: string;
+  /** How cover renders in cards — contain keeps full UI visible */
+  coverFit?: "cover" | "contain";
+  /** CardMedia / blueprint variant (architecture sections) */
+  blueprint: "hr" | "dialog" | "community";
+  /** Subtle in-market proof for home / listing cards (editable later) */
+  socialProof?: string;
   featured?: boolean;
   draft?: boolean;
 }
 
 export const products: Product[] = [
   {
-    id: "certify",
-    name: "Trizen Certify",
-    slug: "trizen-certify",
-    category: "Credentialing",
+    id: "hr",
+    name: "TrizenHR",
+    slug: "trizen-hr",
+    category: "Workforce Ops",
     oneLineValueProp:
-      "Automated credentialing with QR verification and audit-ready issuance logs.",
-    headline: "Credential pipelines without the audit gaps",
+      "Attendance and payroll in one place: web or mobile clock-in, leave, and accurate payslips without spreadsheet guesswork.",
+    headline: "Attendance and payroll, in one place",
     problem:
-      "Enterprise academies still issue credentials through spreadsheets, email, and static PDFs. Learners wait days for certificates; auditors cannot verify authenticity; ops teams burn cycles on re-issuance and fraud checks.",
+      "Growing teams still run attendance in spreadsheets and disconnected tools. Payroll errors climb when leave and approvals do not sync, and compliance audits become stressful without centralized, accurate records.",
     howItWorks:
-      "Trizen Certify is a governed credentialing engine: unique certificate IDs, QR-linked public verification, branded PDF generation, and program/cohort configuration. Delivery teams configure once; issuance and validation become a pipeline instead of a manual handoff.",
-    deploymentModel: "Embedded or standalone",
+      "TrizenHR centralizes workforce tracking: employees check in via web or mobile with clear policies; attendance auto-flows into leave and payroll; salaries calculate with statutory components; teams export audit-ready reports. Role-based dashboards give admins, HR, managers, and employees exactly what they need.",
+    deploymentModel: "Standalone SaaS",
     metrics: [
-      "Minutes instead of days for certificate issuance",
-      "Public QR verification for every credential",
-      "Built for regulated workforce programs",
+      "Clock-in to payslip in four automated steps",
+      "Photo-backed web check-in with real-time visibility",
+      "Plans from ₹1/user/day that scale to enterprise",
     ],
     capabilities: [
-      "Unique ID generation and secure lookup",
-      "QR-linked public verification pages",
-      "Branded PDF certificate generation",
-      "Program and cohort configuration",
-      "Audit-ready issuance logs",
+      "Smart attendance (web / mobile, photo capture, regularization)",
+      "Leave requests, one-click approvals, team calendar",
+      "Automated payroll, statutory components, and payslips",
+      "Role-based dashboards for admin, HR, manager, employee",
+      "Audit-ready reports and compliance exports",
     ],
     outcomes: [
-      "Training programs ship credentials in minutes with a verifiable trail",
-      "Compliance and L&D leaders get instant authenticity checks",
-      "Learners receive brand-consistent artifacts without ops bottlenecks",
+      "Less time lost to spreadsheet attendance ops",
+      "Fewer payroll errors from synced leave and approvals",
+      "Confident audits with centralized workforce records",
     ],
-    blueprint: "certify",
-    featured: true,
-  },
-  {
-    id: "labs",
-    name: "Trizen Labs",
-    slug: "trizen-labs",
-    category: "Co-innovation",
-    oneLineValueProp:
-      "A reusable co-innovation codebase so POCs start from proven scaffolding, not a blank repo.",
-    headline: "Rapid POC framework for enterprise co-innovation sprints",
-    problem:
-      "Most AI POCs restart from zero: ad-hoc repos, unclear evaluation, and no path from demo to production. Weeks disappear before a stakeholder sees a credible signal of value.",
-    howItWorks:
-      "Trizen Labs is our sprint kit: scaffolding for retrieval, agent tooling, evaluation harnesses, and environment patterns reused across engagements. Client workshops land on a working baseline in days, with measurable quality gates from day one.",
-    deploymentModel: "Embedded in engagement",
-    metrics: [
-      "~40% head start on first production POC",
-      "Evaluation gates included from day one",
-      "Reusable patterns across verticals",
-    ],
-    capabilities: [
-      "Domain-grounded RAG starter kits",
-      "Agent tool-calling templates",
-      "Evaluation and red-team harnesses",
-      "Secure environment and secrets patterns",
-      "Handoff packs for production engineering",
-    ],
-    outcomes: [
-      "Stakeholders see a grounded prototype faster",
-      "Clearer go/no-go criteria for leadership",
-      "Successful POCs graduate into production roadmaps",
-    ],
-    blueprint: "labs",
+    externalUrl: "https://trizenhr.com/",
+    externalLabel: "Visit TrizenHR",
+    cardCta: "Explore the platform",
+    coverImage: "/products/trizen-hr-v2.jpg",
+    coverPosition: "center top",
+    coverFit: "cover",
+    blueprint: "hr",
+    socialProof: "Live with 2 enterprise teams",
     featured: true,
   },
   {
     id: "dialog",
     name: "TrizenDialog",
     slug: "trizen-dialog",
-    category: "Meta API Infrastructure",
+    category: "WhatsApp Ops",
     oneLineValueProp:
-      "Enterprise WhatsApp automation on official Meta Cloud API webhooks, templates, and CRM sync.",
-    headline: "Conversational operations on Meta WhatsApp Cloud API",
+      "WhatsApp notification operations console: templates, sends, webhooks, and backend integrations on the WhatsApp Business Platform.",
+    headline: "Run WhatsApp notifications without the chaos",
     problem:
-      "Teams bolt chatbots onto WhatsApp without approved templates, consent, webhook reliability, or CRM sync. Conversations die in inboxes; compliance risk grows; agents retype everything into systems of record.",
+      "Ops teams juggle Meta templates, ad-hoc sends, and fragile webhook wiring across numbers and backends. Delivery status is opaque, retries are manual, and integrations break when business events need reliable outbound messaging.",
     howItWorks:
-      "TrizenDialog is our Meta Cloud API platform layer: template governance, webhook ingestion and retry, authenticated sessions, agent assist, and bi-directional CRM updates. Built for production notification, support, and transaction journeys, not demo chat widgets.",
-    deploymentModel: "Embedded or standalone",
+      "TrizenDialog is a WhatsApp ops console: connect your Meta WhatsApp Business account, sync or compose approved templates, then send via REST API or event rules. Track queued-to-delivered status with idempotent sends, signed outbound webhooks for receipts, and multi-number routing your operators can run day to day.",
+    deploymentModel: "Standalone console & API",
     metrics: [
-      "Official Meta Cloud API architecture",
-      "Template and consent governance built in",
-      "CRM-synced journeys, not orphan chat threads",
+      "Template sync and live preview from Meta",
+      "Idempotent sends with clear delivery states",
+      "Signed webhooks for backend receipt handling",
     ],
     capabilities: [
-      "WhatsApp Business / Cloud API integration",
-      "Webhook receivers with idempotency and retries",
-      "Approved template and opt-in governance",
-      "Agent handoff and assist flows",
-      "Bi-directional CRM / ticketing sync",
+      "Template management with Meta sync and live preview",
+      "Reliable delivery tracking (queued → delivered)",
+      "API-first sends with API keys and event rules",
+      "Outbound webhooks with verifiable signed payloads",
+      "Multi-number WABA routing and role-based admin",
     ],
     outcomes: [
-      "Higher response rates on customer journeys",
-      "Lower agent handle time with full context",
-      "Compliant messaging ops leadership can audit",
+      "One console for templates, sends, and integrations",
+      "Ops teams debug with clear error codes and audit activity",
+      "Backends trigger WhatsApp from business events at scale",
     ],
+    externalUrl: "https://trizen-dialog.extrahand.in/",
+    externalLabel: "Open TrizenDialog",
+    cardCta: "Explore the console",
+    coverImage: "/products/trizen-dialog-v3.jpg",
+    cardImage: "/products/trizen-dialog-card-v3.jpg",
+    coverPosition: "center",
+    coverFit: "cover",
     blueprint: "dialog",
+    socialProof: "Used by 2 customer ops teams",
+    featured: true,
+  },
+  {
+    id: "community",
+    name: "Trizen Community",
+    slug: "trizen-community",
+    category: "Community & Events",
+    oneLineValueProp:
+      "Hyderabad Founders Network: monthly, community-led meetups for founders, operators, and aspiring entrepreneurs.",
+    headline: "A founder community that actually shows up",
+    problem:
+      "Most startup networking is pitch theatre: one-off events, hard selling, and weak follow-through. Founders and operators need recurring rooms where trust compounds into intros, hires, and collaboration.",
+    howItWorks:
+      "Trizen Community powers the Hyderabad Founders Network: free, community-owned meetups every 3rd Saturday (~40 seats, offline at DraperU India, Gachibowli). Same cadence, same energy—real conversations beyond the pitch deck, with WhatsApp updates, RSVPs, and ecosystem partners across Hyderabad.",
+    deploymentModel: "Community program",
+    metrics: [
+      "Every 3rd Saturday in Hyderabad",
+      "Free to attend · community-owned · no hard selling",
+      "~40-seat offline format at DraperU India",
+    ],
+    capabilities: [
+      "Monthly Founders Open House roundtables",
+      "WhatsApp community for updates and intros",
+      "Room for founders, operators, aspirants, and angels",
+      "Peer learning on pricing, customers, and hard hires",
+      "Ecosystem partners (T-Hub, WE Hub, eChai, and more)",
+    ],
+    outcomes: [
+      "Recurring trust networks that turn into co-founders and warm intros",
+      "Access to mentors, operators, and early angels in Hyderabad",
+      "Design partners, beta users, and collaboration without the pitch circus",
+    ],
+    externalUrl: "https://community.trizenventures.com/",
+    externalLabel: "Visit community",
+    cardCta: "Explore the network",
+    coverImage: "/products/trizen-community.jpg",
+    coverPosition: "center",
+    coverFit: "cover",
+    blueprint: "community",
+    socialProof: "Monthly Hyderabad meetups",
     featured: true,
   },
 ];
 
-/** Legacy accelerator slugs → product slugs */
+/** Legacy accelerator / product slugs → current product slugs */
 export const productSlugAliases: Record<string, string> = {
-  "trizen-certify": "trizen-certify",
-  "trizen-labs": "trizen-labs",
+  "trizen-hr": "trizen-hr",
+  "trizen-dialog": "trizen-dialog",
+  "trizen-community": "trizen-community",
+  "trizen-certify": "trizen-hr",
+  "trizen-labs": "trizen-community",
   "trizen-deploy": "trizen-dialog",
-  "trizendialog": "trizen-dialog",
+  trizendialog: "trizen-dialog",
 };
 
 export function getProductBySlug(slug: string): Product | undefined {

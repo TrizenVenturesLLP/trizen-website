@@ -15,16 +15,16 @@ const Products = () => {
       <PageMeta
         title="Products"
         path="/products"
-        description="Trizen proprietary products: Certify credentialing, Labs co-innovation kits, and TrizenDialog Meta WhatsApp Cloud API platform."
+        description="Trizen products: TrizenHR attendance and payroll, TrizenDialog WhatsApp ops, and Trizen Community founder events."
       />
 
-      <section className="border-b border-zinc-200 bg-zinc-50 py-20 md:py-28">
-        <div className="container mx-auto px-4">
+      <section className="relative overflow-hidden border-b border-zinc-200 section-mesh-muted pt-28 pb-20 sm:pt-32 md:pt-36 md:pb-28">
+        <div className="container relative mx-auto px-4">
           <FadeIn>
             <SectionHeader
               eyebrow="Products"
-              title="Proprietary engines that compress enterprise delivery"
-              description="Named platforms we build and operate—credentialing, co-innovation scaffolding, and Meta WhatsApp infrastructure—so engagements start from production-ready code, not slideware."
+              title="Live platforms we build and operate"
+              description="Named products with production surfaces: workforce ops, WhatsApp notification infrastructure, and a founder community for events. Not slideware labeled as solutions."
             />
           </FadeIn>
         </div>
@@ -41,7 +41,10 @@ const Products = () => {
                 >
                   <CardMedia
                     theme="light"
-                    blueprint={product.blueprint}
+                    image={product.cardImage ?? product.coverImage}
+                    imageAlt={`${product.name} product preview`}
+                    imagePosition={product.coverPosition}
+                    imageFit={product.coverFit}
                     className="rounded-none border-0 min-h-[160px]"
                   />
                   <div className="flex flex-1 flex-col p-6 md:p-7">
@@ -54,11 +57,9 @@ const Products = () => {
                     <p className="text-sm text-zinc-600 leading-relaxed mb-5 flex-grow">
                       {product.oneLineValueProp}
                     </p>
-                    <p className="text-xs text-zinc-500 mb-4">
-                      {product.deploymentModel}
-                    </p>
+                    <p className="text-xs text-zinc-500 mb-4">{product.deploymentModel}</p>
                     <span className="inline-flex items-center text-sm font-medium text-zinc-700 group-hover:text-indigo-600 transition-colors">
-                      Explore product
+                      {product.cardCta}
                       <ArrowRight className="ml-1.5 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                     </span>
                   </div>
@@ -70,8 +71,8 @@ const Products = () => {
       </section>
 
       <CTABanner
-        title="Want these engines on your roadmap?"
-        description="We embed Trizen products into delivery engagements—or stand them up as governed platforms for your teams."
+        title="Want these products on your roadmap?"
+        description="We ship and operate TrizenHR, TrizenDialog, and Trizen Community—or embed them into delivery engagements for your teams."
         secondaryLabel="View services"
         secondaryHref="/services"
       />

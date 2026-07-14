@@ -450,6 +450,30 @@ export function getServicesByCategory(category: ServiceCategory): Service[] {
   return services.filter((s) => s.category === category && !s.draft);
 }
 
+/** Map service category → blueprint diagram (reuse on detail pages) */
+export function getBlueprintForCategory(
+  category: ServiceCategory
+): "strategy" | "automation" | "agents" | "intelligence" | "build" {
+  switch (category) {
+    case "Strategy":
+      return "strategy";
+    case "Automation":
+      return "automation";
+    case "Intelligence":
+      return "intelligence";
+    case "Build":
+      return "build";
+  }
+}
+
+/** Prefer agent diagram for agent/voice services within Automation */
+export function getBlueprintForService(service: Service) {
+  if (service.slug === "ai-agents" || service.slug === "voice-ai") {
+    return "agents" as const;
+  }
+  return getBlueprintForCategory(service.category);
+}
+
 /** Home bento: three distinct value props (overrides catalog titles where needed) */
 export interface HomePillar {
   slug: string;

@@ -13,6 +13,8 @@ interface CTABannerProps {
   className?: string;
 }
 
+const isExternal = (href: string) => /^https?:\/\//i.test(href);
+
 const CTABanner = ({
   title = "Ready to transform your operations?",
   description = "Partner with Trizen to accelerate your AI transformation with proven enterprise methodology and proprietary products.",
@@ -22,12 +24,30 @@ const CTABanner = ({
   secondaryHref,
   className,
 }: CTABannerProps) => {
+  const isBookCta = /book/i.test(primaryLabel);
+
+  const primaryInner = (
+    <>
+      {primaryLabel}
+      {isBookCta ? (
+        <span className="btn-book__arrow" aria-hidden="true">
+          <ArrowRight />
+        </span>
+      ) : null}
+    </>
+  );
+
   return (
-    <section className={cn("bg-white py-20 md:py-28", className)}>
+    <section className={cn("relative overflow-hidden section-mesh py-16 md:py-28", className)}>
+      <div className="mobile-orb left-1/4 top-0 h-48 w-48 bg-indigo-500/25 md:hidden" aria-hidden />
       <div className="container mx-auto px-4">
-        <div className="relative overflow-hidden rounded-2xl border border-indigo-100 glass-frost px-5 py-10 sm:px-8 sm:py-12 md:px-16 md:py-16 text-center">
+        <div className="relative overflow-hidden rounded-2xl md:rounded-3xl border border-indigo-200/80 bg-gradient-to-br from-indigo-50 via-white to-sky-50 px-5 py-10 sm:px-8 sm:py-12 md:px-16 md:py-16 text-center shadow-lg shadow-indigo-500/10">
           <div
-            className="pointer-events-none absolute left-1/2 top-0 h-64 w-[28rem] -translate-x-1/2 rounded-full bg-indigo-500/15 blur-[80px]"
+            className="pointer-events-none absolute -left-10 top-0 h-48 w-48 rounded-full bg-indigo-400/25 blur-[60px] md:left-1/2 md:h-64 md:w-[28rem] md:-translate-x-1/2 md:bg-indigo-500/15 md:blur-[80px]"
+            aria-hidden
+          />
+          <div
+            className="pointer-events-none absolute -right-8 bottom-0 h-40 w-40 rounded-full bg-sky-400/20 blur-[50px] md:hidden"
             aria-hidden
           />
           <div className="relative z-10">
@@ -41,21 +61,33 @@ const CTABanner = ({
               <Button
                 asChild
                 size="lg"
-                className="btn-micro w-full sm:w-auto sm:min-w-[200px] min-h-12 touch-manipulation"
+                className={cn(
+                  "btn-micro w-full sm:w-auto sm:min-w-[220px] min-h-12 touch-manipulation",
+                  isBookCta && "btn-book pl-6 pr-2 shadow-none"
+                )}
               >
-                <Link to={primaryHref}>
-                  {primaryLabel}
-                  <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
-                </Link>
+                {isExternal(primaryHref) ? (
+                  <a href={primaryHref} target="_blank" rel="noopener noreferrer">
+                    {primaryInner}
+                  </a>
+                ) : (
+                  <Link to={primaryHref}>{primaryInner}</Link>
+                )}
               </Button>
               {secondaryLabel && secondaryHref && (
                 <Button
                   asChild
                   variant="outline"
                   size="lg"
-                  className="btn-micro w-full sm:w-auto sm:min-w-[200px] min-h-12 touch-manipulation"
+                  className="btn-micro w-full sm:w-auto sm:min-w-[200px] min-h-12 touch-manipulation border-indigo-200 bg-white/80 backdrop-blur-sm"
                 >
-                  <Link to={secondaryHref}>{secondaryLabel}</Link>
+                  {isExternal(secondaryHref) ? (
+                    <a href={secondaryHref} target="_blank" rel="noopener noreferrer">
+                      {secondaryLabel}
+                    </a>
+                  ) : (
+                    <Link to={secondaryHref}>{secondaryLabel}</Link>
+                  )}
                 </Button>
               )}
             </div>

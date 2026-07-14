@@ -133,6 +133,69 @@
     backface-visibility: hidden;
   }
 
+  /* Soft multi-stop washes — stronger on small screens where flat white reads bland */
+  .section-mesh {
+    position: relative;
+    isolation: isolate;
+    background-color: #fff;
+    background-image:
+      radial-gradient(ellipse 90% 55% at 10% -10%, rgb(99 102 241 / 0.14), transparent 55%),
+      radial-gradient(ellipse 70% 45% at 100% 0%, rgb(56 189 248 / 0.1), transparent 50%),
+      radial-gradient(ellipse 60% 40% at 50% 100%, rgb(99 102 241 / 0.06), transparent 55%);
+  }
+
+  .section-mesh-muted {
+    position: relative;
+    isolation: isolate;
+    background-color: rgb(250 250 250);
+    background-image:
+      radial-gradient(ellipse 80% 50% at 0% 0%, rgb(99 102 241 / 0.12), transparent 55%),
+      radial-gradient(ellipse 70% 45% at 100% 20%, rgb(14 165 233 / 0.08), transparent 50%),
+      linear-gradient(180deg, rgb(250 250 250), rgb(244 244 245));
+  }
+
+  .section-mesh-invert {
+    position: relative;
+    isolation: isolate;
+    background-color: #fff;
+    background-image:
+      radial-gradient(ellipse 75% 50% at 90% -5%, rgb(99 102 241 / 0.11), transparent 55%),
+      radial-gradient(ellipse 55% 40% at 0% 80%, rgb(165 180 252 / 0.14), transparent 50%);
+  }
+
+  .mobile-orb {
+    pointer-events: none;
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(48px);
+    transform: translateZ(0);
+  }
+
+  @media (min-width: 768px) {
+    .mobile-orb {
+      filter: blur(80px);
+    }
+  }
+
+  .text-gradient-brand {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #312e81 0%, #4f46e5 45%, #6366f1 100%);
+  }
+
+  .card-sheen::before {
+    content: "";
+    pointer-events: none;
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgb(165 180 252 / 0.9),
+      transparent
+    );
+  }
+
   .glass-soft-light {
     @apply border border-zinc-100 bg-zinc-50;
     box-shadow: inset 0 1px 0 0 rgb(255 255 255 / 0.8);
@@ -238,9 +301,9 @@
     50% { opacity: 1; }
   }
 
-  /* Micro interactions */
+  /* Soft lift for general CTAs (no arrow motion) */
   .btn-micro {
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.22s ease;
   }
 
   @media (hover: hover) and (pointer: fine) {
@@ -249,6 +312,145 @@
     }
     .btn-micro:active {
       transform: translate3d(0, 0, 0);
+    }
+  }
+
+  /* Book a Consultation — premium CTA with arrow micro-interaction */
+  .btn-book {
+    position: relative;
+    isolation: isolate;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    overflow: hidden;
+    border-radius: 0.625rem !important;
+    border: 1px solid rgb(67 56 202 / 0.85) !important;
+    background-color: #4f46e5 !important;
+    background-image: linear-gradient(
+      165deg,
+      #818cf8 0%,
+      #4f46e5 48%,
+      #4338ca 100%
+    ) !important;
+    color: #fff !important;
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.28),
+      0 1px 2px rgb(49 46 129 / 0.2),
+      0 12px 28px -10px rgb(79 70 229 / 0.55);
+    transition:
+      transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.28s ease,
+      filter 0.28s ease;
+  }
+
+  .btn-book::before {
+    content: "";
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      105deg,
+      transparent 40%,
+      rgb(255 255 255 / 0.14) 50%,
+      transparent 60%
+    );
+    transform: translateX(-120%);
+    transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    z-index: 0;
+  }
+
+  .btn-book > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .btn-book__arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.875rem;
+    height: 1.875rem;
+    border-radius: 0.4rem;
+    flex-shrink: 0;
+    background: linear-gradient(160deg, #ffffff 0%, #eef0f8 55%, #e2e5f0 100%);
+    border: 1px solid rgb(255 255 255 / 0.95);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.9),
+      0 1px 2px rgb(15 23 42 / 0.12);
+    color: #312e81;
+    transition:
+      transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.28s ease;
+  }
+
+  .btn-book__arrow svg {
+    width: 0.875rem !important;
+    height: 0.875rem !important;
+    color: #312e81;
+    stroke: currentColor;
+    transform: rotate(-45deg);
+    transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* Compact for navbar / sm */
+  .h-9.btn-book {
+    gap: 0.55rem;
+    border-radius: 0.5rem !important;
+  }
+
+  .h-9 .btn-book__arrow {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 0.3rem;
+  }
+
+  .h-9 .btn-book__arrow svg {
+    width: 0.75rem !important;
+    height: 0.75rem !important;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .btn-book:hover {
+      filter: brightness(1.04);
+      box-shadow:
+        inset 0 1px 0 rgb(255 255 255 / 0.32),
+        0 1px 2px rgb(49 46 129 / 0.22),
+        0 16px 34px -10px rgb(79 70 229 / 0.65);
+    }
+
+    .btn-book:hover::before {
+      transform: translateX(120%);
+    }
+
+    .btn-book:hover .btn-book__arrow {
+      transform: scale(1.04);
+      box-shadow:
+        inset 0 1px 0 rgb(255 255 255 / 0.95),
+        0 2px 6px rgb(15 23 42 / 0.14);
+    }
+
+    .btn-book:hover .btn-book__arrow svg {
+      transform: rotate(0deg);
+    }
+
+    .btn-book:active {
+      filter: brightness(0.98);
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  .btn-book:active .btn-book__arrow svg {
+    transform: rotate(0deg);
+  }
+
+  .link-arrow svg {
+    transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .link-arrow:hover svg {
+      transform: translate3d(4px, 0, 0);
     }
   }
 
@@ -267,6 +469,32 @@
     .network-draw line,
     .network-pulse {
       animation: none !important;
+    }
+
+    .btn-micro,
+    .btn-book,
+    .btn-book__arrow,
+    .btn-book__arrow svg,
+    .btn-book::before,
+    .link-arrow svg {
+      transition: none !important;
+    }
+
+    .btn-micro:hover,
+    .btn-micro:active,
+    .btn-book:hover,
+    .btn-book:active,
+    .btn-book:hover .btn-book__arrow,
+    .btn-book:hover .btn-book__arrow svg,
+    .btn-book:active .btn-book__arrow svg,
+    .btn-book:hover::before,
+    .link-arrow:hover svg {
+      transform: none !important;
+      filter: none !important;
+    }
+
+    .btn-book__arrow svg {
+      transform: rotate(0deg) !important;
     }
   }
 

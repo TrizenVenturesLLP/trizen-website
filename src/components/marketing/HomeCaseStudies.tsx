@@ -21,8 +21,9 @@ const HomeCaseStudies = () => {
   const caseStudies = getFeaturedCaseStudies().slice(0, 2);
 
   return (
-    <section className="py-24 md:py-32 border-b border-zinc-200 bg-white text-zinc-950">
-      <div className="container mx-auto px-4">
+    <section className="relative overflow-hidden py-24 md:py-32 border-b border-zinc-200 section-mesh text-zinc-950">
+      <div className="mobile-orb -right-8 bottom-10 h-44 w-44 bg-sky-400/15 md:hidden" aria-hidden />
+      <div className="container relative mx-auto px-4">
         <FadeIn className="mb-10 md:mb-14">
           <SectionHeader
             tone="light"

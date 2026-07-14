@@ -14,7 +14,7 @@ const Industries = () => {
         path="/industries"
         description="Sector expertise where operational AI compounds, across healthcare, financial services, and more."
       />
-      <section className="border-b border-zinc-200 bg-white py-20 md:py-28">
+      <section className="border-b border-zinc-200 bg-white pt-28 pb-20 sm:pt-32 md:pt-36 md:pb-28">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ y: 16 }}

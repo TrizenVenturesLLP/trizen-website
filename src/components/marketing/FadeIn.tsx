@@ -18,15 +18,15 @@ const MotionTag = {
 } as const;
 
 /**
- * Scroll-enter motion — Y translate only (no opacity flash on route change).
- * GPU-composited; once-only viewport observer.
+ * Soft scroll-enter — short travel, calm easing, once-only.
+ * Tuned to feel natural on long homepage scrolls (not laggy or snappy).
  */
 const FadeIn = ({
   children,
   className,
   delay = 0,
   as = "div",
-  y = 14,
+  y = 8,
 }: FadeInProps) => {
   const reduced = useReducedMotion();
   const Comp = MotionTag[as];
@@ -39,14 +39,14 @@ const FadeIn = ({
 
   return (
     <Comp
-      className={cn("transform-gpu", className)}
+      className={cn("transform-gpu will-change-transform", className)}
       initial={{ y }}
       whileInView={{ y: 0 }}
-      viewport={{ once: true, amount: 0.12, margin: "0px 0px -32px 0px" }}
+      viewport={{ once: true, amount: 0.15, margin: "0px 0px -24px 0px" }}
       transition={{
-        duration: 0.45,
-        delay: delaySec,
-        ease: [0.16, 1, 0.3, 1],
+        duration: 0.55,
+        delay: Math.min(delaySec, 0.18),
+        ease: [0.22, 1, 0.36, 1],
       }}
     >
       {children}

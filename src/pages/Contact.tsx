@@ -1,6 +1,6 @@
 import { FormEvent, useState } from "react";
 import { motion } from "framer-motion";
-import { Calendar, Mail, Send } from "lucide-react";
+import { ArrowRight, Calendar, Check, Clock, Mail, Send, Video } from "lucide-react";
 import SectionHeader from "@/components/marketing/SectionHeader";
 import PageMeta from "@/components/marketing/PageMeta";
 import { Button } from "@/components/ui/button";
@@ -9,6 +9,16 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { siteConfig } from "@/content/site";
 import { useToast } from "@/hooks/use-toast";
+import { cn } from "@/lib/utils";
+
+const CALENDLY_URL = "https://calendly.com/projects-trizen/consultation";
+const CONTACT_FORM_EMAIL = siteConfig.email;
+
+const scheduleHighlights = [
+  { icon: Clock, label: "30 minutes" },
+  { icon: Video, label: "Video call" },
+  { icon: Check, label: "No obligation" },
+] as const;
 
 const Contact = () => {
   const { toast } = useToast();
@@ -17,18 +27,42 @@ const Contact = () => {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = event.currentTarget;
-    setSubmitting(true);
+    const data = new FormData(form);
 
-    // Placeholder until Formspree / HubSpot / webhook is wired
+    const name = String(data.get("name") ?? "").trim();
+    const email = String(data.get("email") ?? "").trim();
+    const company = String(data.get("company") ?? "").trim();
+    const scope = String(data.get("scope") ?? "").trim();
+
+    const subject = `Consultation request from ${name}${company ? ` (${company})` : ""}`;
+    const body = [
+      "Hello Trizen team,",
+      "",
+      "I would like to book a consultation.",
+      "",
+      `Name: ${name}`,
+      `Work email: ${email}`,
+      `Company: ${company}`,
+      "",
+      "Project scope:",
+      scope,
+      "",
+      "Sent from the Trizen website contact form.",
+    ].join("\n");
+
+    const mailto = `mailto:${CONTACT_FORM_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    setSubmitting(true);
+    window.location.href = mailto;
+
     window.setTimeout(() => {
       setSubmitting(false);
       form.reset();
       toast({
-        title: "Request received",
-        description:
-          "Thanks, our team will follow up shortly. You can also book time via the calendar.",
+        title: "Opening your email app",
+        description: `Your message is ready to send to ${CONTACT_FORM_EMAIL}.`,
       });
-    }, 600);
+    }, 400);
   };
 
   return (
@@ -36,137 +70,222 @@ const Contact = () => {
       <PageMeta
         title="Contact"
         path="/contact"
-        description="Book a consultation with Trizen. Tell us about your AI initiative and we'll respond with next steps."
+        description="Book a consultation with Trizen. Schedule a call or send a project brief and we'll respond with next steps."
       />
-      <section className="border-b border-zinc-200 bg-white py-20 md:py-28">
-        <div className="container mx-auto px-4">
+
+      {/* Hero */}
+      <section className="relative overflow-hidden border-b border-zinc-200 section-mesh pt-28 pb-20 sm:pt-32 md:pt-36 md:pb-28">
+        <div className="mobile-orb -right-10 top-12 h-48 w-48 bg-indigo-400/20 md:hidden" aria-hidden />
+        <div className="mobile-orb -left-8 bottom-0 h-40 w-40 bg-sky-400/15 md:hidden" aria-hidden />
+        <div className="container relative mx-auto px-4 max-w-3xl">
           <motion.div
             initial={{ y: 16 }}
             animate={{ y: 0 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
           >
             <SectionHeader
+              tone="light"
               eyebrow="Contact"
-              title="Book a consultation"
-              description="Tell us about your initiative. We'll respond with next steps, or book time directly on the calendar."
+              title="Let's scope your next AI initiative"
+              description="Book a live briefing with our team, or send a short project brief. We typically respond within one business day."
             />
+            <ul className="mt-8 flex flex-wrap gap-2.5" aria-label="What to expect">
+              {["Outcome framing", "Delivery path", "Clear next steps"].map((item) => (
+                <li
+                  key={item}
+                  className="inline-flex items-center gap-1.5 rounded-full border border-indigo-100 bg-white/80 px-3.5 py-1.5 text-xs font-medium text-zinc-700 shadow-sm shadow-indigo-500/5 backdrop-blur-sm"
+                >
+                  <span className="h-1.5 w-1.5 rounded-full bg-indigo-500" aria-hidden />
+                  {item}
+                </li>
+              ))}
+            </ul>
           </motion.div>
         </div>
       </section>
 
-      <section className="py-16 md:py-24 border-b border-zinc-200">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
-            <motion.div
-              initial={{ y: 20 }}
+      {/* Booking + brief */}
+      <section className="relative overflow-hidden py-14 md:py-20 border-b border-zinc-200 section-mesh-muted">
+        <div className="mobile-orb right-0 top-24 h-44 w-44 bg-indigo-400/15 md:hidden" aria-hidden />
+        <div className="container relative mx-auto px-4 max-w-6xl">
+          <div className="flex flex-col lg:flex-row lg:items-stretch gap-5 md:gap-6 lg:gap-0">
+            {/* Schedule card */}
+            <motion.article
+              initial={{ y: 14 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.45, ease: "easeOut" }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              className={cn(
+                "card-sheen relative flex h-full flex-col overflow-hidden rounded-2xl md:rounded-3xl border border-indigo-100/90",
+                "bg-gradient-to-br from-white via-indigo-50/40 to-sky-50/50",
+                "p-6 sm:p-8 shadow-lg shadow-indigo-500/10",
+                "lg:flex-1 lg:min-w-0"
+              )}
             >
-              <div className="glass-panel rounded-xl p-8 md:p-10 h-full flex flex-col">
-                <div className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-zinc-200 bg-zinc-50 text-accent mb-6">
-                  <Calendar className="h-5 w-5" />
+              <div
+                className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-indigo-400/20 blur-3xl"
+                aria-hidden
+              />
+              <div className="relative flex flex-1 flex-col">
+                <div className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-zinc-900 text-white shadow-md shadow-zinc-900/20 mb-5">
+                  <Calendar className="h-5 w-5" aria-hidden />
                 </div>
-                <h2 className="text-2xl font-semibold tracking-tight text-foreground mb-3">
+                <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-indigo-600 mb-2">
+                  Preferred path
+                </p>
+                <h2 className="text-xl sm:text-2xl font-semibold tracking-[-0.03em] text-zinc-900 mb-3">
                   Schedule a briefing
                 </h2>
-                <p className="text-zinc-600 leading-relaxed mb-8">
-                  Prefer to pick a time? Embed your Cal.com or Calendly link here.
-                  Until connected, reach us by email and we will propose slots.
+                <p className="text-sm text-zinc-600 leading-relaxed mb-6">
+                  A focused 30-minute conversation on outcomes, constraints, and whether Trizen is
+                  the right operating partner for your initiative.
                 </p>
 
-                {/* Placeholder for Cal.com / Calendly embed */}
-                <div className="flex-grow min-h-[280px] rounded-lg border border-dashed border-zinc-300 bg-white/[0.03] flex flex-col items-center justify-center px-6 text-center mb-8">
-                  <p className="font-mono text-[11px] uppercase tracking-widest text-zinc-600 mb-3">
-                    Calendar embed
-                  </p>
-                  <p className="text-sm text-zinc-600 max-w-xs">
-                    Replace this panel with your Cal.com iframe or scheduling widget.
-                  </p>
-                </div>
+                <ul className="flex flex-col gap-2.5 mb-8">
+                  {scheduleHighlights.map(({ icon: Icon, label }) => (
+                    <li
+                      key={label}
+                      className="inline-flex items-center gap-2.5 rounded-xl border border-white/90 bg-white/90 px-3.5 py-2.5 text-sm font-medium text-zinc-700 shadow-sm"
+                    >
+                      <Icon className="h-4 w-4 text-indigo-600 shrink-0" aria-hidden />
+                      {label}
+                    </li>
+                  ))}
+                </ul>
 
-                <a
-                  href={`mailto:${siteConfig.email}`}
-                  className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline"
+                <Button
+                  asChild
+                  size="lg"
+                  className="btn-micro btn-book mt-auto w-full min-h-12 pl-6 pr-2 shadow-none"
                 >
-                  <Mail className="h-4 w-4" />
-                  {siteConfig.email}
-                </a>
+                  <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">
+                    Book a time on Calendly
+                    <span className="btn-book__arrow" aria-hidden="true">
+                      <ArrowRight />
+                    </span>
+                  </a>
+                </Button>
               </div>
-            </motion.div>
+            </motion.article>
 
+            {/* OR divider — horizontal on mobile, vertical on desktop */}
+            <div
+              className="flex shrink-0 items-center gap-4 lg:flex-col lg:justify-center lg:gap-3 lg:px-5 xl:px-7"
+              role="separator"
+              aria-label="Or"
+            >
+              <div className="h-px flex-1 bg-gradient-to-r from-transparent via-zinc-300 to-transparent lg:h-auto lg:w-px lg:flex-1 lg:bg-gradient-to-b lg:from-transparent lg:via-zinc-300 lg:to-transparent" />
+              <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-zinc-400 shrink-0">
+                or
+              </span>
+              <div className="h-px flex-1 bg-gradient-to-r from-transparent via-zinc-300 to-transparent lg:h-auto lg:w-px lg:flex-1 lg:bg-gradient-to-b lg:from-transparent lg:via-zinc-300 lg:to-transparent" />
+            </div>
+
+            {/* Form card */}
             <motion.div
-              initial={{ y: 20 }}
+              initial={{ y: 14 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.45, delay: 0.08, ease: "easeOut" }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.5, delay: 0.06, ease: [0.22, 1, 0.36, 1] }}
+              className="h-full lg:flex-1 lg:min-w-0"
             >
               <form
                 onSubmit={handleSubmit}
-                className="glass-panel rounded-xl p-8 md:p-10 space-y-6"
+                className={cn(
+                  "card-sheen relative flex h-full flex-col overflow-hidden rounded-2xl md:rounded-3xl border border-zinc-200/90",
+                  "bg-white p-6 sm:p-8 shadow-lg shadow-zinc-900/5"
+                )}
               >
-                <div>
-                  <h2 className="text-2xl font-semibold tracking-tight text-foreground mb-2">
+                <div className="mb-6">
+                  <div className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-indigo-50 text-indigo-600 ring-1 ring-indigo-100 mb-5">
+                    <Mail className="h-5 w-5" aria-hidden />
+                  </div>
+                  <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-indigo-600 mb-2">
+                    Async option
+                  </p>
+                  <h2 className="text-xl sm:text-2xl font-semibold tracking-[-0.03em] text-zinc-900 mb-2">
                     Send a project brief
                   </h2>
-                  <p className="text-sm text-zinc-600">
-                    Work email preferred. We typically respond within one business day.
+                  <p className="text-sm text-zinc-600 leading-relaxed">
+                    Prefer writing first? Submit opens your email client with a message ready for{" "}
+                    <span className="font-medium text-zinc-800">{CONTACT_FORM_EMAIL}</span>.
                   </p>
                 </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="name">Name</Label>
-                  <Input
-                    id="name"
-                    name="name"
-                    required
-                    autoComplete="name"
-                    placeholder="Your full name"
-                  />
-                </div>
+                <div className="flex flex-1 flex-col gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="space-y-1.5">
+                      <Label htmlFor="name">Name</Label>
+                      <Input
+                        id="name"
+                        name="name"
+                        required
+                        autoComplete="name"
+                        placeholder="Your full name"
+                        className="h-11 bg-zinc-50/80 border-zinc-200 focus-visible:bg-white"
+                      />
+                    </div>
+                    <div className="space-y-1.5">
+                      <Label htmlFor="email">Work email</Label>
+                      <Input
+                        id="email"
+                        name="email"
+                        type="email"
+                        required
+                        autoComplete="email"
+                        placeholder="you@company.com"
+                        className="h-11 bg-zinc-50/80 border-zinc-200 focus-visible:bg-white"
+                      />
+                    </div>
+                  </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="email">Work email</Label>
-                  <Input
-                    id="email"
-                    name="email"
-                    type="email"
-                    required
-                    autoComplete="email"
-                    placeholder="you@company.com"
-                  />
-                </div>
+                  <div className="space-y-1.5">
+                    <Label htmlFor="company">Company</Label>
+                    <Input
+                      id="company"
+                      name="company"
+                      required
+                      autoComplete="organization"
+                      placeholder="Organization name"
+                      className="h-11 bg-zinc-50/80 border-zinc-200 focus-visible:bg-white"
+                    />
+                  </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="company">Company</Label>
-                  <Input
-                    id="company"
-                    name="company"
-                    required
-                    autoComplete="organization"
-                    placeholder="Organization name"
-                  />
-                </div>
+                  <div className="flex flex-1 flex-col space-y-1.5">
+                    <Label htmlFor="scope">Project scope</Label>
+                    <Textarea
+                      id="scope"
+                      name="scope"
+                      required
+                      rows={4}
+                      placeholder="Outcomes you care about, timelines, systems involved, and any constraints we should know."
+                      className="min-h-[100px] flex-1 resize-y bg-zinc-50/80 border-zinc-200 focus-visible:bg-white"
+                    />
+                  </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="scope">Project scope</Label>
-                  <Textarea
-                    id="scope"
-                    name="scope"
-                    required
-                    rows={5}
-                    placeholder="Outcomes, timelines, systems involved, and any constraints we should know."
-                    className="min-h-[120px] resize-y"
-                  />
+                  <Button
+                    type="submit"
+                    size="lg"
+                    className="btn-micro mt-auto w-full min-h-12 shadow-md shadow-indigo-500/20"
+                    disabled={submitting}
+                  >
+                    {submitting ? "Opening email…" : "Submit request"}
+                    <Send className="ml-2 h-4 w-4" />
+                  </Button>
                 </div>
-
-                <Button type="submit" size="lg" className="w-full" disabled={submitting}>
-                  {submitting ? "Sending…" : "Submit request"}
-                  <Send className="ml-2 h-4 w-4" />
-                </Button>
               </form>
             </motion.div>
           </div>
+
+          <p className="mt-8 text-center text-xs text-zinc-500">
+            Prefer to reach us directly?{" "}
+            <a
+              href={`mailto:${CONTACT_FORM_EMAIL}`}
+              className="font-medium text-indigo-600 hover:text-indigo-700 transition-colors"
+            >
+              {CONTACT_FORM_EMAIL}
+            </a>
+          </p>
         </div>
       </section>
     </>

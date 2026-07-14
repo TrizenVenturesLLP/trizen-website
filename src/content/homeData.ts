@@ -65,18 +65,17 @@ export const metricClaims: MetricClaim[] = [
   },
   {
     id: "m3",
-    value: 40,
+    value: 50,
     suffix: "%",
-    label: "POC head start via Labs",
+    label: "Faster payroll processing",
     footnoteAnchor: "3",
   },
   {
     id: "m4",
-    value: 3,
-    suffix: "×",
-    label: "Faster credential issuance",
+    value: 4,
+    suffix: "",
+    label: "Steps from clock-in to payslip",
     footnoteAnchor: "4",
-    sourceCaseStudySlug: "healthcare-admin-automation",
   },
 ];
 
@@ -91,10 +90,10 @@ export const metricFootnotes: { anchor: string; text: string }[] = [
   },
   {
     anchor: "3",
-    text: "Typical time-to-first-credible-prototype reduction using Trizen Labs scaffolding vs greenfield POCs (internal delivery baseline).",
+    text: "Customer-reported payroll processing time reduction after adopting TrizenHR (mid-market HR team).",
   },
   {
     anchor: "4",
-    text: "Credential issuance throughput improvement on programs using Trizen Certify patterns (related healthcare admin automation engagement).",
+    text: "TrizenHR automated workflow: mark attendance → auto-sync → process payroll → generate reports.",
   },
 ];

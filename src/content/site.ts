@@ -52,9 +52,9 @@ export const footerColumns: FooterColumn[] = [
     title: "Explore",
     links: [
       { label: "Industries", href: "/industries" },
-      { label: "Trizen Certify", href: "/products/trizen-certify" },
-      { label: "Trizen Labs", href: "/products/trizen-labs" },
+      { label: "TrizenHR", href: "/products/trizen-hr" },
       { label: "TrizenDialog", href: "/products/trizen-dialog" },
+      { label: "Trizen Community", href: "/products/trizen-community" },
     ],
   },
   {
