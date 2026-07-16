@@ -35,24 +35,24 @@ export interface ServiceCategoryCopy {
 
 export const serviceCategoryCopy: Record<ServiceCategory, ServiceCategoryCopy> = {
   Strategy: {
-    headline: "Direction before delivery",
+    headline: "Clear direction first",
     blurb:
-      "Advisory and roadmaps that turn ambitious AI ideas into funded, governed programs leadership can stand behind.",
+      "Plans and advice so you know where AI helps most - and what to fund next.",
   },
   Automation: {
-    headline: "Operations that run themselves",
+    headline: "Less manual work, faster operations",
     blurb:
-      "Workflows, agents, voice, and messaging systems that remove friction across back-office, supply chain, and customer operations.",
+      "Workflows, AI agents, voice, and messaging that free your teams from repetitive tasks.",
   },
   Intelligence: {
-    headline: "Data that actually drives decisions",
+    headline: "Data you can trust for decisions",
     blurb:
-      "Data engineering, analytics, ML, and language systems built on your real data, not generic models.",
+      "Pipelines, dashboards, and models built on your data - so insights match how you actually work.",
   },
   Build: {
-    headline: "Products your teams can own",
+    headline: "Custom tools your team can own",
     blurb:
-      "Custom AI applications engineered for production, security, compliance, and clean handoff to your teams.",
+      "AI apps designed for your process, built securely, and handed over with clear docs and support.",
   },
 };
 
@@ -60,23 +60,23 @@ export const services: Service[] = [
   {
     slug: "ai-consulting",
     title: "AI Consulting",
-    headline: "Executive clarity on where AI creates durable advantage",
+    headline: "Know where AI can help your business most",
     description:
-      "Advisory engagements that align stakeholders, expose readiness gaps, and turn ambition into a governed delivery agenda.",
+      "Workshops and advice that align your team, spot gaps, and turn AI ideas into a clear action plan.",
     category: "Strategy",
     challenge:
-      "Leadership teams hear competing vendor narratives while pilots multiply without ownership, budget discipline, or a shared definition of success.",
+      "Leaders hear mixed vendor stories while small pilots multiply - without clear owners, budgets, or shared goals.",
     approach:
-      "Trizen runs structured discovery across business, risk, and technology, then produces an executive-ready recommendation set with sequencing, investment logic, and operating model implications.",
+      "We talk to business, risk, and tech teams, then deliver plain recommendations: what to do first, what it costs, and who owns it.",
     benefits: [
-      "Shared vocabulary across business and IT",
-      "Risk and compliance engaged early",
-      "Fundable recommendations, not slideware",
+      "Business and IT speak the same language",
+      "Risk and compliance involved early",
+      "Clear recommendations you can act on",
     ],
     deliverables: [
-      "Current-state AI portfolio assessment",
+      "Review of your current AI efforts",
       "Executive briefing and decision pack",
-      "Recommended operating model options",
+      "Options for how to run AI going forward",
     ],
     capabilities: [
       "Stakeholder workshops",
@@ -88,23 +88,23 @@ export const services: Service[] = [
   {
     slug: "ai-strategy",
     title: "AI Strategy",
-    headline: "A multi-year AI roadmap tied to P&L outcomes",
+    headline: "A multi-year AI plan tied to real business results",
     description:
-      "Prioritized use-case portfolios, platform choices, and investment sequencing that survive budget cycles.",
+      "A prioritized list of AI projects, platform choices, and investment order that fits your budget cycle.",
     category: "Strategy",
     challenge:
-      "Most AI strategies are technology wish lists. Without ROI theses, data readiness, and change capacity, roadmaps stall after the first pilot.",
+      "Many AI strategies are tech wish lists. Without ROI, data readiness, and change capacity, plans stall after the first pilot.",
     approach:
-      "We score use cases on value, feasibility, and risk, then design a platform and capability plan that compounds: quick wins fund the foundation for scale.",
+      "We rank projects by value, ease, and risk. Quick wins pay for the foundation you need to scale.",
     benefits: [
-      "Clear ROI thesis per prioritized use case",
-      "Sequenced investments leadership can fund",
-      "Build-vs-buy guidance with ownership models",
+      "Clear ROI for each priority project",
+      "Investments leadership can fund step by step",
+      "Build-vs-buy guidance with clear ownership",
     ],
     deliverables: [
-      "Prioritized use-case portfolio",
+      "Prioritized project portfolio",
       "Value framework and success metrics",
-      "12-24 month roadmap and funding plan",
+      "12 - 24 month roadmap and funding plan",
     ],
     capabilities: [
       "Use-case discovery & ROI modeling",
@@ -115,50 +115,50 @@ export const services: Service[] = [
   {
     slug: "generative-ai",
     title: "Generative AI",
-    headline: "Production GenAI grounded in your enterprise knowledge",
+    headline: "GenAI that uses your company knowledge safely",
     description:
-      "Secure generation, summarization, and content workflows with retrieval, evaluation, and human oversight.",
+      "Secure chat, summaries, and content tools grounded in your approved data - with humans in control.",
     category: "Automation",
     challenge:
-      "Generic copilots leak context, invent facts, and fail audits. Without grounding and evaluation, GenAI creates risk faster than it creates value.",
+      "Generic AI tools can invent facts, leak context, and fail audits. Without grounding and checks, risk grows faster than value.",
     approach:
-      "Trizen designs GenAI as software: approved corpora, least-privilege tools, quality gates, and observability, so outputs are useful and defensible.",
+      "We treat GenAI like real software: approved sources, limited access, quality checks, and monitoring so answers are useful and defensible.",
     benefits: [
-      "Grounded answers from approved sources",
-      "Evaluation loops that catch drift",
-      "Policies that satisfy security and legal",
+      "Answers based on approved sources",
+      "Checks that catch quality issues early",
+      "Policies that work for security and legal",
     ],
     deliverables: [
-      "GenAI architecture and threat model",
-      "RAG / tool-use implementation",
-      "Evaluation suite and rollout plan",
+      "GenAI architecture and risk review",
+      "Knowledge-grounded implementation",
+      "Quality suite and rollout plan",
     ],
     capabilities: [
-      "Enterprise RAG design",
+      "Enterprise knowledge search design",
       "Prompt and policy engineering",
-      "Red-teaming and quality gates",
+      "Testing and quality gates",
     ],
   },
   {
     slug: "ai-automation",
     title: "AI Automation",
-    headline: "Intelligent automation that handles variance, not just rules",
+    headline: "Automation that handles messy work, not just fixed rules",
     description:
-      "Combine classic automation with AI judgment for processes that used to need humans at every branch.",
+      "Combine classic automation with AI judgment for processes that used to need a person at every step.",
     category: "Automation",
     challenge:
-      "RPA breaks when documents, emails, or edge cases vary. Pure AI without process design creates unpredictable outcomes and opaque failures.",
+      "Simple bots break when documents or emails vary. AI without process design creates unpredictable results that are hard to explain.",
     approach:
-      "We redesign the process, then apply AI where judgment compounds, keeping deterministic automation for stable steps and human gates for material risk.",
+      "We redesign the process first, then use AI where judgment helps - and keep simple rules (plus human review) where risk is high.",
     benefits: [
-      "Higher automation coverage on messy work",
-      "Fewer brittle scripts and rework loops",
-      "Auditable decisions on AI-assisted steps",
+      "More of the messy work automated",
+      "Fewer broken scripts and rework loops",
+      "Clear records of AI-assisted decisions",
     ],
     deliverables: [
-      "Automation blueprint and control design",
+      "Automation blueprint and controls",
       "Hybrid AI + workflow implementation",
-      "Ops dashboard and exception runbook",
+      "Ops dashboard and exception guide",
     ],
     capabilities: [
       "Document and decision automation",
@@ -169,22 +169,22 @@ export const services: Service[] = [
   {
     slug: "workflow-automation",
     title: "Workflow Automation",
-    headline: "Cut cycle time and cost across the operating model",
+    headline: "Faster processes, lower operating cost",
     description:
       "End-to-end process automation that reduces friction in back-office, supply chain, and customer operations.",
     category: "Automation",
     challenge:
-      "Critical workflows still depend on swivel-chair work, brittle scripts, and tribal knowledge. Volume spikes expose bottlenecks and rising cost-to-serve.",
+      "Critical work still depends on copy-paste, fragile scripts, and tribal knowledge. Volume spikes expose bottlenecks and rising cost.",
     approach:
-      "We redesign the workflow first, then apply orchestration and AI where they compound. Results are measurable from day one with human-in-the-loop controls.",
+      "We redesign the workflow first, then add automation and AI where they help most - with clear metrics and human review when needed.",
     benefits: [
-      "Lower cost-to-serve on high-volume processes",
-      "Faster exception handling and SLA adherence",
-      "Fewer handoffs and manual rework loops",
+      "Lower cost on high-volume processes",
+      "Faster handling of exceptions and SLAs",
+      "Fewer handoffs and manual rework",
     ],
     deliverables: [
       "Process discovery & baseline metrics",
-      "Production workflow automation",
+      "Live workflow automation",
       "Operations dashboard and runbook",
     ],
     capabilities: [
@@ -197,27 +197,27 @@ export const services: Service[] = [
   {
     slug: "ai-agents",
     title: "AI Agents",
-    headline: "Secure agents that act inside your systems of record",
+    headline: "Secure AI helpers that work inside your systems",
     description:
-      "Domain-specific agents that are auditable, observable, and built for enterprise permissions and policy.",
+      "Task-focused AI agents with clear permissions, logs, and monitoring - built for how your business actually runs.",
     category: "Automation",
     challenge:
-      "Generic agents fail in regulated environments. Without grounding, permissions, and evaluation, they create risk through hallucinations, leakage, and unauditable actions.",
+      "Generic agents struggle in regulated settings. Without grounding, permissions, and checks, they invent answers or take unsafe actions.",
     approach:
-      "Trizen builds agents as production software: grounded retrieval, least-privilege tools, evaluation harnesses, and observability in your ops stack.",
+      "We build agents like production software: limited tools, approved data, evaluation, and monitoring in your ops stack.",
     benefits: [
-      "Agents that act within policy",
+      "Agents that stay within your policies",
       "Traceable decisions for compliance",
-      "Integration with systems you already trust",
+      "Works with the systems you already trust",
     ],
     deliverables: [
-      "Agent architecture and threat model",
-      "Tool-use and retrieval implementation",
-      "Production deployment with monitoring",
+      "Agent architecture and risk review",
+      "Tools and knowledge integration",
+      "Live deployment with monitoring",
     ],
     capabilities: [
       "Tool-calling into enterprise APIs",
-      "Identity and RBAC integration",
+      "Identity and access integration",
       "Evaluation and incident response",
     ],
     featured: true,
@@ -225,18 +225,18 @@ export const services: Service[] = [
   {
     slug: "voice-ai",
     title: "Voice AI",
-    headline: "Voice experiences that resolve work, not just chat",
+    headline: "Voice AI that finishes the job, not just the chat",
     description:
-      "Speech agents and assistants for support, sales, and internal ops, with latency, compliance, and handoff designed in.",
+      "Phone and voice assistants for support, sales, and internal ops - with smooth handoff to people when needed.",
     category: "Automation",
     challenge:
-      "IVR trees frustrate customers; unconstrained voice bots invent answers and fail compliance. Enterprises need voice that resolves intent and escalates cleanly.",
+      "Old phone menus frustrate customers; free-form voice bots invent answers. You need voice that solves the request and escalates cleanly.",
     approach:
-      "We design voice flows around real intents and systems access (transcription, NLU, action, and human takeover), with logging suitable for regulated channels.",
+      "We design voice flows around real intents: understand, act in your systems, and hand off to a person - with logging for compliance.",
     benefits: [
-      "Higher containment on routine intents",
+      "More routine calls handled automatically",
       "Faster resolution with CRM context",
-      "Compliant recording and audit trails",
+      "Recording and audit trails where required",
     ],
     deliverables: [
       "Voice journey and escalation design",
@@ -252,18 +252,18 @@ export const services: Service[] = [
   {
     slug: "whatsapp-automation",
     title: "WhatsApp Automation",
-    headline: "Conversational operations on the channel customers already use",
+    headline: "WhatsApp workflows on the channel customers already use",
     description:
-      "WhatsApp business workflows for notifications, support, and transactions, with templates, consent, and CRM sync.",
+      "Business WhatsApp for notifications, support, and transactions - with templates, consent, and CRM sync.",
     category: "Automation",
     challenge:
-      "Teams spam WhatsApp without journeys, consent, or system sync. Conversations die in inboxes; compliance risk grows; agents retype everything into CRM.",
+      "Teams message ad hoc without journeys or consent. Chats die in inboxes, compliance risk grows, and staff retype everything into CRM.",
     approach:
-      "Trizen designs WhatsApp as an operational channel: approved templates, authenticated sessions, agent assist, and bi-directional CRM updates.",
+      "We treat WhatsApp as a proper channel: approved templates, clear sessions, agent help, and two-way CRM updates.",
     benefits: [
       "Higher response rates on customer journeys",
-      "Lower agent handle time with context",
-      "Consent and template compliance built in",
+      "Less agent time with full context",
+      "Consent and template rules built in",
     ],
     deliverables: [
       "Channel journey and template set",
@@ -279,18 +279,18 @@ export const services: Service[] = [
   {
     slug: "crm-automation",
     title: "CRM Automation",
-    headline: "Make CRM the system of action, not a data graveyard",
+    headline: "Make your CRM a system people actually use",
     description:
-      "AI-assisted enrichment, routing, follow-ups, and pipeline hygiene inside Salesforce, HubSpot, and custom CRMs.",
+      "AI-assisted enrichment, routing, follow-ups, and cleaner pipelines in Salesforce, HubSpot, and custom CRMs.",
     category: "Automation",
     challenge:
-      "Reps spend hours on updates; leads rot; follow-ups are inconsistent. CRM data quality collapses, so forecasting and automation fail.",
+      "Reps spend hours on updates; leads go cold; follow-ups are inconsistent. Bad CRM data breaks forecasts and automation.",
     approach:
-      "We automate the busywork around the CRM (capture, enrichment, next-best-action, and SLA routing) while keeping humans accountable for relationships.",
+      "We automate the busywork (capture, enrichment, next steps, and routing) while people stay accountable for relationships.",
     benefits: [
-      "Cleaner pipeline and forecast inputs",
+      "Cleaner pipeline and forecast data",
       "Faster lead-to-action cycles",
-      "Less manual CRM administration",
+      "Less manual CRM admin",
     ],
     deliverables: [
       "CRM process and field audit",
@@ -306,22 +306,22 @@ export const services: Service[] = [
   {
     slug: "data-engineering",
     title: "Data Engineering",
-    headline: "Reliable pipelines that make AI and BI trustworthy",
+    headline: "Reliable data pipelines for AI and reporting",
     description:
-      "Ingestion, modeling, and quality for operational and analytical data, built for AI readiness and governance.",
+      "Clean ingestion, models, and quality checks so your AI and dashboards sit on data you can trust.",
     category: "Intelligence",
     challenge:
-      "AI and analytics fail when data is late, incomplete, or undocumented. Teams rebuild the same extracts; quality issues surface only in production.",
+      "AI and analytics fail when data is late, incomplete, or poorly documented. Teams rebuild the same extracts; issues show up only in production.",
     approach:
-      "Trizen designs pipelines as products: contracts, tests, lineage, and SLAs, so models and dashboards sit on ground truth rather than tribal extracts.",
+      "We build pipelines as products: clear contracts, tests, lineage, and SLAs - so models and dashboards rest on solid ground.",
     benefits: [
       "Trusted inputs for AI and reporting",
-      "Faster feature and metric delivery",
-      "Lineage that satisfies auditors",
+      "Faster delivery of metrics and features",
+      "Lineage that helps with audits",
     ],
     deliverables: [
       "Data architecture and pipeline design",
-      "Production ETL / ELT with quality checks",
+      "Production pipelines with quality checks",
       "Documentation and ownership model",
     ],
     capabilities: [
@@ -333,26 +333,26 @@ export const services: Service[] = [
   {
     slug: "business-intelligence",
     title: "Business Intelligence",
-    headline: "Decision systems leaders actually use",
+    headline: "Dashboards leaders actually open and use",
     description:
-      "Metrics layers, executive dashboards, and self-serve analytics aligned to operating KPIs rather than vanity charts.",
+      "Shared metrics, executive views, and self-serve analytics tied to the KPIs that run your business.",
     category: "Intelligence",
     challenge:
-      "Every team has a different definition of revenue, churn, or cycle time. Dashboards proliferate while decisions still run on intuition and spreadsheets.",
+      "Every team defines revenue or cycle time differently. Dashboards multiply while decisions still run on gut feel and spreadsheets.",
     approach:
-      "We start from the decisions that matter, define a governed metrics layer, then deliver interfaces for executives and operators with clear ownership.",
+      "We start from decisions that matter, define shared metrics, then build views for leaders and operators with clear owners.",
     benefits: [
       "One source of truth for core KPIs",
       "Faster executive decision cycles",
       "Self-serve without metric chaos",
     ],
     deliverables: [
-      "KPI taxonomy and metrics layer",
+      "KPI list and metrics layer",
       "Executive and ops dashboards",
       "Enablement for analysts and leaders",
     ],
     capabilities: [
-      "Semantic / metrics modeling",
+      "Metrics modeling",
       "Dashboard product design",
       "Embedded analytics patterns",
     ],
@@ -360,14 +360,14 @@ export const services: Service[] = [
   {
     slug: "machine-learning",
     title: "Machine Learning",
-    headline: "Predictive models that ship and stay healthy",
+    headline: "Predictive models that ship - and stay accurate",
     description:
-      "Forecasting, ranking, and classification systems with MLOps, monitoring, and business feedback loops.",
+      "Forecasting, ranking, and classification with monitoring and feedback so models keep working in the real world.",
     category: "Intelligence",
     challenge:
-      "Models die in notebooks. Without feature stores, evaluation, and monitoring, performance decays silently and trust evaporates.",
+      "Models often die in notebooks. Without monitoring and retraining, quality drops quietly and trust disappears.",
     approach:
-      "Trizen treats ML as a product lifecycle: problem framing, features, training, deployment, and continuous evaluation against business KPIs.",
+      "We treat ML as a full lifecycle: problem framing, features, training, deployment, and ongoing checks against business KPIs.",
     benefits: [
       "Models tied to operating metrics",
       "Monitoring that catches drift early",
@@ -387,18 +387,18 @@ export const services: Service[] = [
   {
     slug: "computer-vision",
     title: "Computer Vision",
-    headline: "Vision systems for inspection, safety, and operations",
+    headline: "Vision systems for inspection, safety, and ops",
     description:
-      "Detection, classification, and document vision pipelines designed for edge and cloud enterprise constraints.",
+      "Detect, classify, and read documents or scenes - built for real lighting, cameras, and edge or cloud needs.",
     category: "Intelligence",
     challenge:
-      "Vision PoCs look impressive in demos but fail on lighting, camera placement, latency, and false-positive cost in the field.",
+      "Vision demos look great but fail on lighting, camera placement, latency, and false alarms in the field.",
     approach:
-      "We design for the operating environment first (data collection, labeling strategy, model choice, and human review), then harden deployment for scale.",
+      "We design for the real environment first (data, labeling, model choice, human review), then harden deployment for scale.",
     benefits: [
       "Fewer missed defects or safety events",
       "Lower manual inspection load",
-      "Measurable precision / recall targets",
+      "Clear accuracy targets you can measure",
     ],
     deliverables: [
       "Vision use-case and data plan",
@@ -414,17 +414,17 @@ export const services: Service[] = [
   {
     slug: "natural-language-processing",
     title: "Natural Language Processing",
-    headline: "Language systems for classification, extraction, and search",
+    headline: "Understand tickets, contracts, and conversations at scale",
     description:
-      "NLP for tickets, contracts, knowledge bases, and customer conversations, with evaluation and domain adaptation.",
+      "Classify, extract, and search text from tickets, documents, and chats - with quality checks you can trust.",
     category: "Intelligence",
     challenge:
-      "Unstructured text is where enterprise knowledge hides. Keyword search and brittle rules miss intent, entities, and risk signals.",
+      "Important knowledge hides in unstructured text. Keyword search and brittle rules miss intent, entities, and risk signals.",
     approach:
-      "Trizen combines classical NLP and modern language models where each fits (classification, entity extraction, semantic search), with gold sets and QA gates.",
+      "We mix proven NLP and modern language models where each fits - with labeled examples and quality gates.",
     benefits: [
       "Faster triage of tickets and documents",
-      "Search that finds meaning, not keywords",
+      "Search that finds meaning, not just keywords",
       "Consistent extraction for downstream systems",
     ],
     deliverables: [
@@ -441,17 +441,17 @@ export const services: Service[] = [
   {
     slug: "custom-ai-development",
     title: "Custom AI Development",
-    headline: "Bespoke AI products engineered for your enterprise",
+    headline: "Custom AI products built for your business",
     description:
-      "End-to-end design and build of proprietary AI applications, from architecture to production ownership transfer.",
+      "Design and build proprietary AI apps end to end - from architecture to a clean handoff your team can run.",
     category: "Build",
     challenge:
-      "Off-the-shelf tools stop at 70%. Differentiated workflows need custom software that fits security, UX, and systems of record.",
+      "Off-the-shelf tools often stop at 70%. Unique workflows need software that fits your security, UX, and core systems.",
     approach:
-      "We assemble cross-functional squads (product, ML, platform, design) to ship production AI with documentation, tests, and a clear path for your team to own it.",
+      "Cross-functional teams (product, ML, platform, design) ship production AI with docs, tests, and a clear path for your team to own it.",
     benefits: [
-      "Software tailored to your moat",
-      "Security and compliance by design",
+      "Software tailored to your advantage",
+      "Security and compliance built in",
       "Clean handoff and runbooks",
     ],
     deliverables: [
@@ -527,7 +527,7 @@ export const homePillars: HomePillar[] = [
     slug: "ai-consulting",
     title: "AI Strategy & Consulting",
     description:
-      "Roadmaps, readiness, and governance that turn AI ambition into a fundable delivery agenda.",
+      "Roadmaps and readiness checks that turn AI ideas into a plan you can fund and deliver.",
     category: "Strategy",
     blueprint: "strategy",
   },
@@ -535,15 +535,15 @@ export const homePillars: HomePillar[] = [
     slug: "workflow-automation",
     title: "Operations & Workflow Automation",
     description:
-      "Connect systems and cut manual work across back-office, supply chain, and customer operations.",
+      "Connect your systems and cut manual work across back-office, supply chain, and customer ops.",
     category: "Automation",
     blueprint: "automation",
   },
   {
     slug: "ai-agents",
-    title: "Custom Enterprise Agents",
+    title: "Custom AI Agents",
     description:
-      "Auditable agents and net-new AI capabilities that act inside your systems of record.",
+      "Secure AI helpers that take action in your existing tools - with clear logs and permissions.",
     category: "Automation",
     blueprint: "agents",
   },
@@ -560,17 +560,17 @@ export const homeCapabilityTabs: {
   {
     id: "Strategy",
     label: "Strategy",
-    blurb: "Advisory, roadmaps, and GenAI programs that leadership can fund and govern.",
+    blurb: "Advice, roadmaps, and GenAI programs you can fund and run with confidence.",
   },
   {
     id: "Automation",
     label: "Automation",
-    blurb: "Workflows, agents, voice, messaging, and CRM that remove operating friction.",
+    blurb: "Workflows, agents, voice, messaging, and CRM that reduce day-to-day friction.",
   },
   {
     id: "Intelligence",
     label: "Intelligence",
-    blurb: "Data, analytics, ML, vision, NLP, and custom build for lasting advantage.",
+    blurb: "Data, analytics, ML, vision, language, and custom builds for lasting advantage.",
   },
 ];
 

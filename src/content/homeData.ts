@@ -14,7 +14,7 @@ export interface MetricClaim {
   sourceCaseStudySlug?: string;
 }
 
-/** Home industry strip — links into /industries/:slug */
+/** Home industry strip - links into /industries/:slug */
 export const industryChips: IndustryChip[] = [
   {
     id: "logistics",

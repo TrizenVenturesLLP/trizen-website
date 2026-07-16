@@ -32,7 +32,7 @@ export interface Product {
   cardImage?: string;
   /** CSS object-position for cover crop (default top) */
   coverPosition?: string;
-  /** How cover renders in cards — contain keeps full UI visible */
+  /** How cover renders in cards - contain keeps full UI visible */
   coverFit?: "cover" | "contain";
   /** CardMedia / blueprint variant (architecture sections) */
   blueprint: "hr" | "dialog" | "community";
@@ -49,17 +49,17 @@ export const products: Product[] = [
     slug: "trizen-hr",
     category: "Workforce Ops",
     oneLineValueProp:
-      "Attendance and payroll in one place: web or mobile clock-in, leave, and accurate payslips without spreadsheet guesswork.",
+      "Attendance and payroll in one place - clock in on web or mobile, manage leave, and get accurate payslips without spreadsheet chaos.",
     headline: "Attendance and payroll, in one place",
     problem:
-      "Growing teams still run attendance in spreadsheets and disconnected tools. Payroll errors climb when leave and approvals do not sync, and compliance audits become stressful without centralized, accurate records.",
+      "Growing teams still track attendance in spreadsheets and scattered tools. When leave and approvals don’t sync, payroll errors rise and audits get stressful.",
     howItWorks:
-      "TrizenHR centralizes workforce tracking: employees check in via web or mobile with clear policies; attendance auto-flows into leave and payroll; salaries calculate with statutory components; teams export audit-ready reports. Role-based dashboards give admins, HR, managers, and employees exactly what they need.",
+      "Employees clock in on web or mobile. Attendance flows into leave and payroll automatically. Salaries calculate with the right components, and you export clean reports. Admins, HR, managers, and employees each see what they need.",
     deploymentModel: "Standalone SaaS",
     metrics: [
       "Clock-in to payslip in four automated steps",
-      "Photo-backed web check-in with real-time visibility",
-      "Plans from ₹1/user/day that scale to enterprise",
+      "Photo-backed web check-in with live visibility",
+      "Plans from ₹1/user/day that scale with your team",
     ],
     capabilities: [
       "Smart attendance (web / mobile, photo capture, regularization)",
@@ -69,7 +69,7 @@ export const products: Product[] = [
       "Audit-ready reports and compliance exports",
     ],
     outcomes: [
-      "Less time lost to spreadsheet attendance ops",
+      "Less time lost to spreadsheet attendance work",
       "Fewer payroll errors from synced leave and approvals",
       "Confident audits with centralized workforce records",
     ],
@@ -89,16 +89,16 @@ export const products: Product[] = [
     slug: "trizen-dialog",
     category: "WhatsApp Ops",
     oneLineValueProp:
-      "WhatsApp notification operations console: templates, sends, webhooks, and backend integrations on the WhatsApp Business Platform.",
+      "One console for WhatsApp Business: templates, sends, delivery status, and backend integrations - without the chaos.",
     headline: "Run WhatsApp notifications without the chaos",
     problem:
-      "Ops teams juggle Meta templates, ad-hoc sends, and fragile webhook wiring across numbers and backends. Delivery status is opaque, retries are manual, and integrations break when business events need reliable outbound messaging.",
+      "Ops teams juggle Meta templates, one-off sends, and fragile integrations. Delivery status is unclear, retries are manual, and things break when business events need reliable messaging.",
     howItWorks:
-      "TrizenDialog is a WhatsApp ops console: connect your Meta WhatsApp Business account, sync or compose approved templates, then send via REST API or event rules. Track queued-to-delivered status with idempotent sends, signed outbound webhooks for receipts, and multi-number routing your operators can run day to day.",
+      "Connect your WhatsApp Business account, sync or create approved templates, then send via API or simple rules. Track delivery from queued to delivered, with webhooks and multi-number routing your team can run day to day.",
     deploymentModel: "Standalone console & API",
     metrics: [
       "Template sync and live preview from Meta",
-      "Idempotent sends with clear delivery states",
+      "Reliable sends with clear delivery states",
       "Signed webhooks for backend receipt handling",
     ],
     capabilities: [
@@ -106,11 +106,11 @@ export const products: Product[] = [
       "Reliable delivery tracking (queued → delivered)",
       "API-first sends with API keys and event rules",
       "Outbound webhooks with verifiable signed payloads",
-      "Multi-number WABA routing and role-based admin",
+      "Multi-number routing and role-based admin",
     ],
     outcomes: [
-      "One console for templates, sends, and integrations",
-      "Ops teams debug with clear error codes and audit activity",
+      "One place for templates, sends, and integrations",
+      "Ops teams debug with clear errors and activity history",
       "Backends trigger WhatsApp from business events at scale",
     ],
     externalUrl: "https://trizen-dialog.extrahand.in/",
@@ -130,12 +130,12 @@ export const products: Product[] = [
     slug: "trizen-community",
     category: "Community & Events",
     oneLineValueProp:
-      "Hyderabad Founders Network: monthly, community-led meetups for founders, operators, and aspiring entrepreneurs.",
+      "Hyderabad Founders Network: free monthly meetups for founders, operators, and aspiring entrepreneurs.",
     headline: "A founder community that actually shows up",
     problem:
-      "Most startup networking is pitch theatre: one-off events, hard selling, and weak follow-through. Founders and operators need recurring rooms where trust compounds into intros, hires, and collaboration.",
+      "Most startup networking is one-off events and hard selling. Founders need regular rooms where trust grows into intros, hires, and real collaboration.",
     howItWorks:
-      "Trizen Community powers the Hyderabad Founders Network: free, community-owned meetups every 3rd Saturday (~40 seats, offline at DraperU India, Gachibowli). Same cadence, same energy—real conversations beyond the pitch deck, with WhatsApp updates, RSVPs, and ecosystem partners across Hyderabad.",
+      "Free, community-owned meetups every 3rd Saturday (~40 seats) at DraperU India, Gachibowli. Real conversations beyond the pitch deck - with WhatsApp updates, RSVPs, and partners across Hyderabad.",
     deploymentModel: "Community program",
     metrics: [
       "Every 3rd Saturday in Hyderabad",
@@ -150,9 +150,9 @@ export const products: Product[] = [
       "Ecosystem partners (T-Hub, WE Hub, eChai, and more)",
     ],
     outcomes: [
-      "Recurring trust networks that turn into co-founders and warm intros",
+      "Recurring networks that turn into co-founders and warm intros",
       "Access to mentors, operators, and early angels in Hyderabad",
-      "Design partners, beta users, and collaboration without the pitch circus",
+      "Design partners and collaboration without the pitch circus",
     ],
     externalUrl: "https://community.trizenventures.com/",
     externalLabel: "Visit community",
@@ -169,15 +169,15 @@ export const products: Product[] = [
 /** Narrative copy for each deployment model (product detail) */
 export const deploymentModelCopy: Record<DeploymentModel, string> = {
   "Standalone SaaS":
-    "Cloud-hosted product your HR and ops teams run day to day—configure policies, onboard roles, and scale seats as the organization grows.",
+    "Cloud product your HR and ops teams use every day - set policies, add people, and grow seats as you grow.",
   "Standalone console & API":
-    "Operator console plus REST API and webhooks. Connect your Meta WhatsApp Business account, sync templates, and wire backends with signed receipt events.",
+    "A console for your operators plus APIs and webhooks for your developers. Connect WhatsApp Business, manage templates, and wire your backends.",
   "Community program":
-    "Recurring offline meetups and a WhatsApp community layer—owned by members, supported by Trizen Ventures. Show up, build trust, and RSVP each month.",
+    "Monthly offline meetups plus a WhatsApp group - run by members, supported by Trizen AI. Show up, build trust, and RSVP each month.",
 };
 
 const defaultDeploymentCopy =
-  "We configure governance and leave your team with clear runbooks.";
+  "We set things up carefully and leave your team with clear guides to run day to day.";
 
 /** Legacy accelerator / product slugs → current product slugs */
 export const productSlugAliases: Record<string, string> = {

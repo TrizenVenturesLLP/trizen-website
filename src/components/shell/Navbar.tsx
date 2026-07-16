@@ -9,7 +9,7 @@ import { primaryNav, siteConfig, type NavLink } from "@/content/site";
 import { cn } from "@/lib/utils";
 
 /**
- * Contained floating navbar — one rounded glass bar.
+ * Contained floating navbar - one rounded glass bar.
  */
 const Navbar = () => {
   const location = useLocation();

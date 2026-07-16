@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, Boxes, Gauge, Workflow } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { siteConfig } from "@/content/site";
 
 const heroFeatures = [
   { icon: Workflow, label: "Strategy to production" },
@@ -9,9 +10,35 @@ const heroFeatures = [
   { icon: Gauge, label: "Measurable outcomes" },
 ] as const;
 
+/** Split headline so the trailing "AI" (or last word) can take brand gradient. */
+function HeadlineWithAccent({ text }: { text: string }) {
+  const match = text.match(/^(.*\s)(AI|Intelligent AI)$/i);
+  if (!match) {
+    return <>{text}</>;
+  }
+  const [, lead, accent] = match;
+  // Prefer a natural line break before "Operations" when present
+  const breakMatch = lead.match(/^(Transform Business\s)(Operations with\s)$/i);
+  if (breakMatch) {
+    return (
+      <>
+        {breakMatch[1].trimEnd()}
+        <br />
+        {breakMatch[2]}
+        <span className="text-gradient-brand">{accent}</span>
+      </>
+    );
+  }
+  return (
+    <>
+      {lead}
+      <span className="text-gradient-brand">{accent}</span>
+    </>
+  );
+}
+
 /**
  * Split hero: brand + headline left · copy + CTAs right · feature strip below.
- * (Post–IgniteLabs layout, no right-side product image.)
  */
 const Hero = () => {
   const reduced = useReducedMotion();
@@ -47,23 +74,23 @@ const Hero = () => {
           transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
         >
           <div className="lg:col-span-7">
+            <p className="mb-2 text-sm font-semibold tracking-[-0.02em] text-zinc-900">
+              {siteConfig.name}
+            </p>
+            <p className="mb-4 font-mono text-[11px] sm:text-xs font-medium uppercase tracking-[0.16em] text-indigo-600">
+              {siteConfig.tagline}
+            </p>
             <h1
               id="hero-heading"
               className="text-[2.125rem] leading-[1.1] sm:text-5xl md:text-6xl xl:text-[4.25rem] font-semibold tracking-[-0.04em] sm:leading-[1.05] text-zinc-900"
             >
-              Automate Operations.
-              <br />
-              <span className="text-gradient-brand">Reduce Costs.</span>
-              <br />
-              Scale Faster.
+              <HeadlineWithAccent text={siteConfig.heroHeadline} />
             </h1>
           </div>
 
           <div className="lg:col-span-5 flex flex-col gap-6 sm:gap-7 lg:pb-1">
             <p className="text-base sm:text-lg text-zinc-600 leading-relaxed max-w-md">
-              Enterprise AI transformation for leaders who need measurable
-              operational outcomes: strategy, automation, and production systems
-              delivered with proprietary products.
+              {siteConfig.heroSupporting}
             </p>
             <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
               <Button

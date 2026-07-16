@@ -4,7 +4,7 @@
 @tailwind utilities;
 
 @layer base {
-  /* Light tokens — available when theme is light */
+  /* Light tokens - available when theme is light */
   :root {
     --background: 0 0% 98%;
     --foreground: 225 18% 8%;
@@ -46,7 +46,7 @@
     --sidebar-ring: 239 84% 59%;
   }
 
-  /* Optional dark — kept for dark bookend surfaces / future toggle */
+  /* Optional dark - kept for dark bookend surfaces / future toggle */
   .dark {
     --background: 225 18% 5%;
     --foreground: 0 0% 95%;
@@ -118,7 +118,7 @@
 }
 
 @layer components {
-  /* Enterprise light panels — single surface system (glass-panel aliases light) */
+  /* Enterprise light panels - single surface system (glass-panel aliases light) */
   .glass-panel,
   .glass-panel-light {
     @apply relative overflow-hidden border border-zinc-200 bg-white;
@@ -127,7 +127,7 @@
     backface-visibility: hidden;
   }
 
-  /* Soft multi-stop washes — stronger on small screens where flat white reads bland */
+  /* Soft multi-stop washes - stronger on small screens where flat white reads bland */
   .section-mesh {
     position: relative;
     isolation: isolate;
@@ -304,7 +304,7 @@
     }
   }
 
-  /* Book a Consultation — premium CTA with arrow micro-interaction */
+  /* Book a Consultation - premium CTA with arrow micro-interaction */
   .btn-book {
     position: relative;
     isolation: isolate;
@@ -447,7 +447,7 @@
     @apply bg-gradient-to-b from-white to-white/70 bg-clip-text text-transparent;
   }
 
-  /* Soft card lift — single system (card-lift aliases light) */
+  /* Soft card lift - single system (card-lift aliases light) */
   .card-lift,
   .card-lift-light {
     @apply transition-[transform,border-color,box-shadow] duration-300 ease-out;

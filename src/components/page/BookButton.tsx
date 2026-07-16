@@ -6,7 +6,7 @@ import { siteConfig } from "@/content/site";
 import { cn } from "@/lib/utils";
 
 interface BookButtonProps extends Omit<ButtonProps, "asChild" | "children"> {
-  /** Destination — defaults to site contact path */
+  /** Destination - defaults to site contact path */
   to?: string;
   label?: string;
   children?: ReactNode;

@@ -9,15 +9,15 @@ const Products = () => {
     <ListingPage
       title="Products"
       path="/products"
-      description="Trizen products: TrizenHR attendance and payroll, TrizenDialog WhatsApp ops, and Trizen Community founder events."
+      description="Ready-to-use products from Trizen AI: attendance and payroll, WhatsApp messaging, and a founders community."
       eyebrow="Products"
-      heading="Live platforms we build and operate"
-      intro="Named products with production surfaces: workforce ops, WhatsApp notification infrastructure, and a founder community for events. Not slideware labeled as solutions."
+      heading="Tools your teams can use today"
+      intro="Three live products - workforce, messaging, and community. Built for real work, not demos."
       mesh="muted"
       cta={{
-        title: "Want these products on your roadmap?",
+        title: "Want to use these products?",
         description:
-          "We ship and operate TrizenHR, TrizenDialog, and Trizen Community—or embed them into delivery engagements for your teams.",
+          "We can set up TrizenHR, TrizenDialog, or Trizen Community for your team - or include them in a larger project.",
         secondaryLabel: "View services",
         secondaryHref: "/services",
       }}

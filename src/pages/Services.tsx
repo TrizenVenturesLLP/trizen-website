@@ -19,7 +19,7 @@ const Services = () => {
       <PageMeta
         title="Services"
         path="/services"
-        description="Enterprise AI consulting, automation, agents, data platforms, and custom build, delivered as one operating partner."
+        description="AI consulting, automation, data, and custom builds that help your business work smarter - clear plans and real results."
       />
 
       <section className="relative overflow-hidden border-b border-zinc-200 section-mesh pt-28 pb-20 sm:pt-32 md:pt-36 md:pb-28">
@@ -29,8 +29,8 @@ const Services = () => {
             <SectionHeader
               tone="light"
               eyebrow="What we do"
-              title="AI that transforms how enterprises operate"
-              description="We help organizations move from scattered AI experiments to governed, production-grade systems, delivered as one accountable operating partner, not disconnected pilots."
+              title="Practical AI services for your business"
+              description="From strategy to automation and custom builds - we help you pick the right projects, ship them safely, and see real results. One team, clear ownership."
             />
           </FadeIn>
         </div>
@@ -135,8 +135,8 @@ const Services = () => {
       })}
 
       <CTABanner
-        title="Ready to prioritize the right AI bets?"
-        description="Book a consultation to map outcomes, readiness, and a delivery path your leadership team can fund."
+        title="Not sure where to start?"
+        description="Book a short call. We'll help you choose the highest-impact AI projects and a simple path to deliver them."
         secondaryLabel="View products"
         secondaryHref="/products"
       />

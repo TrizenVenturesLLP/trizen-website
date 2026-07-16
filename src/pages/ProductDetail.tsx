@@ -1,9 +1,11 @@
+import { useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { ArrowRight, ExternalLink } from "lucide-react";
 import NotFound from "@/pages/NotFound";
 import CTABanner from "@/components/marketing/CTABanner";
 import CardMedia from "@/components/marketing/CardMedia";
 import PageMeta from "@/components/marketing/PageMeta";
+import JsonLd from "@/components/marketing/JsonLd";
 import FadeIn from "@/components/marketing/FadeIn";
 import { Button } from "@/components/ui/button";
 import {
@@ -14,10 +16,17 @@ import {
   SectionTitle,
 } from "@/components/page";
 import { getDeploymentModelCopy, getProductBySlug } from "@/content/products";
+import { buildCommunityEventJsonLd } from "@/content/communityEvents";
 
 const ProductDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const product = slug ? getProductBySlug(slug) : undefined;
+
+  const communityEventLd = useMemo(
+    () =>
+      product?.slug === "trizen-community" ? buildCommunityEventJsonLd() : null,
+    [product?.slug]
+  );
 
   if (!product) {
     return <NotFound />;
@@ -32,6 +41,9 @@ const ProductDetail = () => {
         path={`/products/${product.slug}`}
         description={product.oneLineValueProp}
       />
+      {communityEventLd ? (
+        <JsonLd id="community-event" data={communityEventLd} />
+      ) : null}
 
       <PageHero
         compact

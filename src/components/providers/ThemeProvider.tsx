@@ -5,7 +5,7 @@ interface ThemeProviderProps {
   children: ReactNode;
 }
 
-/** Light-only — no dark theme */
+/** Light-only - no dark theme */
 const ThemeProvider = ({ children }: ThemeProviderProps) => {
   return (
     <NextThemesProvider

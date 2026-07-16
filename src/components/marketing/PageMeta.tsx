@@ -1,7 +1,8 @@
 import { useEffect } from "react";
+import { siteConfig } from "@/content/site";
 
-const TITLE_SUFFIX = "Trizen AI Transformation";
-const SITE_URL = "https://trizenventures.com";
+const TITLE_SUFFIX = siteConfig.name;
+const SITE_URL = siteConfig.websiteHref;
 
 interface PageMetaProps {
   /** Page name shown before the brand suffix */
@@ -61,7 +62,7 @@ function upsertLink(rel: string, href: string): () => void {
 }
 
 /**
- * Lightweight SPA SEO helper ,  title, description, Open Graph, Twitter, canonical.
+ * Lightweight SPA SEO helper - title, description, Open Graph, Twitter, canonical.
  */
 const PageMeta = ({ title, description, path, noIndex }: PageMetaProps) => {
   useEffect(() => {
@@ -70,9 +71,7 @@ const PageMeta = ({ title, description, path, noIndex }: PageMetaProps) => {
     document.title = fullTitle;
 
     const cleanups: Array<() => void> = [];
-    const desc =
-      description ??
-      "Trizen helps enterprises design, deploy, and scale AI systems that deliver measurable operational outcomes.";
+    const desc = description ?? siteConfig.description;
     const url = path ? `${SITE_URL}${path}` : SITE_URL;
 
     cleanups.push(upsertMeta("name", "description", desc));
@@ -80,7 +79,7 @@ const PageMeta = ({ title, description, path, noIndex }: PageMetaProps) => {
     cleanups.push(upsertMeta("property", "og:description", desc));
     cleanups.push(upsertMeta("property", "og:type", "website"));
     cleanups.push(upsertMeta("property", "og:url", url));
-    cleanups.push(upsertMeta("property", "og:site_name", "Trizen"));
+    cleanups.push(upsertMeta("property", "og:site_name", siteConfig.name));
     cleanups.push(upsertMeta("name", "twitter:card", "summary_large_image"));
     cleanups.push(upsertMeta("name", "twitter:title", fullTitle));
     cleanups.push(upsertMeta("name", "twitter:description", desc));

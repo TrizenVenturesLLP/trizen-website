@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { getAllProducts } from "@/content/products";
 
 /**
- * Home products showcase — live platforms customers already use.
+ * Home products showcase - live platforms customers already use.
  * Mobile: horizontal snap scroll · md+: 2-col · lg+: 3-col grid
  */
 const HomeProducts = () => {
@@ -25,7 +25,7 @@ const HomeProducts = () => {
             tone="light"
             eyebrow="Our Products"
             title="Platforms we build, ship, and operate"
-            description="Named products in market: workforce ops, WhatsApp infrastructure, and a founder community. Not slideware labeled as solutions."
+            description="Three live products: workforce tools, WhatsApp messaging, and a founders community - ready to use, not just slides."
           />
           <h2 id="home-products-heading" className="sr-only">
             Our products

@@ -10,12 +10,12 @@ interface CardMediaProps {
   className?: string;
   size?: "default" | "tall" | "wide";
   blueprint?: BlueprintType;
-  /** Product / landing cover — takes precedence over blueprint */
+  /** Product / landing cover - takes precedence over blueprint */
   image?: string;
   imageAlt?: string;
   /** CSS object-position when using image */
   imagePosition?: string;
-  /** cover (default) or contain — contain keeps full UI visible on light dashboards */
+  /** cover (default) or contain - contain keeps full UI visible on light dashboards */
   imageFit?: "cover" | "contain";
   /** Light for white content chapters; dark for bookend cards */
   theme?: BlueprintTheme;

@@ -6,7 +6,7 @@ interface SectionHeaderProps {
   description?: string;
   align?: "left" | "center";
   className?: string;
-  /** Kept for API compat — site is light-only */
+  /** Kept for API compat - site is light-only */
   tone?: "dark" | "light";
 }
 

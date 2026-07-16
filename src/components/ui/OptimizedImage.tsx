@@ -4,6 +4,11 @@ import { cn } from "@/lib/utils";
 export interface OptimizedImageProps extends ImgHTMLAttributes<HTMLImageElement> {
   /** Skip lazy-load for LCP candidates (logo in header, hero media) */
   priority?: boolean;
+  /**
+   * Image fetch priority. Passed to the DOM as the standard HTML attribute
+   * `fetchpriority` (React 18 does not whitelist camelCase `fetchPriority`).
+   */
+  fetchPriority?: "high" | "low" | "auto";
 }
 
 /**
@@ -23,6 +28,8 @@ const OptimizedImage = forwardRef<HTMLImageElement, OptimizedImageProps>(
     },
     ref
   ) => {
+    const resolvedPriority = fetchPriority ?? (priority ? "high" : "auto");
+
     return (
       <img
         ref={ref}
@@ -30,7 +37,8 @@ const OptimizedImage = forwardRef<HTMLImageElement, OptimizedImageProps>(
         className={cn(className)}
         loading={loading ?? (priority ? "eager" : "lazy")}
         decoding={decoding}
-        fetchPriority={fetchPriority ?? (priority ? "high" : "auto")}
+        // Lowercase attribute avoids React 18 "unknown prop fetchPriority" warning
+        fetchpriority={resolvedPriority}
         {...props}
       />
     );

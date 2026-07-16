@@ -17,7 +17,8 @@ const isExternal = (href: string) => /^https?:\/\//i.test(href);
 
 const CTABanner = ({
   title = "Ready to transform your operations?",
-  description = "Partner with Trizen to accelerate your AI transformation with proven enterprise methodology and proprietary products.",
+  description =
+    "Partner with Trizen AI to deliver measurable business outcomes through AI, automation, and intelligent systems.",
   primaryLabel = "Book a Consultation",
   primaryHref = "/contact",
   secondaryLabel,

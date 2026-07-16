@@ -8,8 +8,8 @@ import { cn } from "@/lib/utils";
 interface ProductCardProps {
   product: Product;
   /**
-   * home — richer home showcase (badges, social proof, taller card)
-   * listing — products index grid
+   * home - richer home showcase (badges, social proof, taller card)
+   * listing - products index grid
    */
   variant?: "home" | "listing";
   className?: string;

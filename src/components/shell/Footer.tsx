@@ -21,7 +21,7 @@ import {
 } from "@/content/site";
 import { cn } from "@/lib/utils";
 
-/** X (Twitter) mark — Lucide has no official X glyph in this version */
+/** X (Twitter) mark - Lucide has no official X glyph in this version */
 const XIcon = ({ className }: { className?: string }) => (
   <svg
     viewBox="0 0 24 24"
@@ -137,7 +137,7 @@ const Footer = () => {
       <div className="container relative mx-auto px-4 py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 md:gap-10 lg:gap-8 mb-12">
           <div className="lg:col-span-2">
-            <Link to="/" className="inline-flex items-center mb-5 min-h-11">
+            <Link to="/" className="inline-flex items-center mb-4 min-h-11">
               <OptimizedImage
                 src="/lovable-uploads/trizen-logo.png"
                 alt={siteConfig.name}
@@ -146,10 +146,15 @@ const Footer = () => {
                 className="h-9 w-auto"
               />
             </Link>
-            <p className="text-sm font-medium text-zinc-900 mb-2">
+
+            {/* Brand hierarchy: tagline → positioning pill → core promise */}
+            <p className="text-base font-medium tracking-[-0.02em] text-zinc-900 mb-3">
               {siteConfig.tagline}
             </p>
-            <p className="text-sm text-zinc-600 leading-relaxed max-w-sm mb-6">
+            <p className="mb-4 inline-flex max-w-full rounded-full border border-indigo-100 bg-indigo-50/80 px-3 py-1 text-xs font-medium text-indigo-700">
+              {siteConfig.positioning}
+            </p>
+            <p className="text-sm text-zinc-500 leading-relaxed max-w-xs mb-6">
               {siteConfig.description}
             </p>
 
@@ -242,7 +247,7 @@ const Footer = () => {
 
         <div className="border-t border-zinc-200 pt-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <p className="text-xs text-zinc-500">
-            © {new Date().getFullYear()} {siteConfig.name} LLP. All rights reserved.
+            © {new Date().getFullYear()} {siteConfig.legalName}. All rights reserved.
           </p>
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-zinc-500">
             <Link to="/privacy" className="hover:text-indigo-600 transition-colors">

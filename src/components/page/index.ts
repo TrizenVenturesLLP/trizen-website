@@ -1,4 +1,4 @@
-/** Shared page layout primitives — prefer these over ad-hoc section markup */
+/** Shared page layout primitives - prefer these over ad-hoc section markup */
 export { default as BackLink } from "./BackLink";
 export { default as BookButton } from "./BookButton";
 export { default as PageHero } from "./PageHero";

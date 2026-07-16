@@ -22,7 +22,7 @@ const HomeServices = () => {
   const [activeTab, setActiveTab] = useState<HomeCapabilityTab>("Strategy");
   const activeMeta = homeCapabilityTabs.find((t) => t.id === activeTab)!;
   const tabServices = getHomeTabServices(activeTab);
-  /** Keep a stable 2×2 grid on home — longer catalogs live on /services */
+  /** Keep a stable 2×2 grid on home - longer catalogs live on /services */
   const visibleServices = tabServices.slice(0, 4);
   const hasMoreServices = tabServices.length > 4;
 
@@ -36,8 +36,8 @@ const HomeServices = () => {
           <SectionHeader
             tone="light"
             eyebrow="What we do"
-            title="AI that transforms how enterprises operate"
-            description="We help organizations move from scattered AI experiments to governed, production-grade systems, delivered as one accountable operating partner."
+            title="Practical AI services for your business"
+            description="From strategy to automation and custom builds - we help you pick the right projects, ship them safely, and see real results."
           />
         </FadeIn>
 
@@ -194,7 +194,7 @@ const HomeServices = () => {
                   className="lg:col-span-8 min-h-[28rem] sm:min-h-[30rem]"
                   role="tabpanel"
                 >
-                  {/* Soft enter only — no exit wait (avoids awkward tab swaps) */}
+                  {/* Soft enter only - no exit wait (avoids awkward tab swaps) */}
                   <motion.div
                     key={activeTab}
                     initial={reduced ? false : { opacity: 0, y: 6 }}

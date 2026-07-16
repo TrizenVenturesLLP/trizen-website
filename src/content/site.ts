@@ -25,10 +25,34 @@ export interface SocialLink {
 }
 
 export const siteConfig = {
-  name: "Trizen Ventures",
-  tagline: "Enterprise AI Transformation & Operations Partner",
+  /** Public marketing brand */
+  name: "Trizen AI",
+  /** Legal entity for copyright and legal surfaces */
+  legalName: "Trizen Ventures LLP",
+  /** Short brand tagline (footer, hero eyebrow) */
+  tagline: "Automate. Optimize. Accelerate.",
+  /** Category / positioning line */
+  positioning: "Enterprise AI Consulting & Business Automation",
+  /**
+   * What we do - About intro (business transformation scope).
+   * Distinct from heroSupporting (outcomes-focused) and capability (how we deliver).
+   */
+  valueProposition:
+    "We help businesses transform operations through AI, automation, intelligent agents, and digital transformation.",
+  /** Core promise - footer, SEO defaults, About teaser */
   description:
-    "We help enterprises design, deploy, and scale AI systems that deliver measurable operational outcomes.",
+    "Deliver measurable business outcomes through AI, automation, and intelligent systems.",
+  mission: "Make AI practical and valuable for every business.",
+  vision:
+    "Become a trusted AI transformation partner for businesses worldwide.",
+  /** How we work - About / Services narrative */
+  capability:
+    "We design, build, integrate, and optimize AI-powered solutions that improve productivity, reduce operational costs, and accelerate business growth.",
+  /** Home hero supporting copy */
+  heroSupporting:
+    "Helping businesses leverage AI, intelligent automation, AI agents, and digital transformation to streamline operations, improve customer experiences, and accelerate growth.",
+  /** Home hero H1 */
+  heroHeadline: "Transform Business Operations with AI",
   contactHref: "/contact",
   careersHref: "https://careers.trizenventures.com/",
   insightsHref: "/insights",
@@ -83,7 +107,7 @@ export const socialLinks: SocialLink[] = [
 ];
 
 /**
- * Lean primary nav — Services, Products, proof, thought leadership, company.
+ * Lean primary nav - Services, Products, proof, thought leadership, company.
  */
 export const primaryNav: NavLink[] = [
   { label: "Services", href: "/services" },
@@ -97,7 +121,7 @@ export const primaryNav: NavLink[] = [
   { label: "About", href: "/about" },
 ];
 
-/** Footer columns — full sitemap lives here */
+/** Footer columns - full sitemap lives here */
 export const footerColumns: FooterColumn[] = [
   {
     title: "Capabilities",

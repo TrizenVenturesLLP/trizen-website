@@ -5,6 +5,8 @@ import {
   Rocket,
   Handshake,
   ArrowRight,
+  Target,
+  Eye,
 } from "lucide-react";
 import SectionHeader from "@/components/marketing/SectionHeader";
 import CTABanner from "@/components/marketing/CTABanner";
@@ -48,20 +50,24 @@ const About = () => {
       <PageMeta
         title="About"
         path="/about"
-        description="Trizen is an enterprise AI transformation partner for strategy, delivery, and proprietary products that drive production outcomes."
+        description={`${siteConfig.name} is an enterprise AI consulting and business automation partner. ${siteConfig.description}`}
       />
       <section className="border-b border-zinc-200 bg-white pt-28 pb-20 sm:pt-32 md:pt-36 md:pb-28">
         <div className="container mx-auto px-4 max-w-4xl">
           <FadeIn y={12}>
             <SectionHeader
-              eyebrow="About Trizen"
-              title="Enterprise AI transformation partner"
-              description={siteConfig.description}
+              eyebrow={`About ${siteConfig.name}`}
+              title={siteConfig.positioning}
+              description={siteConfig.tagline}
             />
             <p className="mt-8 text-lg text-zinc-700 leading-relaxed max-w-3xl">
-              Trizen Ventures works with enterprise leaders who need AI that survives the jump
-              from pilot to production. We combine strategy, delivery, and proprietary products so
-              initiatives land as governed systems, not isolated experiments.
+              {siteConfig.valueProposition}
+            </p>
+            <p className="mt-4 text-lg text-zinc-700 leading-relaxed max-w-3xl">
+              {siteConfig.capability}
+            </p>
+            <p className="mt-4 text-base font-medium text-zinc-800 leading-relaxed max-w-3xl">
+              {siteConfig.description}
             </p>
             <div className="mt-10 flex flex-col sm:flex-row gap-4">
               <BookButton className="pl-6 pr-2" />
@@ -76,11 +82,45 @@ const About = () => {
       <section className="py-16 md:py-24 border-b border-zinc-200 bg-zinc-50">
         <div className="container mx-auto px-4 max-w-4xl">
           <FadeIn>
+            <h2 className="text-2xl md:text-3xl font-semibold tracking-[-0.03em] text-zinc-900 mb-10">
+              Mission &amp; vision
+            </h2>
+          </FadeIn>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <FadeIn className="glass-panel-light rounded-2xl p-7 md:p-8">
+              <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600 ring-1 ring-indigo-100">
+                <Target className="h-[22px] w-[22px]" strokeWidth={1.75} aria-hidden />
+              </div>
+              <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-zinc-400 mb-2">
+                Mission
+              </p>
+              <p className="text-lg font-medium tracking-[-0.02em] text-zinc-900 leading-relaxed">
+                {siteConfig.mission}
+              </p>
+            </FadeIn>
+            <FadeIn delay={0.06} className="glass-panel-light rounded-2xl p-7 md:p-8">
+              <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600 ring-1 ring-indigo-100">
+                <Eye className="h-[22px] w-[22px]" strokeWidth={1.75} aria-hidden />
+              </div>
+              <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-zinc-400 mb-2">
+                Vision
+              </p>
+              <p className="text-lg font-medium tracking-[-0.02em] text-zinc-900 leading-relaxed">
+                {siteConfig.vision}
+              </p>
+            </FadeIn>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 md:py-24 border-b border-zinc-200 bg-white">
+        <div className="container mx-auto px-4 max-w-4xl">
+          <FadeIn>
             <h2 className="text-2xl md:text-3xl font-semibold tracking-[-0.03em] text-zinc-900 mb-6">
               What we stand for
             </h2>
             <p className="text-lg text-zinc-600 leading-relaxed mb-12">
-              Enterprises do not need more AI tooling. They need an operating partner who can
+              Businesses do not need more AI tooling. They need an operating partner who can
               prioritize the right bets, ship securely, and leave teams with systems they can own.
             </p>
           </FadeIn>
@@ -110,7 +150,7 @@ const About = () => {
         </div>
       </section>
 
-      <section className="py-16 md:py-24 border-b border-zinc-200 bg-white">
+      <section className="py-16 md:py-24 border-b border-zinc-200 bg-zinc-50">
         <div className="container mx-auto px-4 max-w-4xl">
           <FadeIn className="glass-panel-light rounded-2xl overflow-hidden">
             <CardMedia
@@ -125,7 +165,7 @@ const About = () => {
               </h2>
               <p className="text-zinc-600 leading-relaxed mb-8">
                 Typical engagements start with outcome framing and readiness, move through a
-                governed build, and scale with your teams—supported by TrizenHR, TrizenDialog, and
+                governed build, and scale with your teams - supported by TrizenHR, TrizenDialog, and
                 Trizen Community where they remove friction.
               </p>
               <ul className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -151,7 +191,7 @@ const About = () => {
       </section>
 
       <CTABanner
-        title="Ready to partner with Trizen?"
+        title={`Ready to partner with ${siteConfig.name}?`}
         description="Talk to our team about your AI roadmap, operating constraints, and where we can accelerate outcomes."
         secondaryLabel="Explore services"
         secondaryHref="/services"

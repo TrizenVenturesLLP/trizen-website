@@ -41,7 +41,7 @@ const LegalPage = ({
             </h1>
             <p className="text-lg text-zinc-600 leading-relaxed mb-4">{intro}</p>
             <p className="text-sm text-zinc-500">
-              Last updated: {legalLastUpdated} · {siteConfig.name}
+              Last updated: {legalLastUpdated} · {siteConfig.legalName}
             </p>
           </FadeIn>
         </div>
