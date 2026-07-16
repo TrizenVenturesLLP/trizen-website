@@ -106,15 +106,6 @@
       scroll-behavior: auto;
     }
   }
-
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
-  .fade-in {
-    animation: fadeIn 0.5s ease-out forwards;
-  }
 }
 
 @layer components {
@@ -224,70 +215,6 @@
 
   .glow-accent {
     box-shadow: 0 6px 18px -10px hsl(var(--primary) / 0.18);
-  }
-
-  /* Gradient blobs */
-  .gradient-blob {
-    position: absolute;
-    border-radius: 9999px;
-    filter: blur(64px);
-    transform: translateZ(0);
-    animation: blob-drift 22s ease-in-out infinite;
-  }
-
-  .gradient-blob-a {
-    top: -10%;
-    left: 20%;
-    width: min(55vw, 480px);
-    height: min(55vw, 480px);
-    background: hsl(220 20% 50% / 0.14);
-  }
-
-  .gradient-blob-b {
-    top: 35%;
-    right: -5%;
-    width: min(40vw, 360px);
-    height: min(40vw, 360px);
-    background: hsl(200 30% 55% / 0.1);
-    animation-delay: -6s;
-    animation-duration: 26s;
-  }
-
-  .gradient-blob-c {
-    bottom: -15%;
-    left: 35%;
-    width: min(45vw, 400px);
-    height: min(45vw, 400px);
-    background: hsl(210 15% 45% / 0.08);
-    animation-delay: -11s;
-    animation-duration: 30s;
-  }
-
-  @keyframes blob-drift {
-    0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-    33% { transform: translate3d(3%, 4%, 0) scale(1.05); }
-    66% { transform: translate3d(-4%, 2%, 0) scale(0.96); }
-  }
-
-  /* Animated network SVGs */
-  .network-draw path,
-  .network-draw line {
-    stroke-dasharray: 180;
-    stroke-dashoffset: 180;
-    animation: network-draw 2.8s ease-out forwards;
-  }
-
-  .network-pulse {
-    animation: network-pulse 3.5s ease-in-out infinite;
-  }
-
-  @keyframes network-draw {
-    to { stroke-dashoffset: 0; }
-  }
-
-  @keyframes network-pulse {
-    0%, 100% { opacity: 0.45; }
-    50% { opacity: 1; }
   }
 
   /* Soft lift for general CTAs (no arrow motion) */
@@ -433,16 +360,6 @@
     transform: rotate(0deg);
   }
 
-  .link-arrow svg {
-    transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  @media (hover: hover) and (pointer: fine) {
-    .link-arrow:hover svg {
-      transform: translate3d(4px, 0, 0);
-    }
-  }
-
   .text-gradient {
     @apply bg-gradient-to-b from-white to-white/70 bg-clip-text text-transparent;
   }
@@ -453,20 +370,23 @@
     @apply transition-[transform,border-color,box-shadow] duration-300 ease-out;
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .gradient-blob,
-    .network-draw path,
-    .network-draw line,
-    .network-pulse {
-      animation: none !important;
-    }
+  .card-media-zoom {
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
 
+  @media (hover: hover) and (pointer: fine) {
+    .group:hover .card-media-zoom {
+      transform: scale(1.03);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
     .btn-micro,
     .btn-book,
     .btn-book__arrow,
     .btn-book__arrow svg,
     .btn-book::before,
-    .link-arrow svg {
+    .card-media-zoom {
       transition: none !important;
     }
 
@@ -478,7 +398,7 @@
     .btn-book:hover .btn-book__arrow svg,
     .btn-book:active .btn-book__arrow svg,
     .btn-book:hover::before,
-    .link-arrow:hover svg {
+    .group:hover .card-media-zoom {
       transform: none !important;
       filter: none !important;
     }
@@ -486,46 +406,5 @@
     .btn-book__arrow svg {
       transform: rotate(0deg) !important;
     }
-  }
-
-  .navbar-link {
-    @apply relative px-1 py-2 text-foreground/80 font-medium text-sm hover:text-primary transition-colors duration-200 cursor-pointer;
-  }
-
-  .navbar-link:after {
-    content: '';
-    @apply absolute bottom-0 left-0 w-0 h-[2px] bg-primary transition-all duration-300;
-  }
-
-  .navbar-link:hover:after {
-    @apply w-full;
-  }
-
-  .navbar-dropdown {
-    @apply invisible opacity-0 absolute top-full left-0 w-48 glass-panel rounded-md overflow-hidden transition-all duration-300 transform -translate-y-2 z-50;
-  }
-
-  .navbar-dropdown-trigger:hover .navbar-dropdown {
-    @apply visible opacity-100 transform translate-y-0;
-  }
-
-  .tab-button {
-    @apply px-6 py-3 rounded-md font-medium transition-all duration-300 text-sm;
-  }
-
-  .tab-button.active {
-    @apply bg-primary text-primary-foreground;
-  }
-
-  .tab-button:not(.active) {
-    @apply bg-secondary text-secondary-foreground hover:bg-secondary/80;
-  }
-
-  .tab-content {
-    @apply opacity-0;
-  }
-
-  .tab-content.active {
-    @apply animate-tab-fade-in;
   }
 }

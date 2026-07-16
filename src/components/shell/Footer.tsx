@@ -12,6 +12,7 @@ import {
   Phone,
 } from "lucide-react";
 import OptimizedImage from "@/components/ui/OptimizedImage";
+import FadeIn from "@/components/marketing/FadeIn";
 import {
   footerColumns,
   siteConfig,
@@ -135,6 +136,7 @@ const Footer = () => {
     >
       <div className="mobile-orb right-0 top-0 h-40 w-40 bg-indigo-400/15 md:hidden" aria-hidden />
       <div className="container relative mx-auto px-4 py-12 md:py-16">
+        <FadeIn y={12}>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 md:gap-10 lg:gap-8 mb-12">
           <div className="lg:col-span-2">
             <Link to="/" className="inline-flex items-center mb-4 min-h-11">
@@ -196,6 +198,7 @@ const Footer = () => {
             />
           ))}
         </div>
+        </FadeIn>
 
         {/* Registered office + contact information */}
         <div className="border-t border-zinc-200 pt-8 mb-8 grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">

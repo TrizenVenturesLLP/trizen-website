@@ -73,7 +73,7 @@ const CardMedia = ({
           src={image}
           alt={imageAlt}
           className={cn(
-            "absolute inset-0 h-full w-full",
+            "absolute inset-0 h-full w-full card-media-zoom",
             imageFit === "contain" ? "object-contain" : "object-cover"
           )}
           style={{ objectPosition: imagePosition }}

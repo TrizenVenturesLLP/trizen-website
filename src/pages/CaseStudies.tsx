@@ -1,26 +1,23 @@
+import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import CardMedia from "@/components/marketing/CardMedia";
 import FadeIn from "@/components/marketing/FadeIn";
 import AnimatedCounter from "@/components/marketing/AnimatedCounter";
 import { ListingPage } from "@/components/page";
-import { getAllCaseStudies } from "@/content/caseStudies";
+import { getAllCaseStudies, getSectors } from "@/content/caseStudies";
+import { parseLeadingMetric } from "@/lib/parseMetric";
 import { cn } from "@/lib/utils";
-
-function parseOutcomeMetric(
-  outcome: string
-): { value: number; suffix: string; rest: string } | null {
-  const match = outcome.match(/^(\d+)\s*(%|×|x)?\s*(.*)$/i);
-  if (!match) return null;
-  return {
-    value: Number(match[1]),
-    suffix: match[2]?.toLowerCase() === "x" ? "×" : match[2] || "",
-    rest: match[3]?.trim() ?? "",
-  };
-}
 
 const CaseStudies = () => {
   const published = getAllCaseStudies();
+  const sectors = useMemo(() => getSectors(), []);
+  const [activeSector, setActiveSector] = useState<string>("All");
+
+  const filtered =
+    activeSector === "All"
+      ? published
+      : published.filter((study) => study.sector === activeSector);
 
   return (
     <ListingPage
@@ -39,9 +36,38 @@ const CaseStudies = () => {
         secondaryHref: "/services",
       }}
     >
+      <FadeIn className="mb-8">
+        <div
+          className="flex flex-wrap gap-2"
+          role="tablist"
+          aria-label="Filter by sector"
+        >
+          {["All", ...sectors].map((sector) => {
+            const selected = activeSector === sector;
+            return (
+              <button
+                key={sector}
+                type="button"
+                role="tab"
+                aria-selected={selected}
+                onClick={() => setActiveSector(sector)}
+                className={cn(
+                  "rounded-lg px-3.5 py-2 text-sm font-medium transition-colors touch-manipulation min-h-10",
+                  selected
+                    ? "bg-indigo-600 text-white shadow-sm shadow-indigo-500/25"
+                    : "border border-zinc-200 bg-white text-zinc-600 hover:border-indigo-200 hover:text-indigo-700"
+                )}
+              >
+                {sector}
+              </button>
+            );
+          })}
+        </div>
+      </FadeIn>
+
       <div className="grid grid-cols-1 gap-6 lg:gap-8">
-        {published.map((study, index) => {
-          const metric = parseOutcomeMetric(study.outcome);
+        {filtered.map((study, index) => {
+          const metric = parseLeadingMetric(study.outcome);
 
           return (
             <FadeIn key={study.slug} delay={index * 0.06} y={12}>
@@ -152,6 +178,12 @@ const CaseStudies = () => {
           );
         })}
       </div>
+
+      {filtered.length === 0 ? (
+        <p className="text-sm text-zinc-500 text-center py-12">
+          No case studies in this sector yet.
+        </p>
+      ) : null}
     </ListingPage>
   );
 };

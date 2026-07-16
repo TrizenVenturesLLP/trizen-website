@@ -149,3 +149,36 @@ export function getCaseStudyBySlug(slug: string): CaseStudy | undefined {
 export function getFeaturedCaseStudies(): CaseStudy[] {
   return getAllCaseStudies().filter((study) => study.featured);
 }
+
+export function getCaseStudiesBySector(sector: string): CaseStudy[] {
+  const normalized = sector.toLowerCase();
+  return getAllCaseStudies().filter(
+    (study) => study.sector.toLowerCase() === normalized
+  );
+}
+
+export function getRelatedCaseStudies(
+  slugs: string[] | undefined,
+  options?: { exclude?: string; limit?: number }
+): CaseStudy[] {
+  const limit = options?.limit ?? 2;
+  const exclude = options?.exclude;
+  const fromSlugs = (slugs ?? [])
+    .map((slug) => getCaseStudyBySlug(slug))
+    .filter((study): study is CaseStudy => Boolean(study) && study.slug !== exclude);
+
+  if (fromSlugs.length >= limit) {
+    return fromSlugs.slice(0, limit);
+  }
+
+  const extras = getFeaturedCaseStudies().filter(
+    (study) =>
+      study.slug !== exclude && !fromSlugs.some((s) => s.slug === study.slug)
+  );
+
+  return [...fromSlugs, ...extras].slice(0, limit);
+}
+
+export function getSectors(): string[] {
+  return [...new Set(getAllCaseStudies().map((study) => study.sector))];
+}

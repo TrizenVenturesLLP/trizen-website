@@ -86,9 +86,14 @@ const ProductDetail = () => {
                 loading="eager"
                 decoding="async"
               />
-              <div className="absolute top-4 right-4 md:top-6 md:right-6 rounded-2xl border border-zinc-200/80 bg-white/95 px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm font-medium text-zinc-700 shadow-sm backdrop-blur-md">
-                {product.deploymentModel}
-              </div>
+              <FadeIn delay={0.12} className="absolute top-4 right-4 md:top-6 md:right-6 flex flex-col items-end gap-2">
+                <span className="rounded-2xl border border-emerald-200/80 bg-emerald-50/95 px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm font-medium text-emerald-800 shadow-sm backdrop-blur-md">
+                  Live product
+                </span>
+                <span className="rounded-2xl border border-zinc-200/80 bg-white/95 px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm font-medium text-zinc-700 shadow-sm backdrop-blur-md">
+                  {product.deploymentModel}
+                </span>
+              </FadeIn>
             </div>
           </FadeIn>
         </div>
@@ -101,10 +106,27 @@ const ProductDetail = () => {
 
       <PageSection animate={false}>
         <FadeIn>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center mb-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start mb-10">
             <div>
               <SectionTitle eyebrow>How it works</SectionTitle>
-              <p className="text-lg text-zinc-700 leading-relaxed">{product.howItWorks}</p>
+              <p className="text-lg text-zinc-700 leading-relaxed mb-8">
+                {product.howItWorks}
+              </p>
+              <ol className="space-y-4">
+                {product.capabilities.slice(0, 4).map((step, index) => (
+                  <FadeIn
+                    key={step}
+                    as="li"
+                    delay={0.05 + index * 0.04}
+                    className="flex gap-3"
+                  >
+                    <span className="font-mono text-xs font-medium text-indigo-600 mt-1 shrink-0 w-6">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <span className="text-sm text-zinc-700 leading-relaxed">{step}</span>
+                  </FadeIn>
+                ))}
+              </ol>
             </div>
             <div className="glass-panel-light rounded-2xl overflow-hidden min-h-[200px]">
               <CardMedia
@@ -114,33 +136,42 @@ const ProductDetail = () => {
               />
             </div>
           </div>
-          <CapabilityGrid items={product.capabilities} withCheck />
+        </FadeIn>
+        <FadeIn delay={0.08}>
+          <CapabilityGrid items={product.capabilities} withCheck stagger />
         </FadeIn>
       </PageSection>
 
-      <PageSection tone="muted">
-        <SectionTitle eyebrow className="mb-6">
-          Outcomes
-        </SectionTitle>
-        <CheckList
-          items={product.outcomes}
-          itemClassName="text-base text-zinc-700"
-          iconClassName="h-5 w-5 mt-0"
-          className="mb-10"
-        />
-        <SectionTitle eyebrow as="h3" className="mb-4">
-          Proof points
-        </SectionTitle>
-        <ul className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-          {product.metrics.map((metric) => (
-            <li
-              key={metric}
-              className="rounded-xl border border-zinc-200 bg-white px-5 py-4 text-sm font-medium text-zinc-800"
-            >
-              {metric}
-            </li>
-          ))}
-        </ul>
+      <PageSection tone="muted" animate={false}>
+        <FadeIn>
+          <SectionTitle eyebrow className="mb-6">
+            Outcomes
+          </SectionTitle>
+          <CheckList
+            items={product.outcomes}
+            stagger
+            itemClassName="text-base text-zinc-700"
+            iconClassName="h-5 w-5 mt-0"
+            className="mb-10"
+          />
+        </FadeIn>
+        <FadeIn delay={0.08}>
+          <SectionTitle eyebrow as="h3" className="mb-4">
+            Proof points
+          </SectionTitle>
+          <ul className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            {product.metrics.map((metric, index) => (
+              <FadeIn
+                key={metric}
+                as="li"
+                delay={0.1 + index * 0.05}
+                className="rounded-xl border border-zinc-200 bg-white px-5 py-4 text-sm font-medium text-zinc-800"
+              >
+                {metric}
+              </FadeIn>
+            ))}
+          </ul>
+        </FadeIn>
       </PageSection>
 
       <PageSection pad="tight">

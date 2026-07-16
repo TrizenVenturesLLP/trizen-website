@@ -7,7 +7,7 @@ interface FadeInProps {
   className?: string;
   /** Delay in seconds (values > 5 treated as ms for legacy callers) */
   delay?: number;
-  as?: "div" | "section" | "article";
+  as?: "div" | "section" | "article" | "li";
   y?: number;
 }
 
@@ -15,6 +15,7 @@ const MotionTag = {
   div: motion.div,
   section: motion.section,
   article: motion.article,
+  li: motion.li,
 } as const;
 
 /**
@@ -40,12 +41,12 @@ const FadeIn = ({
   return (
     <Comp
       className={cn("transform-gpu will-change-transform", className)}
-      initial={{ y }}
-      whileInView={{ y: 0 }}
+      initial={{ opacity: 0, y }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.12, margin: "0px 0px -20px 0px" }}
       transition={{
         duration: 0.5,
-        delay: Math.min(delaySec, 0.22),
+        delay: Math.min(delaySec, 0.4),
         ease: [0.22, 1, 0.36, 1],
       }}
     >

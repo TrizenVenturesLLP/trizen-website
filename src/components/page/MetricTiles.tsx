@@ -1,5 +1,7 @@
 import FadeIn from "@/components/marketing/FadeIn";
+import AnimatedCounter from "@/components/marketing/AnimatedCounter";
 import { surfaceVariants } from "@/lib/variants";
+import { parseLeadingMetric } from "@/lib/parseMetric";
 import { cn } from "@/lib/utils";
 
 export interface MetricTile {
@@ -37,21 +39,35 @@ const MetricTiles = ({
             : "grid-cols-1 sm:grid-cols-2"
         )}
       >
-        {metrics.map((metric, index) => (
-          <FadeIn key={metric.label} delay={index * 0.05}>
-            <div
-              className={cn(
-                surfaceVariants({ radius: "xl", pad: "none", shadow: "soft" }),
-                "p-6 text-center h-full"
-              )}
-            >
-              <p className="text-3xl font-semibold tracking-[-0.03em] text-zinc-900 mb-2">
-                {metric.value}
-              </p>
-              <p className="text-sm text-zinc-600">{metric.label}</p>
-            </div>
-          </FadeIn>
-        ))}
+        {metrics.map((metric, index) => {
+          const parsed = parseLeadingMetric(metric.value);
+
+          return (
+            <FadeIn key={metric.label} delay={index * 0.06} y={10}>
+              <div
+                className={cn(
+                  surfaceVariants({ radius: "xl", pad: "none", shadow: "soft" }),
+                  "p-6 text-center h-full"
+                )}
+              >
+                <p className="text-3xl font-semibold tracking-[-0.03em] text-zinc-900 mb-2">
+                  {parsed ? (
+                    <>
+                      <AnimatedCounter
+                        value={parsed.value}
+                        suffix={parsed.suffix}
+                      />
+                      {parsed.rest ? ` ${parsed.rest}` : null}
+                    </>
+                  ) : (
+                    metric.value
+                  )}
+                </p>
+                <p className="text-sm text-zinc-600">{metric.label}</p>
+              </div>
+            </FadeIn>
+          );
+        })}
       </div>
     </div>
   );

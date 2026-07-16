@@ -5,17 +5,8 @@ import CardMedia from "@/components/marketing/CardMedia";
 import FadeIn from "@/components/marketing/FadeIn";
 import AnimatedCounter from "@/components/marketing/AnimatedCounter";
 import { getFeaturedCaseStudies } from "@/content/caseStudies";
+import { parseLeadingMetric } from "@/lib/parseMetric";
 import { cn } from "@/lib/utils";
-
-function parseOutcomeMetric(outcome: string): { value: number; suffix: string; rest: string } | null {
-  const match = outcome.match(/^(\d+)\s*(%|×|x)?\s*(.*)$/i);
-  if (!match) return null;
-  return {
-    value: Number(match[1]),
-    suffix: match[2]?.toLowerCase() === "x" ? "×" : match[2] || "",
-    rest: match[3]?.trim() ?? "",
-  };
-}
 
 const HomeCaseStudies = () => {
   const caseStudies = getFeaturedCaseStudies().slice(0, 2);
@@ -35,7 +26,7 @@ const HomeCaseStudies = () => {
 
         <div className="grid grid-cols-1 gap-6 lg:gap-8">
           {caseStudies.map((study, index) => {
-            const metric = parseOutcomeMetric(study.outcome);
+            const metric = parseLeadingMetric(study.outcome);
             const isFeature = index === 0;
 
             return (

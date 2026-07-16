@@ -3,12 +3,14 @@ import { Calendar, Check, Clock, Mail, Send, Video } from "lucide-react";
 import SectionHeader from "@/components/marketing/SectionHeader";
 import PageMeta from "@/components/marketing/PageMeta";
 import FadeIn from "@/components/marketing/FadeIn";
+import FaqList from "@/components/marketing/FaqList";
 import { BookButton } from "@/components/page";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { siteConfig } from "@/content/site";
+import { contactCallTopics, contactFaq } from "@/content/marketingExtras";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 
@@ -133,7 +135,7 @@ const Contact = () => {
                   the right operating partner for your initiative.
                 </p>
 
-                <ul className="flex flex-col gap-2.5 mb-8">
+                <ul className="flex flex-col gap-2.5 mb-6">
                   {scheduleHighlights.map(({ icon: Icon, label }) => (
                     <li
                       key={label}
@@ -144,6 +146,23 @@ const Contact = () => {
                     </li>
                   ))}
                 </ul>
+
+                <div className="mb-8 rounded-xl border border-indigo-100/80 bg-white/70 p-4">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-indigo-600 mb-3">
+                    What we&apos;ll cover
+                  </p>
+                  <ul className="space-y-2">
+                    {contactCallTopics.map((topic) => (
+                      <li
+                        key={topic}
+                        className="flex gap-2 text-sm text-zinc-700 leading-snug"
+                      >
+                        <Check className="h-4 w-4 text-indigo-600 shrink-0 mt-0.5" aria-hidden />
+                        {topic}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
 
                 <BookButton
                   href={CALENDLY_URL}
@@ -263,6 +282,12 @@ const Contact = () => {
               {CONTACT_FORM_EMAIL}
             </a>
           </p>
+        </div>
+      </section>
+
+      <section className="relative overflow-hidden border-b border-zinc-200 bg-white py-14 md:py-20">
+        <div className="container relative mx-auto px-4 max-w-3xl">
+          <FaqList items={contactFaq} title="Before you book" />
         </div>
       </section>
     </>

@@ -14,13 +14,10 @@ const MetricsStrip = () => {
         aria-hidden
       />
       <div className="container relative mx-auto px-4">
-        <FadeIn>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-5 gap-y-8 md:gap-x-10 md:gap-y-10">
-            {metricClaims.map((claim) => (
-              <div
-                key={claim.id}
-                className="group relative rounded-2xl border border-indigo-100/80 bg-white/70 p-4 pl-4 shadow-sm shadow-indigo-500/5 backdrop-blur-sm md:rounded-none md:border-0 md:border-l md:border-zinc-200 md:bg-transparent md:p-0 md:pl-4 md:shadow-none md:backdrop-blur-none hover:md:border-zinc-400 transition-colors"
-              >
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-5 gap-y-8 md:gap-x-10 md:gap-y-10">
+          {metricClaims.map((claim, index) => (
+            <FadeIn key={claim.id} delay={index * 0.06} y={10}>
+              <div className="group relative rounded-2xl border border-indigo-100/80 bg-white/70 p-4 pl-4 shadow-sm shadow-indigo-500/5 backdrop-blur-sm md:rounded-none md:border-0 md:border-l md:border-zinc-200 md:bg-transparent md:p-0 md:pl-4 md:shadow-none md:backdrop-blur-none hover:md:border-zinc-400 transition-colors h-full">
                 <p className="text-3xl md:text-4xl font-semibold tracking-[-0.04em] text-zinc-900 mb-2 tabular-nums">
                   <AnimatedCounter value={claim.value} suffix={claim.suffix} />
                 </p>
@@ -36,9 +33,9 @@ const MetricsStrip = () => {
                   <span className="mt-2 block h-4" aria-hidden />
                 )}
               </div>
-            ))}
-          </div>
-        </FadeIn>
+            </FadeIn>
+          ))}
+        </div>
       </div>
     </section>
   );

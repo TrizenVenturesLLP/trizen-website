@@ -13,9 +13,12 @@ import CTABanner from "@/components/marketing/CTABanner";
 import CardMedia from "@/components/marketing/CardMedia";
 import PageMeta from "@/components/marketing/PageMeta";
 import FadeIn from "@/components/marketing/FadeIn";
+import ProcessSteps from "@/components/marketing/ProcessSteps";
 import { BookButton } from "@/components/page";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/content/site";
+import { aboutEngagementSteps } from "@/content/marketingExtras";
+import { industryChips } from "@/content/homeData";
 
 const values = [
   {
@@ -87,7 +90,7 @@ const About = () => {
             </h2>
           </FadeIn>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            <FadeIn className="glass-panel-light rounded-2xl p-7 md:p-8">
+            <FadeIn className="card-sheen glass-panel-light card-lift-light rounded-2xl p-7 md:p-8">
               <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600 ring-1 ring-indigo-100">
                 <Target className="h-[22px] w-[22px]" strokeWidth={1.75} aria-hidden />
               </div>
@@ -98,7 +101,7 @@ const About = () => {
                 {siteConfig.mission}
               </p>
             </FadeIn>
-            <FadeIn delay={0.06} className="glass-panel-light rounded-2xl p-7 md:p-8">
+            <FadeIn delay={0.06} className="card-sheen glass-panel-light card-lift-light rounded-2xl p-7 md:p-8">
               <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600 ring-1 ring-indigo-100">
                 <Eye className="h-[22px] w-[22px]" strokeWidth={1.75} aria-hidden />
               </div>
@@ -130,7 +133,7 @@ const About = () => {
               <FadeIn
                 key={value.title}
                 delay={index * 0.06}
-                className="glass-panel-light rounded-2xl p-7 md:p-8"
+                className="card-sheen glass-panel-light card-lift-light rounded-2xl p-7 md:p-8"
               >
                 <div className="mb-5 flex items-center gap-3">
                   <div className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600 ring-1 ring-indigo-100">
@@ -147,6 +150,17 @@ const About = () => {
               </FadeIn>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="py-16 md:py-24 border-b border-zinc-200 bg-white">
+        <div className="container mx-auto px-4 max-w-5xl">
+          <ProcessSteps
+            steps={aboutEngagementSteps}
+            eyebrow="Engagement model"
+            title="How partnerships typically unfold"
+            description="Outcome framing first, governed build second, ownership transfer always."
+          />
         </div>
       </section>
 
@@ -168,7 +182,7 @@ const About = () => {
                 governed build, and scale with your teams - supported by TrizenHR, TrizenDialog, and
                 Trizen Community where they remove friction.
               </p>
-              <ul className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <ul className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
                 {[
                   { label: "Services", href: "/services" },
                   { label: "Products", href: "/products" },
@@ -181,6 +195,21 @@ const About = () => {
                     >
                       {item.label}
                       <ArrowRight className="h-4 w-4 text-indigo-600 transition-transform group-hover:translate-x-0.5" />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+              <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-zinc-400 mb-4">
+                Sectors we serve
+              </p>
+              <ul className="flex flex-wrap gap-2">
+                {industryChips.map((chip) => (
+                  <li key={chip.id}>
+                    <Link
+                      to={`/industries/${chip.slug}`}
+                      className="inline-flex rounded-lg border border-zinc-200 bg-white px-3 py-1.5 text-sm font-medium text-zinc-700 hover:border-indigo-200 hover:text-indigo-700 transition-colors"
+                    >
+                      {chip.name}
                     </Link>
                   </li>
                 ))}

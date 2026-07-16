@@ -14,3 +14,7 @@ export { default as HomeServices } from "./HomeServices";
 export { default as HomeProducts } from "./HomeProducts";
 export { default as HomeCaseStudies } from "./HomeCaseStudies";
 export { default as TechStack } from "./TechStack";
+export { default as FaqList } from "./FaqList";
+export { default as ProcessSteps } from "./ProcessSteps";
+export { default as RelatedCaseStudies } from "./RelatedCaseStudies";
+export { default as DetailSectionNav } from "./DetailSectionNav";

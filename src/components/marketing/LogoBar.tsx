@@ -11,26 +11,26 @@ const LogoBar = () => {
           <p className="font-mono text-[10px] md:text-xs font-medium uppercase tracking-widest text-indigo-600 text-center mb-8">
             Industries we serve
           </p>
-          <ul className="flex flex-wrap items-center justify-center gap-x-6 gap-y-4 md:gap-x-12 md:gap-y-5">
-            {industryChips.map((chip) => (
-              <li key={chip.id}>
-                <Link
-                  to={`/industries/${chip.slug}`}
-                  className="group inline-flex flex-col items-center text-center touch-manipulation min-h-11 justify-center rounded-xl px-3 py-2 transition-colors hover:bg-white/70"
-                >
-                  <span className="text-base md:text-xl font-medium tracking-wide text-zinc-800 group-hover:text-indigo-600 transition-colors">
-                    {chip.name}
-                  </span>
-                  {chip.relevanceMetric ? (
-                    <span className="mt-1.5 font-mono text-[10px] uppercase tracking-widest text-zinc-500 group-hover:text-zinc-600 transition-colors">
-                      {chip.relevanceMetric}
-                    </span>
-                  ) : null}
-                </Link>
-              </li>
-            ))}
-          </ul>
         </FadeIn>
+        <ul className="flex flex-wrap items-center justify-center gap-x-6 gap-y-4 md:gap-x-12 md:gap-y-5">
+          {industryChips.map((chip, index) => (
+            <FadeIn key={chip.id} as="li" delay={0.04 + index * 0.03} y={6}>
+              <Link
+                to={`/industries/${chip.slug}`}
+                className="group inline-flex flex-col items-center text-center touch-manipulation min-h-11 justify-center rounded-xl px-3 py-2 transition-colors hover:bg-white/70"
+              >
+                <span className="text-base md:text-xl font-medium tracking-wide text-zinc-800 group-hover:text-indigo-600 transition-colors">
+                  {chip.name}
+                </span>
+                {chip.relevanceMetric ? (
+                  <span className="mt-1.5 font-mono text-[10px] uppercase tracking-widest text-zinc-500 group-hover:text-zinc-600 transition-colors">
+                    {chip.relevanceMetric}
+                  </span>
+                ) : null}
+              </Link>
+            </FadeIn>
+          ))}
+        </ul>
       </div>
     </section>
   );

@@ -7,7 +7,6 @@ import {
   TechStack,
   HomeCaseStudies,
   CTABanner,
-  FadeIn,
   PageMeta,
 } from "@/components/marketing";
 import { siteConfig } from "@/content/site";
@@ -38,12 +37,10 @@ const Index = () => {
       <HomeProducts />
       <TechStack />
       <HomeCaseStudies />
-      <FadeIn>
-        <CTABanner
-          secondaryLabel="View Case Studies"
-          secondaryHref="/case-studies"
-        />
-      </FadeIn>
+      <CTABanner
+        secondaryLabel="View Case Studies"
+        secondaryHref="/case-studies"
+      />
     </>
   );
 };

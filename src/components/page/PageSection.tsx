@@ -67,7 +67,12 @@ const PageSection = ({
       id={id}
       aria-label={ariaLabel}
       aria-labelledby={ariaLabelledby}
-      className={cn(toneClass[tone], padClass[pad], className)}
+      className={cn(
+        toneClass[tone],
+        padClass[pad],
+        id && "scroll-mt-28",
+        className
+      )}
     >
       <div
         className={cn(
