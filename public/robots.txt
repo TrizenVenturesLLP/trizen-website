@@ -1,14 +1,8 @@
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: Twitterbot
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
-
 User-agent: *
 Allow: /
+
+# Internal / legacy — not for indexing
+Disallow: /certificate-manager
+Disallow: /certificate-test
+
+Sitemap: https://trizenventures.com/sitemap.xml

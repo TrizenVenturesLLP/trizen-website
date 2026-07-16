@@ -11,12 +11,46 @@ export default defineConfig(({ mode }) => ({
   },
   plugins: [
     react(),
-    mode === 'development' &&
-    componentTagger(),
+    mode === "development" && componentTagger(),
   ].filter(Boolean),
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
+  },
+  build: {
+    target: "es2020",
+    cssCodeSplit: true,
+    sourcemap: false,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (!id.includes("node_modules")) return;
+
+          if (
+            id.includes("/react/") ||
+            id.includes("/react-dom/") ||
+            id.includes("/react-router") ||
+            id.includes("/scheduler/")
+          ) {
+            return "vendor-react";
+          }
+
+          if (id.includes("framer-motion")) {
+            return "vendor-motion";
+          }
+
+          if (
+            id.includes("@radix-ui") ||
+            id.includes("class-variance-authority") ||
+            id.includes("/clsx/") ||
+            id.includes("tailwind-merge")
+          ) {
+            return "vendor-ui";
+          }
+        },
+      },
+    },
+    chunkSizeWarningLimit: 600,
   },
 }));

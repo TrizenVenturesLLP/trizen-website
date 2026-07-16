@@ -4,45 +4,86 @@
 @tailwind utilities;
 
 @layer base {
+  /* Light tokens - available when theme is light */
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 0 0% 98%;
+    --foreground: 225 18% 8%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 225 18% 8%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 225 18% 8%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 239 84% 59%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 240 5% 96%;
+    --secondary-foreground: 225 18% 12%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 240 5% 96%;
+    --muted-foreground: 240 4% 42%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 239 84% 59%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 240 6% 90%;
+    --input: 240 6% 90%;
+    --ring: 239 84% 59%;
 
     --radius: 0.5rem;
 
     --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-foreground: 225 18% 8%;
+    --sidebar-primary: 239 84% 59%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 5% 96%;
+    --sidebar-accent-foreground: 225 18% 12%;
+    --sidebar-border: 240 6% 90%;
+    --sidebar-ring: 239 84% 59%;
+  }
+
+  /* Optional dark - kept for dark bookend surfaces / future toggle */
+  .dark {
+    --background: 225 18% 5%;
+    --foreground: 0 0% 95%;
+
+    --card: 240 6% 10%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 240 6% 10%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 239 84% 67%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 240 4% 16%;
+    --secondary-foreground: 0 0% 95%;
+
+    --muted: 240 4% 16%;
+    --muted-foreground: 240 5% 65%;
+
+    --accent: 239 84% 67%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 4% 16%;
+    --input: 240 4% 16%;
+    --ring: 239 84% 67%;
+
+    --sidebar-background: 240 10% 4%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 239 84% 67%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 4% 16%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 240 4% 16%;
+    --sidebar-ring: 239 84% 67%;
   }
 
   * {
@@ -50,58 +91,320 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans;
+    @apply bg-background text-foreground font-sans antialiased;
+    -webkit-tap-highlight-color: transparent;
   }
 
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+  /* Visible keyboard focus for accessibility */
+  :focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
   }
 
-  .fade-in {
-    animation: fadeIn 0.5s ease-out forwards;
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
   }
 }
 
 @layer components {
-  .navbar-link {
-    @apply relative px-1 py-2 text-trizen-dark font-medium text-sm hover:text-trizen-purple transition-colors duration-200 cursor-pointer;
+  /* Enterprise light panels - single surface system (glass-panel aliases light) */
+  .glass-panel,
+  .glass-panel-light {
+    @apply relative overflow-hidden border border-zinc-200 bg-white;
+    box-shadow: 0 1px 2px rgb(15 23 42 / 0.04);
+    transform: translateZ(0);
+    backface-visibility: hidden;
   }
 
-  .navbar-link:after {
-    content: '';
-    @apply absolute bottom-0 left-0 w-0 h-[2px] bg-trizen-purple transition-all duration-300;
+  /* Soft multi-stop washes - stronger on small screens where flat white reads bland */
+  .section-mesh {
+    position: relative;
+    isolation: isolate;
+    background-color: #fff;
+    background-image:
+      radial-gradient(ellipse 90% 55% at 10% -10%, rgb(99 102 241 / 0.14), transparent 55%),
+      radial-gradient(ellipse 70% 45% at 100% 0%, rgb(56 189 248 / 0.1), transparent 50%),
+      radial-gradient(ellipse 60% 40% at 50% 100%, rgb(99 102 241 / 0.06), transparent 55%);
   }
 
-  .navbar-link:hover:after {
-    @apply w-full;
+  .section-mesh-muted {
+    position: relative;
+    isolation: isolate;
+    background-color: rgb(250 250 250);
+    background-image:
+      radial-gradient(ellipse 80% 50% at 0% 0%, rgb(99 102 241 / 0.12), transparent 55%),
+      radial-gradient(ellipse 70% 45% at 100% 20%, rgb(14 165 233 / 0.08), transparent 50%),
+      linear-gradient(180deg, rgb(250 250 250), rgb(244 244 245));
   }
 
-  .navbar-dropdown {
-    @apply invisible opacity-0 absolute top-full left-0 w-48 bg-white shadow-lg rounded-md overflow-hidden transition-all duration-300 transform -translate-y-2 z-50;
+  .section-mesh-invert {
+    position: relative;
+    isolation: isolate;
+    background-color: #fff;
+    background-image:
+      radial-gradient(ellipse 75% 50% at 90% -5%, rgb(99 102 241 / 0.11), transparent 55%),
+      radial-gradient(ellipse 55% 40% at 0% 80%, rgb(165 180 252 / 0.14), transparent 50%);
   }
 
-  .navbar-dropdown-trigger:hover .navbar-dropdown {
-    @apply visible opacity-100 transform translate-y-0;
+  .mobile-orb {
+    pointer-events: none;
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(48px);
+    transform: translateZ(0);
   }
 
-  .tab-button {
-    @apply px-6 py-3 rounded-md font-medium transition-all duration-300 text-sm;
+  @media (min-width: 768px) {
+    .mobile-orb {
+      filter: blur(80px);
+    }
   }
 
-  .tab-button.active {
-    @apply bg-trizen-purple text-white;
+  .text-gradient-brand {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #312e81 0%, #4f46e5 45%, #6366f1 100%);
   }
 
-  .tab-button:not(.active) {
-    @apply bg-trizen-gray text-trizen-dark hover:bg-opacity-80;
+  .card-sheen::before {
+    content: "";
+    pointer-events: none;
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgb(165 180 252 / 0.9),
+      transparent
+    );
   }
 
-  .tab-content {
-    @apply opacity-0;
+  .glass-soft-light {
+    @apply border border-zinc-100 bg-zinc-50;
+    box-shadow: inset 0 1px 0 0 rgb(255 255 255 / 0.8);
   }
 
-  .tab-content.active {
-    @apply animate-tab-fade-in;
+  .glass-soft {
+    box-shadow: inset 0 1px 0 0 rgb(255 255 255 / 0.8);
+  }
+
+  /* Soft indigo CTA surface on light pages */
+  .glass-frost {
+    background-color: rgb(238 242 255 / 0.85);
+    border-color: rgb(199 210 254);
+    box-shadow:
+      inset 0 1px 0 0 rgb(255 255 255 / 0.9),
+      0 20px 50px -30px rgb(79 70 229 / 0.2);
+    transform: translateZ(0);
+  }
+
+  .inner-shadow-inset-light {
+    box-shadow: inset 0 1px 1px 0 rgb(15 23 42 / 0.04);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .card-lift:hover,
+    .card-lift-light:hover {
+      transform: translate3d(0, -2px, 0);
+      border-color: rgb(199 210 254);
+      box-shadow: 0 8px 18px -12px rgb(15 23 42 / 0.1);
+    }
+  }
+
+  .glow-accent {
+    box-shadow: 0 6px 18px -10px hsl(var(--primary) / 0.18);
+  }
+
+  /* Soft lift for general CTAs (no arrow motion) */
+  .btn-micro {
+    transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.22s ease;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .btn-micro:hover {
+      transform: translate3d(0, -1px, 0);
+    }
+    .btn-micro:active {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  /* Book a Consultation - premium CTA with arrow micro-interaction */
+  .btn-book {
+    position: relative;
+    isolation: isolate;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    overflow: hidden;
+    border-radius: 0.625rem !important;
+    border: 1px solid rgb(67 56 202 / 0.85) !important;
+    background-color: #4f46e5 !important;
+    background-image: linear-gradient(
+      165deg,
+      #818cf8 0%,
+      #4f46e5 48%,
+      #4338ca 100%
+    ) !important;
+    color: #fff !important;
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.28),
+      0 1px 2px rgb(49 46 129 / 0.2),
+      0 12px 28px -10px rgb(79 70 229 / 0.55);
+    transition:
+      transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.28s ease,
+      filter 0.28s ease;
+  }
+
+  .btn-book::before {
+    content: "";
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      105deg,
+      transparent 40%,
+      rgb(255 255 255 / 0.14) 50%,
+      transparent 60%
+    );
+    transform: translateX(-120%);
+    transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    z-index: 0;
+  }
+
+  .btn-book > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .btn-book__arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.875rem;
+    height: 1.875rem;
+    border-radius: 0.4rem;
+    flex-shrink: 0;
+    background: linear-gradient(160deg, #ffffff 0%, #eef0f8 55%, #e2e5f0 100%);
+    border: 1px solid rgb(255 255 255 / 0.95);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.9),
+      0 1px 2px rgb(15 23 42 / 0.12);
+    color: #312e81;
+    transition:
+      transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.28s ease;
+  }
+
+  .btn-book__arrow svg {
+    width: 0.875rem !important;
+    height: 0.875rem !important;
+    color: #312e81;
+    stroke: currentColor;
+    transform: rotate(-45deg);
+    transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* Compact for navbar / sm */
+  .h-9.btn-book {
+    gap: 0.55rem;
+    border-radius: 0.5rem !important;
+  }
+
+  .h-9 .btn-book__arrow {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 0.3rem;
+  }
+
+  .h-9 .btn-book__arrow svg {
+    width: 0.75rem !important;
+    height: 0.75rem !important;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .btn-book:hover {
+      filter: brightness(1.04);
+      box-shadow:
+        inset 0 1px 0 rgb(255 255 255 / 0.32),
+        0 1px 2px rgb(49 46 129 / 0.22),
+        0 16px 34px -10px rgb(79 70 229 / 0.65);
+    }
+
+    .btn-book:hover::before {
+      transform: translateX(120%);
+    }
+
+    .btn-book:hover .btn-book__arrow {
+      transform: scale(1.04);
+      box-shadow:
+        inset 0 1px 0 rgb(255 255 255 / 0.95),
+        0 2px 6px rgb(15 23 42 / 0.14);
+    }
+
+    .btn-book:hover .btn-book__arrow svg {
+      transform: rotate(0deg);
+    }
+
+    .btn-book:active {
+      filter: brightness(0.98);
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  .btn-book:active .btn-book__arrow svg {
+    transform: rotate(0deg);
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-b from-white to-white/70 bg-clip-text text-transparent;
+  }
+
+  /* Soft card lift - single system (card-lift aliases light) */
+  .card-lift,
+  .card-lift-light {
+    @apply transition-[transform,border-color,box-shadow] duration-300 ease-out;
+  }
+
+  .card-media-zoom {
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .group:hover .card-media-zoom {
+      transform: scale(1.03);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .btn-micro,
+    .btn-book,
+    .btn-book__arrow,
+    .btn-book__arrow svg,
+    .btn-book::before,
+    .card-media-zoom {
+      transition: none !important;
+    }
+
+    .btn-micro:hover,
+    .btn-micro:active,
+    .btn-book:hover,
+    .btn-book:active,
+    .btn-book:hover .btn-book__arrow,
+    .btn-book:hover .btn-book__arrow svg,
+    .btn-book:active .btn-book__arrow svg,
+    .btn-book:hover::before,
+    .group:hover .card-media-zoom {
+      transform: none !important;
+      filter: none !important;
+    }
+
+    .btn-book__arrow svg {
+      transform: rotate(0deg) !important;
+    }
   }
 }

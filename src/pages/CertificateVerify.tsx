@@ -1,8 +1,6 @@
 
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import { Loader2, Download, FileText, Image } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
@@ -72,9 +70,7 @@ const CertificateVerify = () => {
   }, [id]);
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <Navbar />
-      <main className="flex-grow bg-white">
+    <div className="bg-white">
         <div className="container mx-auto py-12 px-4">
           <h1 className="text-3xl font-bold text-center mb-8">Certificate Verification</h1>
           
@@ -159,8 +155,6 @@ const CertificateVerify = () => {
             )}
           </div>
         </div>
-      </main>
-      <Footer />
     </div>
   );
 };

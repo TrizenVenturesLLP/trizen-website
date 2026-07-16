@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import CertificateGenerator from '@/components/CertificateGenerator';
 import { QRCodeGenerator } from '@/lib/qrCodeGenerator';
 import { Button } from '@/components/ui/button';
@@ -100,9 +98,7 @@ const CertificateManager = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <Navbar />
-      <main className="flex-grow bg-gray-50">
+    <div className="bg-gray-50">
         <div className="container mx-auto py-12 px-4">
           <div className="max-w-6xl mx-auto space-y-8">
             
@@ -288,8 +284,6 @@ const CertificateManager = () => {
             </Card>
           </div>
         </div>
-      </main>
-      <Footer />
     </div>
   );
 };

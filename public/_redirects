@@ -1,1 +1,31 @@
-/*    /index.html    200
+# SPA fallback
+/*    /index.html   200
+
+# Legacy B2C → enterprise IA (301 for SEO)
+/consulting              /services       301
+/consulting/*            /services       301
+/research                /products       301
+/research/*              /products       301
+/training                /services       301
+/training/*              /services       301
+/contribute              /about          301
+/gallery                 /about          301
+/ventures                /about          301
+/ventures/*              /about          301
+/events                  /products/trizen-community  301
+/project/*               /products       301
+/ongoing-project/*       /case-studies   301
+/certificate-test        /               301
+
+# Solutions / Accelerators → Products
+/solutions               /products       301
+/solutions/*             /products       301
+/accelerators            /products       301
+/accelerators/trizen-certify  /products/trizen-hr         301
+/accelerators/trizen-labs     /products/trizen-community  301
+/accelerators/trizen-deploy   /products/trizen-dialog     301
+/accelerators/*          /products       301
+
+# Renamed product slugs
+/products/trizen-certify /products/trizen-hr         301
+/products/trizen-labs    /products/trizen-community  301
