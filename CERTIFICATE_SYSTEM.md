@@ -62,6 +62,7 @@ This system provides automated certificate generation with embedded QR codes tha
 ### New Certificate IDs (Ready to Use)
 - **X9K2MN** - First new certificate
 - **P7Q4RS** - Second new certificate
+- **M4P7Q2** - Third new certificate
 
 ### Existing Certificate IDs
 - **BJAK1DV** - Existing certificate

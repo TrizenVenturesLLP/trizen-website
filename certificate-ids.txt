@@ -14,6 +14,13 @@ Files needed:
 - public/certificates/P7Q4RS.png
 - public/certificates/P7Q4RS.pdf
 
+## Certificate 3
+ID: M4P7Q2
+Verification URL: https://yourdomain.com/verify/M4P7Q2
+Files needed:
+- public/certificates/M4P7Q2.png
+- public/certificates/M4P7Q2.pdf
+
 ## Existing Certificate IDs for Reference:
 - BJAK1DV
 - R7M3QA
