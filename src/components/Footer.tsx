@@ -29,7 +29,7 @@ const Footer = () => {
   return (
     <footer className="bg-trizen-dark text-white py-12">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-10">
           {/* Logo and Tagline */}
           <div>
             <div className="flex items-center mb-4">
@@ -60,30 +60,14 @@ const Footer = () => {
           </div>
 
           {/* Contact Information */}
-          <div>
+          <div className="lg:col-span-2">
             <h3 className="text-lg font-semibold mb-4 text-trizen-purple">Contact Us</h3>
             <ul className="space-y-2 text-gray-300">
               <li>Email: nukaraju@trizenventures.com</li>
               <li>Phone: +91 8639648822</li>
-              <li>Address 1: Gajuwaka,Visakhapatnam, Andhrapradesh</li>
-              <li>Address 2: Kukatpally, Hyderabad Telangana</li>
+              <li>Address 1: Gajuwaka, Visakhapatnam, Andhra Pradesh</li>
+              <li>Address 2: Kukatpally, Hyderabad, Telangana</li>
             </ul>
-          </div>
-
-          {/* Newsletter */}
-          <div>
-            <h3 className="text-lg font-semibold mb-4 text-trizen-purple">Stay Updated</h3>
-            <p className="text-gray-300 mb-4">Subscribe to our newsletter for the latest updates.</p>
-            <div className="flex">
-              <input 
-                type="email" 
-                placeholder="Your email" 
-                className="px-4 py-2 w-full rounded-l focus:outline-none text-gray-800"
-              />
-              <button className="bg-trizen-purple hover:bg-trizen-purple/90 px-4 py-2 rounded-r">
-                Subscribe
-              </button>
-            </div>
           </div>
         </div>
 

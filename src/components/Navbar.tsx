@@ -1,133 +1,128 @@
-import { User, Search, HelpCircle, Menu } from "lucide-react";
-import { useState } from "react";
+import { Menu } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
-  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const currentPath =
+    typeof window !== "undefined" ? window.location.pathname : "";
 
-  // Get current path to determine active page
-  const currentPath = typeof window !== 'undefined' ? window.location.pathname : '';
+  const navLinks = [
+    { label: "Research", href: "/#research" },
+    { label: "Consulting", href: "/#consulting" },
+    { label: "Training", href: "https://lms.trizenventures.com/" },
+    { label: "Insights", href: "https://connect.trizenventures.com/" },
+    { label: "Careers", href: "https://careers.trizenventures.com/" },
+  ];
 
   return (
     <header className="sticky bg-[#f0effc] top-0 w-full z-50">
-      <div className="container mx-auto px-4 py-3 flex items-center justify-between">
+      <div className="container mx-auto px-4 py-3 flex items-center justify-between max-w-7xl">
         <div className="flex items-center gap-10">
-          {/* Logo */}
-          <a href="/" className="flex items-center">
-            <img src="/lovable-uploads/trizen-logo.png" alt="Trizen Logo" className="h-14" />
-          </a>
+          <Link to="/" className="flex items-center">
+            <img
+              src="/lovable-uploads/trizen-logo.png"
+              alt="Trizen Logo"
+              className="h-14"
+            />
+          </Link>
 
-          {/* Navigation Links - Desktop Only */}
           <nav className="hidden text-base lg:flex items-center space-x-8">
-            <a 
-              href="/research" 
-              className={`navbar-link ${currentPath === '/research' ? 'text-trizen-purple font-medium' : ''}`}
-            >
-              Research
-            </a>
-            <a 
-              href="/consulting"
-              className={`navbar-link ${currentPath === '/consulting' ? 'text-trizen-purple font-medium' : ''}`}
-            >
-              Consulting
-            </a>
-            <a 
-              href="https://lms.trizenventures.com/" 
-              className={`navbar-link ${currentPath === 'https://lms.trizenventures.com/' ? 'text-trizen-purple font-medium' : ''}`}
-            >
-              Training
-            </a>
-            <a 
-              href="https://connect.trizenventures.com/" 
-              className={`navbar-link ${currentPath === 'https://connect.trizenventures.com/' ? 'text-trizen-purple font-medium' : ''}`}
-            >
-              Insights
-            </a>
-            <a 
-              href="https://careers.trizenventures.com/" 
-              className={`navbar-link ${currentPath === 'https://careers.trizenventures.com/' ? 'text-trizen-purple font-medium' : ''}`}
-            >
-              Careers
-            </a>
+            {navLinks.map((link) =>
+              link.href.startsWith("http") ? (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="navbar-link"
+                >
+                  {link.label}
+                </a>
+              ) : link.href.includes("#") ? (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  className={`navbar-link ${
+                    currentPath === "/" && typeof window !== "undefined" && window.location.hash === link.href.slice(1) ? "text-trizen-purple font-medium" : ""
+                  }`}
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <Link
+                  key={link.label}
+                  to={link.href}
+                  className={`navbar-link ${
+                    currentPath === link.href ? "text-trizen-purple font-medium" : ""
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              )
+            )}
           </nav>
         </div>
 
-        {/* Right side icons */}
-        <div className="flex items-center space-x-6">
-          <button className="text-gray-600 hover:text-trizen-purple">
-            <Search className="h-5 w-5" />
-          </button>
-          <button className="text-gray-600 hover:text-trizen-purple">
-            <HelpCircle className="h-5 w-5" />
-          </button>
-          <div className="relative navbar-dropdown-trigger">
-            <button className="text-gray-600 hover:text-trizen-purple p-1 border border-transparent hover:border-gray-200 rounded">
-              <User className="h-5 w-5" />
-            </button>
-            <div className="navbar-dropdown right-0 left-auto w-40">
-              <div className="py-2 px-4 bg-trizen-light font-medium text-sm">My Trizen</div>
-              <a href="#" className="block px-4 py-2 text-sm hover:bg-gray-50">Log in</a>
-              <a href="#" className="block px-4 py-2 text-sm hover:bg-gray-50">Register</a>
-            </div>
-          </div>
-          
-          {/* Mobile Menu Button */}
+        <div className="flex items-center gap-4">
+          <Link to="/consulting/contact" className="hidden lg:inline-flex">
+            <Button
+              size="sm"
+              className="bg-trizen-purple hover:bg-[#2F2468] text-white transition-all duration-200"
+            >
+              Start a Project
+            </Button>
+          </Link>
+
           <Sheet>
             <SheetTrigger asChild>
-              <button className="lg:hidden text-gray-600 focus:outline-none">
+              <button className="lg:hidden text-gray-600 focus:outline-none p-2">
                 <Menu className="w-6 h-6" />
               </button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-[85%] sm:w-[350px] overflow-y-auto">
+            <SheetContent
+              side="right"
+              className="w-[85%] sm:w-[350px] overflow-y-auto"
+            >
               <div className="py-6 space-y-6">
-                <a 
-                  href="/research" 
-                  className={`block px-4 py-2 text-base font-medium ${
-                    currentPath === '/research' ? 'text-trizen-purple' : 'text-trizen-dark hover:text-trizen-purple'
-                  }`}
-                >
-                  Research
-                </a>
-                <a 
-                  href="/consulting" 
-                  className={`block px-4 py-2 text-base font-medium ${
-                    currentPath === '/consulting' ? 'text-trizen-purple' : 'text-trizen-dark hover:text-trizen-purple'
-                  }`}
-                >
-                  Consulting
-                </a>
-                <a 
-                  href="https://lms.trizenventures.com/" 
-                  className={`block px-4 py-2 text-base font-medium ${
-                    currentPath === 'https://lms.trizenventures.com/' ? 'text-trizen-purple' : 'text-trizen-dark hover:text-trizen-purple'
-                  }`}
-                >
-                  Training
-                </a>
-                <a 
-                  href="https://connect.trizenventures.com/" 
-                  className={`block px-4 py-2 text-base font-medium ${
-                    currentPath === 'https://connect.trizenventures.com/' ? 'text-trizen-purple' : 'text-trizen-dark hover:text-trizen-purple'
-                  }`}
-                >
-                  Insights
-                </a>
-                <a 
-                  href="https://careers.trizenventures.com/" 
-                  className={`block px-4 py-2 text-base font-medium ${
-                    currentPath === 'https://careers.trizenventures.com/' ? 'text-trizen-purple' : 'text-trizen-dark hover:text-trizen-purple'
-                  }`}
-                >
-                  Careers
-                </a>
-                
-                <div className="border-t border-gray-200 pt-4 space-y-4">
-                  <a href="#" className="block px-4 py-2 text-base font-medium text-trizen-dark hover:text-trizen-purple">
-                    Login
-                  </a>
-                  <a href="#" className="block px-4 py-2 text-base font-medium text-trizen-dark hover:text-trizen-purple">
-                    Register
-                  </a>
+                {navLinks.map((link) =>
+                  link.href.startsWith("http") ? (
+                    <a
+                      key={link.label}
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block px-4 py-2 text-base font-medium text-trizen-dark hover:text-trizen-purple"
+                    >
+                      {link.label}
+                    </a>
+                  ) : link.href.includes("#") ? (
+                    <a
+                      key={link.label}
+                      href={link.href}
+                      className="block px-4 py-2 text-base font-medium text-trizen-dark hover:text-trizen-purple"
+                    >
+                      {link.label}
+                    </a>
+                  ) : (
+                    <Link
+                      key={link.label}
+                      to={link.href}
+                      className={`block px-4 py-2 text-base font-medium ${
+                        currentPath === link.href ? "text-trizen-purple" : "text-trizen-dark hover:text-trizen-purple"
+                      }`}
+                    >
+                      {link.label}
+                    </Link>
+                  )
+                )}
+                <div className="border-t border-gray-200 pt-4">
+                  <Link
+                    to="/consulting/contact"
+                    className="block px-4 py-2 text-base font-medium text-trizen-dark hover:text-trizen-purple"
+                  >
+                    Start a Project
+                  </Link>
                 </div>
               </div>
             </SheetContent>

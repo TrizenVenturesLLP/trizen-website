@@ -7,26 +7,24 @@ import { Link } from "react-router-dom";
 
 const OurWingsSection = () => {
   return (
-    <section className="py-20 bg-gradient-to-b from-trizen-light to-white relative overflow-hidden">
+    <section className="py-24 bg-gradient-to-b from-trizen-light to-white relative overflow-hidden">
       {/* Decorative elements */}
       <div className="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-trizen-light/60 to-transparent"></div>
       <div className="absolute -top-10 -right-10 w-40 h-40 bg-trizen-purple/5 rounded-full blur-3xl"></div>
       <div className="absolute -bottom-20 -left-20 w-60 h-60 bg-trizen-blue/5 rounded-full blur-3xl"></div>
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-4 relative z-10 max-w-7xl">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold text-trizen-purple mb-4">Our Wings</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-trizen-purple mb-4">Our Wings</h2>
           <p className="text-gray-600 max-w-3xl mx-auto text-lg">
             Discover the various divisions of Trizen and how we're making an impact across multiple domains.
           </p>
           <Separator className="w-32 h-1 bg-trizen-purple mx-auto mt-8" />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
-
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12 max-w-7xl mx-auto">
           {/* Trizen Research */}
-          <Card className="...">
-            {/* ...Decorations omitted for brevity */}
+          <Card className="rounded-2xl shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-200 border-0">
             <CardHeader className="pb-2">
               {/* Icon */}
               <div className="flex justify-center mb-4">
@@ -42,18 +40,17 @@ const OurWingsSection = () => {
               </p> 
             </CardContent>
             <CardFooter className="flex justify-center pb-6">
-              <Link to="/research">
+              <a href="/#research">
                 <Button variant="outline" className="group border-trizen-purple text-trizen-purple hover:bg-trizen-purple hover:text-white transition-all duration-300">
                   Learn More
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                 </Button>
-              </Link>
+              </a>
             </CardFooter>
           </Card>
 
           {/* Trizen Consulting */}
-          <Card className="...">
-            {/* ...Decorations omitted for brevity */}
+          <Card className="rounded-2xl shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-200 border-0">
             <CardHeader className="pb-2">
               <div className="flex justify-center mb-4">
                 <div className="bg-trizen-light p-4 rounded-full shadow-md group-hover:bg-trizen-purple/10 transition-colors duration-300 group-hover:shadow-lg">
@@ -68,18 +65,17 @@ const OurWingsSection = () => {
               </p>
             </CardContent>
             <CardFooter className="flex justify-center pb-6">
-              <Link to="/consulting">
+              <a href="/#consulting">
                 <Button variant="outline" className="group border-trizen-purple text-trizen-purple hover:bg-trizen-purple hover:text-white transition-all duration-300">
                   Learn More
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                 </Button>
-              </Link>
+              </a>
             </CardFooter>
           </Card>
 
           {/* Trizen Training */}
-          <Card className="...">
-            {/* ...Decorations omitted for brevity */}
+          <Card className="rounded-2xl shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-200 border-0">
             <CardHeader className="pb-2">
               <div className="flex justify-center mb-4">
                 <div className="bg-trizen-light p-4 rounded-full shadow-md group-hover:bg-trizen-purple/10 transition-colors duration-300 group-hover:shadow-lg">
@@ -104,8 +100,7 @@ const OurWingsSection = () => {
           </Card>
 
           {/* Trizen Ventures */}
-          <Card className="...">
-            {/* ...Decorations omitted for brevity */}
+          <Card className="rounded-2xl shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-200 border-0">
             <CardHeader className="pb-2">
               <div className="flex justify-center mb-4">
                 <div className="bg-trizen-light p-4 rounded-full shadow-md group-hover:bg-trizen-purple/10 transition-colors duration-300 group-hover:shadow-lg">

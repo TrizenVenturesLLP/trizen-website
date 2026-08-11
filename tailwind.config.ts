@@ -1,13 +1,21 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
 	darkMode: ["class"],
 	content: [
+		"./index.html",
 		"./pages/**/*.{ts,tsx}",
 		"./components/**/*.{ts,tsx}",
 		"./app/**/*.{ts,tsx}",
 		"./src/**/*.{ts,tsx}",
+	],
+	// Safelist hero/CTA utilities so they are always in production CSS (avoids purge edge cases)
+	safelist: [
+		{ pattern: /^text-(3xl|4xl|5xl|base|lg|sm|xl|2xl)$/ },
+		{ pattern: /^(md|lg):text-(4xl|5xl|base|lg|sm|xl|2xl)$/ },
+		{ pattern: /^min-h-\[(200|220|280|320)px\]$/ },
+		{ pattern: /^p-(6|8|10|12)$/ },
+		{ pattern: /^(lg:)?p-(6|8|10|12)$/ },
 	],
 	prefix: "",
 	theme: {
@@ -110,7 +118,7 @@ export default {
 				'tab-fade-in': 'tab-fade-in 0.4s ease-out forwards'
 			},
 			fontFamily: {
-				sans: ['Segoe UI', 'sans-serif']
+				sans: ['Inter', 'sans-serif']
 			}
 		}
 	},
